@@ -1,26 +1,146 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f5f2ed;
+  --paper-deep: #ebe6dc;
+  --ink: #1c1917;
+  --ink-soft: #3f3a36;
+  --muted: #6b645c;
+  --stamp: #9c4f3a;
+  --stamp-soft: #b86a52;
+  --rule: #d4cfc6;
+  --airmail: #c4282d;
+  --focus: #9c4f3a;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-stamp: var(--stamp);
+  --color-stamp-soft: var(--stamp-soft);
+  --color-rule: var(--rule);
+  --color-airmail: var(--airmail);
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--stamp) 28%, transparent);
+  color: var(--ink);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.paper-grain {
+  position: relative;
+}
+
+.paper-grain::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.airmail-stripe {
+  height: 14px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--airmail),
+    var(--airmail) 10px,
+    #fff 10px,
+    #fff 20px
+  );
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+.rule-dashed {
+  border: none;
+  border-top: 1px dashed var(--rule);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--stamp);
+}
+
+.fade-up {
+  animation: fade-up 0.9s ease both;
+}
+
+.fade-up-delay {
+  animation: fade-up 1s ease 0.15s both;
+}
+
+.fade-up-delay-2 {
+  animation: fade-up 1.05s ease 0.3s both;
+}
+
+.stamp-in {
+  animation: stamp-in 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stamp-in {
+  from {
+    opacity: 0;
+    transform: rotate(-14deg) scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up,
+  .fade-up-delay,
+  .fade-up-delay-2,
+  .stamp-in {
+    animation: none;
+  }
 }

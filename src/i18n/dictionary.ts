@@ -1,0 +1,620 @@
+import type { Locale } from "./config";
+
+const en = {
+  meta: {
+    titleDefault: "BOXOHO — A piece of Mürren, wherever you are",
+    titleTemplate: "%s · BOXOHO",
+    description:
+      "Tiny Art Surprises from a vintage vending machine in Mürren — and postcards that keep you connected to the most beautiful place in the world.",
+  },
+  nav: {
+    main: "Main navigation",
+    mobile: "Mobile navigation",
+    items: [
+      { href: "#offers", label: "Two ways" },
+      { href: "#story", label: "Story" },
+      { href: "#impressions", label: "Mürren" },
+      { href: "#creator", label: "Creator" },
+      { href: "#artwork", label: "Artwork" },
+      { href: "#postcard", label: "Postcard" },
+      { href: "#map", label: "Map" },
+    ],
+    legal: [
+      { href: "/terms", label: "Terms" },
+      { href: "/privacy", label: "Privacy" },
+    ],
+  },
+  lang: {
+    label: "Language",
+    en: "EN",
+    de: "DE",
+  },
+  home: {
+    eyebrow: "Post & art from Mürren",
+    title: "BOXOHO",
+    lead: "A piece of Mürren for your home — wherever you are in the world. Two ways to take it with you: instantly from the machine, or later by post.",
+    ctaPrimary: "Discover two ways",
+    ctaSecondary: "Register your artwork",
+  },
+  footer: {
+    eyebrow: "Boxoho · Mürren",
+    blurb:
+      "A piece of Mürren for your home. Tiny Art Surprises from the vintage machine — and postcards that keep the connection alive.",
+    instagram: "Instagram",
+    rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
+  },
+  postmark: ["MÜRREN", "CAR-FREE", "ALWAYS"],
+  offers: {
+    eyebrow: "A keepsake from Mürren",
+    title: "Two ways.",
+    intro: "Take a piece of Mürren home — instantly from the machine, or by post to wherever you live.",
+    art: {
+      eyebrow: "Artwork",
+      title: "Tiny Art Surprises",
+      summary:
+        "A matchbox-sized surprise from the retro machine in Mürren — unique, numbered, yours to hang or stick on the fridge.",
+      cta: "How the artwork works",
+    },
+    postcard: {
+      eyebrow: "Postcard",
+      title: "Mürren by mail",
+      summary:
+        "Stay connected with the most beautiful place in the world — a motif and a little story, delivered to your door.",
+      cta: "How the postcard works",
+    },
+  },
+  story: {
+    eyebrow: "Why",
+    title: "The story behind it.",
+    intro:
+      "BOXOHO is made in Mürren: small art you can hold — and mail that keeps you close to the mountains.",
+    paragraphs: [
+      "A piece of Mürren for your home — wherever you are in the world. That is the idea: something real from this place that can live with you long after the train ride down the valley.",
+      "The Tiny Art Surprises are matchbox-sized boxes. Open one and you find a miniature frame — and inside it a souvenir from Mürren, turned into art. A stone from here, a found fragment, a moment — something that makes you smile, and sometimes pause to think. A keepsake.",
+      "Each box includes a tiny booklet: the collection’s story and your registration number with a certificate of authenticity. Hang the piece, or use the magnet on the back.",
+      "Only as many artworks are made each month as the month has days. Every piece is documented on social media. You can buy them only in Mürren — from the retro vending machine, with two Swiss francs.",
+    ],
+  },
+  impressions: {
+    eyebrow: "Mürren",
+    title: "Impressions.",
+    intro: "A few moments from the place this is all about — car-free, high above the valley.",
+    images: [
+      { src: "/muerren/01-peaks.jpg", alt: "Snow-capped alpine peaks above green meadows near Mürren" },
+      { src: "/muerren/02-huts.jpg", alt: "Alpine huts and mountains with paragliders in the sky" },
+      { src: "/muerren/03-path.jpg", alt: "Hiking path through meadows toward the Eiger massif" },
+      { src: "/muerren/04-village.jpg", alt: "Looking down toward the village and mountain valley" },
+      { src: "/muerren/05-bench.jpg", alt: "Wooden bench overlooking cliffs and snowy peaks" },
+      { src: "/muerren/06-evening.jpg", alt: "Evening light over a mountain hut and pine forest" },
+      { src: "/muerren/07-meadow.jpg", alt: "Wildflower meadow facing the Jungfrau region peaks" },
+    ],
+  },
+  creator: {
+    eyebrow: "About the creator",
+    title: "Sandrine.",
+    intro: "Sandrine is the creator of this experience.",
+    paragraphs: [
+      "She loves Mürren. She was not born here, but it is her second home — she almost grew up here.",
+      "She loves bringing joy to the people who visit this marvelous place and wants to share her love of Mürren with all of you.",
+      "Sandrine was born in Basel, Switzerland. She spends several months, weekends and days a year in Mürren. She is a creator and an entrepreneur. And she hopes that her two twin boys (about five years old) will value this beautiful area as she did and does.",
+    ],
+    portraitAlt: "Sandrine picking wildflowers in Mürren",
+    photoNote: "Artwork photos — machine photos coming soon.",
+    altOpen: "Tiny Art Surprise open in its wooden frame, held between two fingers",
+    altBox: "Closed Boxoho matchbox-sized Tiny Art Surprise held between two fingers",
+  },
+  artworkDeep: {
+    eyebrow: "Artwork",
+    title: "Tiny Art Surprises.",
+    intro: "Open the box. Meet a piece of Mürren — framed, numbered, ready for your home.",
+    body: "From a retro Haribo-style vending machine in Mürren: insert two Swiss francs and draw a matchbox-sized surprise. Inside: a tiny frame with a souvenir from Mürren, made into art, plus a little booklet with the story and a certificate of authenticity.",
+    bullets: [
+      "Only available in Mürren, from the machine",
+      "As many pieces per month as the month has days",
+      "Hang it up — or use the magnet",
+      "Register your number and appear on the collectors’ map",
+    ],
+    cta: "Register on the map →",
+  },
+  postcard: {
+    eyebrow: "Postcard",
+    title: "Get Mürren home to you.",
+    intro:
+      "Stay connected with the most beautiful place in the world. A Mürren motif, a short story — delivered wherever you are.",
+    body: "The current motif is printed and mailed. You hear from the artist — and keep receiving a little piece of Mürren.",
+    subscription: {
+      eyebrow: "Get postcards",
+      title: "Choose how you stay connected",
+      body: "Monthly subscription, or pay once for a full year of cards. Monthly plans can be cancelled anytime via the Stripe customer portal. Yearly packs are one payment — we’ll email you before the year ends if you’d like to continue.",
+      priceMonth: "CHF 9.00 / month · subscription",
+      priceYear: "CHF 90.00 · one year, paid once (only CHF 7.50 per month)",
+      firstName: "First name",
+      email: "Email",
+      place: "Town / region (for the map)",
+      placePlaceholder: "City and country",
+      mapConsent:
+        "Optional: I agree that a blurred location (~100 km radius) of where my postcards are sent, and my first name, may appear on the public collectors’ map. The exact address stays private.",
+      ctaMonth: "Subscribe monthly",
+      ctaYear: "Pay for one year",
+      manageCta: "Manage or cancel monthly subscription",
+      loading: "Redirecting…",
+      shippingNote:
+        "Shipping address is collected securely in Stripe Checkout. Cards are sent by standard mail (not tracked).",
+      successBanner: "Thank you — your Mürren postcards are on the way.",
+      cancelBanner: "Checkout cancelled. You can try again anytime.",
+      errorGeneric: "Something went wrong. Please try again.",
+      cta: "Get postcards",
+      ctaSoon: "Coming soon",
+    },
+    shop: {
+      eyebrow: "Shop",
+      title: "Other things to buy & stay connected",
+      body: "Past motifs, blank cards, and more — browse the shop when you want something beyond the postcard offer.",
+      cta: "Visit the shop →",
+      ctaSoon: "Shop · coming soon",
+    },
+    bullets: [
+      "A fresh Mürren motif and story with each card",
+      "Monthly subscription — or 12 cards, paid once",
+      "Delivered worldwide by standard mail",
+    ],
+    onSiteNote:
+      "Visiting Mürren? Next to the machine you can also pick up a postcard on site — one in hand now, another follows by mail.",
+    note: "Secure checkout via Stripe ·",
+    termsLink: "Read the terms",
+  },
+  map: {
+    eyebrow: "Collectors",
+    title: "Where Mürren lives with you.",
+    intro:
+      "On the world map you never see an exact address — only a ~100 km radius. Filter by artworks, postcards, or both.",
+    filterLabel: "Show on map",
+    filterAll: "All",
+    filterPostcards: "Postcards",
+    filterArtworks: "Artworks",
+    legendArtwork: "Artwork",
+    legendPostcard: "Postcard",
+    teaserLabel: "Map · Coming soon",
+    teaserBody:
+      "Soon: an interactive map of registered Tiny Art Surprises and postcard homes — always softly blurred.",
+    ctaRegister: "Register my artwork",
+  },
+  register: {
+    eyebrow: "Authenticity · Number",
+    title: "Already have a piece?",
+    intro:
+      "Enter the number from your booklet. You’ll see the matching image — then you can say where it lives at home, and who you are.",
+    step1: "Step 1",
+    numberLabel: "Registration number",
+    numberPlaceholder: "e.g. BX-2026-014",
+    numberHint: "Enter your number to load the official image of your artwork.",
+    lookupCta: "Find artwork",
+    step2: "Step 2 · After it’s found",
+    firstName: "First name",
+    email: "Email (private only)",
+    place: "Town / region",
+    placePlaceholder: "City and country",
+    photo: "Photo at home (optional)",
+    mapConsent:
+      "Optional: I agree that a blurred location (~100 km radius) of where my artwork lives, and my first name, may appear on the public collectors’ map. The exact address stays private.",
+    submitting: "Saving…",
+    success: "Thank you — your artwork is registered.",
+    alreadyRegistered: "This artwork is already registered.",
+    errors: {
+      notFound: "No artwork found for that number.",
+      generic: "Something went wrong. Please try again.",
+    },
+    button: "Register",
+  },
+  terms: {
+    eyebrow: "Legal",
+    title: "Terms and conditions.",
+    // Shared legal content kept factual; EN version
+    provider:
+      "Provider of both offers: Sundrbi GmbH, under the brand BOXOHO, {address}, UID {uid}.",
+    sections: [
+      {
+        title: "1. Scope",
+        body: "These terms apply to purchases from the Boxoho artwork vending machine in Mürren and to BOXOHO products under the brand BOXOHO — physical postcards and digital offers (including a paid digital newsletter), on site in Mürren and/or via the website (including QR code), as stated for each product at the time of purchase. Prices and product details are those shown in the offer (e.g. Stripe product page or on-site information) when you buy.",
+      },
+      {
+        title: "2. Contract formation",
+        body: "At the machine or on site, the contract is formed upon payment and handover of the goods (and, where applicable, acceptance of the follow-up mailing). Online, upon completing checkout or successful payment via the payment provider. The contract covers the specific product chosen (physical and/or digital).",
+      },
+      {
+        title: "Artwork machine — 3. Purchase & handover",
+        body: "Purchase is made on site by cash or card. The mini artwork (“Tiny Art Surprise”) is handed over immediately and in full. There is no shipping obligation.",
+      },
+      {
+        title: "4. Nature of goods & returns",
+        body: "Each piece is unique and a surprise purchase without prior selection. There is no right of withdrawal or exchange to the extent permitted by law. For obvious defects, the buyer should contact {email} within 7 days.",
+      },
+      {
+        title: "5. Authenticity & edition",
+        body: "Each artwork carries a sequential number and a certificate of authenticity. Monthly production is limited to at most as many pieces as the month has days.",
+      },
+      {
+        title: "6. Registration (optional)",
+        body: "Via the website, the registration number may be recorded and an approximate location shared. Optionally, with consent, first name and a blurred location (~100 km) may appear on the public collectors’ map, along with the artwork image (and optionally a personal photo). Exact address and other contact details remain private. Full contact details are processed as described in the privacy policy.",
+      },
+      {
+        title: "Postcard & digital products — 7. Offers",
+        body: "Depending on availability and channel, the following products may be offered: (a) Single Delivery — on site in Mürren only (not sold online): one-time payment. One postcard is received immediately on site; a second postcard with a new photo and new story is mailed to the address provided about one month later. (b) Yearly Card Set — 12 months of Mürren: one-time payment for twelve postcards — one new postcard with story each month for twelve months from the start of service. This pack does not renew automatically. Before the period ends, Sundrbi GmbH may contact you (e.g. by email) to offer continuation, whether as another prepaid pack or as a subscription if then available. (c) Monthly postcard subscription — online: recurring monthly payment for one new postcard per month. Further postcard subscription periods (in particular a yearly subscription) may be introduced later; they are governed by section 10 and by the price and description stated at purchase. Motifs match the current issue period. Optionally, with consent at checkout or on site, a blurred shipping location (~100 km) and first name may appear on the public collectors’ map; the exact address remains private. (d) Digital newsletter subscription — online: a paid digital subscription delivering Mürren-related content (e.g. photos, stories, or updates) by email only, with no physical postcard shipping. The fee and billing period (e.g. a monthly fee such as CHF 5.00) are those stated at purchase. This product is governed by section 10.",
+      },
+      {
+        title: "8. Delivery",
+        body: "Physical postcards are sent by standard mail to the address provided and are not tracked. Delivery times vary by destination and postal service. In case of proven postal loss within 60 days of the shipping date (or, if unknown, the purchase date), a free replacement card will be sent if reported to {email}. Digital newsletter content is delivered electronically to the email address provided; there is no postal shipping for that product.",
+      },
+      {
+        title: "9. Withdrawal & refunds",
+        body: "After the first card of an order or pack has been handed over or shipped, or after a subscription service (physical or digital) has begun, refunds are excluded to the extent permitted by law. Statutory warranty rights remain unaffected.",
+      },
+      {
+        title: "10. Subscriptions",
+        body: "Where a product is sold as a subscription — including the monthly postcard subscription, any later yearly postcard subscription, and a digital newsletter subscription — it renews for the agreed billing period until cancelled. Cancellation is possible at any time and takes effect at the end of the current billing period — not immediately — via the payment provider’s customer portal or by email to {email}. Prepaid packs under section 7(b) are not subscriptions and do not auto-renew unless you later agree to a subscription or place a new order.",
+      },
+      {
+        title: "11. Payments",
+        body: "Online payments are processed by the integrated payment provider (e.g. Stripe). Their terms apply in addition. On-site payments follow the payment methods accepted there.",
+      },
+      {
+        title: "12. Governing law",
+        body: "Swiss law applies. Place of jurisdiction is the registered office of Sundrbi GmbH, to the extent permitted by law.",
+      },
+    ],
+  },
+  privacy: {
+    eyebrow: "Legal",
+    title: "Privacy policy.",
+    controller: "Controller: Sundrbi GmbH, {address}. Contact: {email}.",
+    sections: [
+      {
+        title: "1. Artwork machine",
+        body: "No personal data are collected by us at the machine. Purchase is anonymous by cash or card. Card data may be processed by the on-site payment provider.",
+      },
+      {
+        title: "2. Postcards, subscriptions & newsletter",
+        body: "For shipping and contract fulfilment we collect name, postal address (where needed for physical products), email address, and payment status (including for one-time postcard products, postcard subscriptions, and a digital newsletter subscription). Data are used for card shipping, digital delivery, renewal reminders where applicable, and processing, and are not shared with third parties except as technically necessary with the payment provider, the postal service, and email delivery tools. Optionally, with your consent at checkout or on site, a blurred shipping location (~100 km radius) and your first name may appear on the public collectors’ map. The exact address is never shown publicly.",
+      },
+      {
+        title: "3. Artwork registration",
+        body: "Optional registration may include registration number, first name, contact details (e.g. email), location information, and optionally a photo. With optional consent, first name, artwork depiction, optional uploaded photo, and a blurred location (~100 km radius) may appear on the public collectors’ map. Exact address and other contact details are not public. The public map can be filtered by artworks, postcard homes, or both.",
+      },
+      {
+        title: "4. Website & hosting",
+        body: "Visiting the website may generate technically necessary data (e.g. server logs) and cookies or similar technologies from hosting and embedded services (e.g. maps, payments, social embeds).",
+      },
+      {
+        title: "5. Retention",
+        body: "Personal data are stored only as long as needed for contract, shipping, support, and legal retention duties, then deleted or anonymised.",
+      },
+      {
+        title: "6. Your rights",
+        body: "Under applicable Swiss data protection law you may in particular request access, rectification, erasure, restriction of processing, and object to processing. Contact {email}.",
+      },
+      {
+        title: "7. Contact",
+        body: "For privacy questions: {email}, Sundrbi GmbH, {address}.",
+      },
+    ],
+  },
+};
+
+const de = {
+  meta: {
+    titleDefault: "BOXOHO — Ein Stück Mürren, wo immer du bist",
+    titleTemplate: "%s · BOXOHO",
+    description:
+      "Tiny Art Surprises aus dem Automaten in Mürren — und Postkarten, die dich mit dem schönsten Ort der Welt verbunden halten.",
+  },
+  nav: {
+    main: "Hauptnavigation",
+    mobile: "Mobile Navigation",
+    items: [
+      { href: "#offers", label: "Zwei Wege" },
+      { href: "#story", label: "Story" },
+      { href: "#impressions", label: "Mürren" },
+      { href: "#creator", label: "Creator" },
+      { href: "#artwork", label: "Kunstwerk" },
+      { href: "#postcard", label: "Postkarte" },
+      { href: "#map", label: "Karte" },
+    ],
+    legal: [
+      { href: "/terms", label: "AGB" },
+      { href: "/privacy", label: "Datenschutz" },
+    ],
+  },
+  lang: {
+    label: "Sprache",
+    en: "EN",
+    de: "DE",
+  },
+  home: {
+    eyebrow: "Post & Kunst aus Mürren",
+    title: "BOXOHO",
+    lead: "Ein Stück Mürren für dich zu Hause — wo immer du auf der Welt bist. Zwei Wege, es mitzunehmen: sofort aus dem Automaten, oder später per Post.",
+    ctaPrimary: "Zwei Wege entdecken",
+    ctaSecondary: "Kunstwerk registrieren",
+  },
+  footer: {
+    eyebrow: "Boxoho · Mürren",
+    blurb:
+      "Ein Stück Mürren für dich zu Hause. Tiny Art Surprises aus dem Automaten — und Postkarten, die die Verbindung lebendig halten.",
+    instagram: "Instagram",
+    rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
+  },
+  postmark: ["MÜRREN", "AUTOFREI", "SEIT JEHER"],
+  offers: {
+    eyebrow: "Andenken aus Mürren",
+    title: "Zwei Wege.",
+    intro:
+      "Nimm ein Stück Mürren mit nach Hause — sofort aus dem Automaten, oder per Post dorthin, wo du lebst.",
+    art: {
+      eyebrow: "Kunstwerk",
+      title: "Tiny Art Surprises",
+      summary:
+        "Eine Streichholz grosse Überraschung aus dem Automaten in Mürren — einzigartig, nummeriert, zum Aufhängen oder als Magnet.",
+      cta: "So funktioniert das Kunstwerk",
+    },
+    postcard: {
+      eyebrow: "Postkarte",
+      title: "Mürren per Post",
+      summary:
+        "Bleib connected mit dem schönsten Ort der Welt — ein Motiv und eine kleine Story, direkt in deinen Briefkasten.",
+      cta: "So funktioniert die Postkarte",
+    },
+  },
+  story: {
+    eyebrow: "Warum",
+    title: "Die Story dahinter.",
+    intro:
+      "BOXOHO entsteht in Mürren: kleine Kunst zum Anfassen — und Post, die dich den Bergen nah hält.",
+    paragraphs: [
+      "Ein Stück Mürren für dich zu Hause — wo immer du auf der Welt bist. Das ist die Idee: etwas Echtes von hier, das bei dir bleibt, lange nachdem die Bahn wieder talwärts fährt.",
+      "Die Tiny Art Surprises sind Streichholz grosse Böxchen. Öffnet man sie, liegt darin ein winziger Bilderrahmen — und darin ein Souvenir aus Mürren, künstlerisch gefasst. Ein Stein von hier, ein Fundstück, ein Moment — etwas, das einem zum Schmunzeln, aber auch manchmal zum Nachdenken bringt. Ein Keepsake.",
+      "Dazu kommt ein kleines Heftchen: die Geschichte der Kollektion und die Registrierungsnummer mit Echtheitszertifikat. Man kann das Kunstwerk aufhängen oder den Magneten nutzen.",
+      "Pro Monat entstehen nur so viele Stücke, wie der Monat Tage hat. Jedes wird auf Social Media dokumentiert. Kaufen kann man sie nur in Mürren — im retro Automaten, mit zweimal einem Franken.",
+    ],
+  },
+  impressions: {
+    eyebrow: "Mürren",
+    title: "Impressionen.",
+    intro: "Ein paar Momente von dem Ort, um den es geht — autofrei, hoch über dem Tal.",
+    images: [
+      { src: "/muerren/01-peaks.jpg", alt: "Schneebedeckte Gipfel über grünen Wiesen bei Mürren" },
+      { src: "/muerren/02-huts.jpg", alt: "Alphütten und Berge mit Gleitschirmfliegern am Himmel" },
+      { src: "/muerren/03-path.jpg", alt: "Wanderweg durch Wiesen Richtung Eiger-Massiv" },
+      { src: "/muerren/04-village.jpg", alt: "Blick hinunter zum Dorf und in das Bergtal" },
+      { src: "/muerren/05-bench.jpg", alt: "Holzbank mit Blick auf Felsen und schneebedeckte Gipfel" },
+      { src: "/muerren/06-evening.jpg", alt: "Abendlicht über einer Hütte und dem Nadelwald" },
+      { src: "/muerren/07-meadow.jpg", alt: "Blumenwiese mit Blick auf die Jungfrau-Region" },
+    ],
+  },
+  creator: {
+    eyebrow: "Über die Creatorin",
+    title: "Sandrine.",
+    intro: "Sandrine ist die Creatorin dieser Erfahrung.",
+    paragraphs: [
+      "Sie liebt Mürren. Sie ist nicht hier geboren, aber es ist ihr zweites Zuhause — sie ist hier fast aufgewachsen.",
+      "Sie liebt es, den Menschen Freude zu bereiten, die diesen wunderbaren Ort besuchen, und möchte ihre Liebe zu Mürren mit euch allen teilen.",
+      "Sandrine wurde in Basel geboren. Sie verbringt mehrere Monate, Wochenenden und Tage im Jahr in Mürren. Sie ist Creatorin und Unternehmerin. Und sie hofft, dass ihre beiden Zwillingsjungs (etwa fünf Jahre alt) diese wunderschöne Gegend ebenso schätzen werden, wie sie es getan hat und tut.",
+    ],
+    portraitAlt: "Sandrine beim Pflücken von Bergblumen in Mürren",
+    photoNote: "Kunstwerk-Fotos — Automaten-Fotos folgen.",
+    altOpen: "Geöffnete Tiny Art Surprise im Holzrahmen, zwischen zwei Fingern gehalten",
+    altBox: "Geschlossenes Boxoho-Böxchen, zwischen zwei Fingern gehalten",
+  },
+  artworkDeep: {
+    eyebrow: "Kunstwerk",
+    title: "Tiny Art Surprises.",
+    intro:
+      "Öffne das Böxchen. Triff ein Stück Mürren — gerahmt, nummeriert, bereit für dein Zuhause.",
+    body: "Im retro Automaten in Mürren: zweimal einen Franken einwerfen — und eine Streichholz grosse Überraschung ziehen. Drinnen: ein winziger Rahmen mit einem Souvenir aus Mürren, künstlerisch gefasst, plus ein kleines Heftchen mit Geschichte und Echtheitszertifikat.",
+    bullets: [
+      "Nur vor Ort in Mürren am Automaten",
+      "So viele Stücke pro Monat wie der Monat Tage hat",
+      "Aufhängen — oder den Magneten nutzen",
+      "Nummer registrieren und auf der Collectors-Karte erscheinen",
+    ],
+    cta: "Auf der Karte registrieren →",
+  },
+  postcard: {
+    eyebrow: "Postkarte",
+    title: "Mürren zu dir nach Hause.",
+    intro:
+      "Bleib connected mit dem schönsten Ort der Welt. Ein Sujet aus Mürren, eine kleine Story — zugestellt, wo immer du bist.",
+    body: "Das aktuelle Motiv wird gedruckt und verschickt. Du hörst von der Künstlerin — und bekommst immer wieder ein Stück Mürren.",
+    subscription: {
+      eyebrow: "Postkarten holen",
+      title: "So bleibst du connected",
+      body: "Monatsabo — oder einmal zahlen für ein ganzes Jahr Karten. Das Monatsabo kannst du jederzeit über das Stripe-Kundenportal kündigen. Das Jahrespaket ist eine Einmalzahlung — vor Ablauf melden wir uns per E-Mail, falls du verlängern möchtest.",
+      priceMonth: "CHF 9.00 / Monat · Abo",
+      priceYear: "CHF 90.00 · ein Jahr, einmalig (nur CHF 7.50 pro Monat)",
+      firstName: "Vorname",
+      email: "E-Mail",
+      place: "Ort / Region (für die Karte)",
+      placePlaceholder: "Stadt und Land",
+      mapConsent:
+        "Optional: Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) des Versandorts meiner Postkarten sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat.",
+      ctaMonth: "Monatlich abonnieren",
+      ctaYear: "Ein Jahr bezahlen",
+      manageCta: "Monatsabo verwalten oder kündigen",
+      loading: "Weiterleitung…",
+      shippingNote:
+        "Die Versandadresse wird sicher im Stripe-Checkout erfasst. Versand als normale Post (ohne Tracking).",
+      successBanner: "Danke — deine Mürren-Postkarten sind unterwegs.",
+      cancelBanner: "Checkout abgebrochen. Du kannst es jederzeit erneut versuchen.",
+      errorGeneric: "Etwas ist schiefgelaufen. Bitte nochmals versuchen.",
+      cta: "Postkarten holen",
+      ctaSoon: "Folgt bald",
+    },
+    shop: {
+      eyebrow: "Shop",
+      title: "Mehr kaufen & connected bleiben",
+      body: "Frühere Motive, leere Karten und mehr — im Shop, wenn du etwas über das Postkarten-Angebot hinaus möchtest.",
+      cta: "Zum Shop →",
+      ctaSoon: "Shop · folgt bald",
+    },
+    bullets: [
+      "Frisches Mürren-Motiv und Story mit jeder Karte",
+      "Monatsabo — oder 12 Karten, einmal bezahlt",
+      "Weltweiter Versand als normale Post",
+    ],
+    onSiteNote:
+      "In Mürren vor Ort? Neben dem Automaten kannst du auch eine Postkarte mitnehmen — eine sofort in der Hand, eine weitere folgt per Post.",
+    note: "Sicherer Checkout über Stripe ·",
+    termsLink: "AGB lesen",
+  },
+  map: {
+    eyebrow: "Collectors",
+    title: "Wo Mürren bei dir lebt.",
+    intro:
+      "Auf der Weltkarte siehst du nie die genaue Adresse — nur einen Umkreis von ca. 100 km. Filtere nach Kunstwerken, Postkarten oder beidem.",
+    filterLabel: "Auf der Karte zeigen",
+    filterAll: "Alle",
+    filterPostcards: "Postkarten",
+    filterArtworks: "Kunstwerke",
+    legendArtwork: "Kunstwerk",
+    legendPostcard: "Postkarte",
+    teaserLabel: "Karte · Folgt bald",
+    teaserBody:
+      "Bald: eine interaktive Karte mit registrierten Tiny Art Surprises und Postkarten-Zuhause — immer unscharf dargestellt.",
+    ctaRegister: "Mein Kunstwerk registrieren",
+  },
+  register: {
+    eyebrow: "Echtheit · Nummer",
+    title: "Schon ein Stück?",
+    intro:
+      "Nummer aus dem Heftchen eingeben. Du siehst das zugehörige Bild — und kannst angeben, wo es zu Hause ist und wer du bist.",
+    step1: "Schritt 1",
+    numberLabel: "Registrierungsnummer",
+    numberPlaceholder: "z. B. BX-2026-014",
+    numberHint: "Gib deine Nummer ein, um das offizielle Bild deines Kunstwerks zu laden.",
+    lookupCta: "Kunstwerk finden",
+    step2: "Schritt 2 · Nach dem Fund",
+    firstName: "Vorname",
+    email: "E-Mail (nur intern)",
+    place: "Ort / Region",
+    placePlaceholder: "Stadt und Land",
+    photo: "Foto zu Hause (optional)",
+    mapConsent:
+      "Optional: Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) meines Kunstwerks sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat.",
+    submitting: "Speichern…",
+    success: "Danke — dein Kunstwerk ist registriert.",
+    alreadyRegistered: "Dieses Kunstwerk ist bereits registriert.",
+    errors: {
+      notFound: "Kein Kunstwerk mit dieser Nummer gefunden.",
+      generic: "Etwas ist schiefgelaufen. Bitte nochmals versuchen.",
+    },
+    button: "Registrieren",
+  },
+  terms: {
+    eyebrow: "Rechtliches",
+    title: "Allgemeine Geschäftsbedingungen.",
+    provider:
+      "Anbieterin beider Angebote: Sundrbi GmbH, unter der Marke BOXOHO, {address}, UID {uid}.",
+    sections: [
+      {
+        title: "1. Geltungsbereich",
+        body: "Diese AGB gelten für Käufe am Boxoho-Kunstwerk-Automaten in Mürren sowie für BOXOHO-Produkte der Marke BOXOHO — physische Postkarten und digitale Angebote (inkl. eines bezahlten Digital-Newsletters), vor Ort in Mürren und/oder über die Website (inkl. QR-Code), soweit für das jeweilige Produkt zum Kaufzeitpunkt angegeben. Preise und Produktdetails ergeben sich aus dem Angebot (z. B. Stripe-Produktseite oder Information vor Ort) im Moment des Kaufs.",
+      },
+      {
+        title: "2. Vertragsschluss",
+        body: "Am Automaten bzw. vor Ort kommt der Vertrag mit Zahlung und Warenübergabe zustande (sowie, soweit vorgesehen, mit Annahme des Folgevorsands). Online mit Abschluss des Checkouts bzw. erfolgreicher Zahlung über den Zahlungsdienstleister. Gegenstand ist das jeweils gewählte Produkt (physisch und/oder digital).",
+      },
+      {
+        title: "Kunstwerk-Automat — 3. Kauf & Übergabe",
+        body: "Der Kauf erfolgt vor Ort gegen Bar- oder Kartenzahlung. Das Mini-Kunstwerk («Tiny Art Surprise») wird sofort und vollständig übergeben. Es besteht keine Versandpflicht.",
+      },
+      {
+        title: "4. Beschaffenheit & Rückgabe",
+        body: "Jedes Stück ist einzigartig und ein Überraschungskauf ohne Vorauswahl. Ein Widerrufs- oder Umtauschrecht besteht nicht, soweit gesetzlich zulässig. Bei offensichtlichen Mängeln meldet sich die Käuferschaft innert 7 Tagen unter {email}.",
+      },
+      {
+        title: "5. Echtheit & Auflage",
+        body: "Jedes Kunstwerk trägt eine fortlaufende Nummer und ein Echtheitszertifikat. Die monatliche Produktion ist auf höchstens so viele Stücke begrenzt, wie der betreffende Monat Tage hat.",
+      },
+      {
+        title: "6. Registrierung (optional)",
+        body: "Über die Website kann die Registrierungsnummer erfasst und der ungefähre Standort geteilt werden. Optional, mit Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Collectors-Karte erscheinen — zusammen mit dem Kunstwerkbild (optional ein eigenes Foto). Exakte Adresse und weitere Kontaktdaten bleiben privat. Vollständige Kontaktdaten verarbeitet die Anbieterin gemäss Datenschutzerklärung.",
+      },
+      {
+        title: "Postkarten- & Digitalprodukte — 7. Angebote",
+        body: "Je nach Verfügbarkeit und Verkaufskanal können folgende Produkte angeboten werden: (a) Single Delivery — nur vor Ort in Mürren (nicht online): Einmalzahlung. Eine Postkarte wird sofort vor Ort übergeben; eine zweite Postkarte mit neuem Foto und neuer Story wird etwa einen Monat später an die angegebene Adresse versendet. (b) Yearly Card Set — 12 Monate Mürren: Einmalzahlung für zwölf Postkarten — jeden Monat eine neue Postkarte mit Story über zwölf Monate ab Leistungsbeginn. Dieses Paket verlängert sich nicht automatisch. Vor Ablauf darf die Sundrbi GmbH dich kontaktieren (z. B. per E-Mail), um eine Fortsetzung anzubieten — als weiteres Prepaid-Paket oder als Abonnement, falls dann angeboten. (c) Monatliches Postkarten-Abonnement — online: wiederkehrende monatliche Zahlung für eine neue Postkarte pro Monat. Weitere Postkarten-Abo-Perioden (insbesondere ein Jahresabonnement) können später eingeführt werden; sie unterliegen Ziff. 10 sowie dem beim Kauf ausgewiesenen Preis und der Produktbeschreibung. Motive entsprechen dem aktuellen Ausgabezeitraum. Optional, mit Einwilligung beim Checkout oder vor Ort, dürfen ein unscharfer Versandort (ca. 100 km) sowie der Vorname auf der öffentlichen Collectors-Karte erscheinen; die genaue Adresse bleibt privat. (d) Digital-Newsletter-Abonnement — online: bezahltes digitales Abo mit Mürren-bezogenem Inhalt (z. B. Fotos, Stories oder Updates) ausschliesslich per E-Mail, ohne physischen Postkartenversand. Gebühr und Abrechnungsperiode (z. B. eine monatliche Gebühr wie CHF 5.00) ergeben sich aus dem Angebot beim Kauf. Dieses Produkt unterliegt Ziff. 10.",
+      },
+      {
+        title: "8. Lieferung",
+        body: "Physische Postkarten gehen als normale Post (ohne Tracking) an die angegebene Adresse. Lieferzeiten variieren je nach Zielland und Post. Bei nachweislichem Postverlust innert 60 Tagen ab Versanddatum (oder, falls unbekannt, ab Kaufdatum) wird kostenlos eine Ersatzkarte versendet, sofern dies unter {email} gemeldet wird. Digitale Newsletter-Inhalte werden elektronisch an die angegebene E-Mail-Adresse zugestellt; für dieses Produkt erfolgt kein Postversand.",
+      },
+      {
+        title: "9. Widerruf & Rückerstattung",
+        body: "Nach Übergabe oder Versand der ersten Karte einer Bestellung bzw. eines Pakets oder nach Beginn einer Abo-Leistung (physisch oder digital) ist eine Rückerstattung ausgeschlossen, soweit gesetzlich zulässig. Gesetzliche Gewährleistungsrechte bleiben unberührt.",
+      },
+      {
+        title: "10. Abonnements",
+        body: "Wird ein Produkt als Abonnement verkauft — einschliesslich des monatlichen Postkarten-Abos, eines späteren jährlichen Postkarten-Abos und eines Digital-Newsletter-Abos — verlängert es sich um die vereinbarte Abrechnungsperiode, bis es gekündigt wird. Die Kündigung ist jederzeit möglich und wirkt auf das Ende der laufenden Abrechnungsperiode — nicht sofort — über das Kundenportal des Zahlungsdienstleisters oder per E-Mail an {email}. Prepaid-Pakete nach Ziff. 7(b) sind keine Abonnements und verlängern sich nicht automatisch, es sei denn, du schließt später ein Abonnement ab oder bestellst erneut.",
+      },
+      {
+        title: "11. Zahlungsabwicklung",
+        body: "Online-Zahlungen werden über den eingebundenen Zahlungsdienstleister (z. B. Stripe) abgewickelt. Es gelten ergänzend dessen Bedingungen. Vor Ort gelten die dort akzeptierten Zahlungsmittel.",
+      },
+      {
+        title: "12. Anwendbares Recht",
+        body: "Es gilt Schweizer Recht. Gerichtsstand ist der Sitz der Sundrbi GmbH, soweit gesetzlich zulässig.",
+      },
+    ],
+  },
+  privacy: {
+    eyebrow: "Rechtliches",
+    title: "Datenschutzerklärung.",
+    controller: "Verantwortliche Stelle: Sundrbi GmbH, {address}. Kontakt: {email}.",
+    sections: [
+      {
+        title: "1. Kunstwerk-Automat",
+        body: "Beim Kauf am Automaten werden durch uns keine Personendaten erhoben. Der Kauf erfolgt anonym gegen Bar- oder Kartenzahlung. Kartendaten werden gegebenenfalls durch den Zahlungsanbieter vor Ort verarbeitet.",
+      },
+      {
+        title: "2. Postkarten, Abonnements & Newsletter",
+        body: "Für Versand und Vertragsabwicklung erheben wir Name, Postadresse (soweit für physische Produkte nötig), E-Mail-Adresse und Zahlungsstatus (auch für einmalige Postkarten-Produkte, Postkarten-Abos und ein Digital-Newsletter-Abo). Diese Daten werden für den Kartenversand, die digitale Zustellung, ggf. Verlängerungshinweise und die Abwicklung verwendet und nicht an Dritte weitergegeben — mit Ausnahme der technisch notwendigen Übermittlung an den Zahlungsdienstleister, die Post und E-Mail-Versandtools. Optional, mit Einwilligung beim Checkout oder vor Ort, dürfen ein unscharfer Versandort (Umkreis ca. 100 km) sowie der Vorname auf der öffentlichen Collectors-Karte erscheinen. Die genaue Adresse wird öffentlich nie gezeigt.",
+      },
+      {
+        title: "3. Kunstwerk-Registrierung",
+        body: "Bei der optionalen Registrierung können Registrierungsnummer, Vorname, Kontaktdaten (z. B. E-Mail), Standortangaben und optional ein Foto erfasst werden. Mit optionaler Einwilligung dürfen Vorname, Darstellung des Kunstwerks, optionales Foto sowie ein unscharfer Standort (Umkreis von ca. 100 km) auf der öffentlichen Collectors-Karte erscheinen. Exakte Adresse und weitere Kontaktdaten sind nicht öffentlich. Die öffentliche Karte lässt sich nach Kunstwerken, Postkarten-Zuhause oder beidem filtern.",
+      },
+      {
+        title: "4. Website & Hosting",
+        body: "Beim Besuch der Website können technisch notwendige Daten (z. B. Server-Logs) sowie Cookies oder ähnliche Technologien von Hosting- und eingebundenen Diensten anfallen (z. B. Karte, Zahlungen, Social-Einbettungen).",
+      },
+      {
+        title: "5. Aufbewahrung",
+        body: "Personendaten werden nur so lange gespeichert, wie es für Vertrag, Versand, Support und gesetzliche Aufbewahrungspflichten erforderlich ist. Danach werden sie gelöscht oder anonymisiert.",
+      },
+      {
+        title: "6. Rechte",
+        body: "Du hast nach anwendbarem Schweizer Datenschutzrecht insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung und Widerspruch. Anfragen an {email}.",
+      },
+      {
+        title: "7. Kontakt",
+        body: "Für Fragen zum Datenschutz: {email}, Sundrbi GmbH, {address}.",
+      },
+    ],
+  },
+};
+
+export type Dictionary = typeof en;
+
+const dictionaries: Record<Locale, Dictionary> = { en, de };
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale];
+}
+
+export function fill(
+  template: string,
+  values: Record<string, string | number>,
+): string {
+  return Object.entries(values).reduce(
+    (text, [key, value]) => text.replaceAll(`{${key}}`, String(value)),
+    template,
+  );
+}

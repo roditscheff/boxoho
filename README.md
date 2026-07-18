@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOXOHO Website
 
-## Getting Started
+One-pager for Tiny Art Surprises and Mürren postcards — with collectors map & registration.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 + TypeScript + Tailwind CSS 4
+- EN/DE i18n
+- Supabase (DB + Storage) — Phase 2
+- MapLibre (collectors map)
+- Stripe — Phase 3 (code ready; needs keys)
+
+## Local
 
 ```bash
+cp .env.example .env.local
+# fill Supabase + ADMIN_PASSWORD
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000) · Admin: `/en/admin`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Supabase setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Create a project on [supabase.com](https://supabase.com)
+2. SQL Editor → run `supabase/migrations/001_initial.sql`
+3. Copy Project URL, anon key, service role key into `.env.local`
+4. Set `ADMIN_PASSWORD`
+5. In Admin: upload artworks (number + image)
 
-## Learn More
+## Stripe setup (Phase 3)
 
-To learn more about Next.js, take a look at the following resources:
+1. Create products in [Stripe Dashboard](https://dashboard.stripe.com) (test mode first):
+   - **Monthly:** recurring subscription · CHF 9.00 / month → `STRIPE_PRICE_MONTHLY`
+   - **Yearly:** one-time payment · CHF 90.00 (not recurring) → `STRIPE_PRICE_YEARLY`  
+     Description idea: *A new postcard from Mürren every month for a year — 12 cards, 12 stories, paid once, delivered all year. Sent by standard mail, not tracked.*
+2. Developers → API keys → `STRIPE_SECRET_KEY`
+3. Developers → Webhooks → Add endpoint  
+   - URL (local via Stripe CLI): `http://127.0.0.1:3000/api/stripe/webhook`  
+   - Event: `checkout.session.completed`  
+   - Secret → `STRIPE_WEBHOOK_SECRET`
+4. Run SQL: `supabase/migrations/002_postcard_stripe.sql`
+5. Customer Portal: Settings → Billing → Customer portal → enable cancellation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Local webhook forwarding:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+```
 
-## Deploy on Vercel
+## Phase status
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Phase | Status |
+|-------|--------|
+| 1 Marketing one-pager | Done |
+| 2 Registration + map + admin | Done |
+| 3 Postcard Stripe checkout | Done in code — add Stripe keys + SQL 002 |
+| 4 Social feed / email polish | Later |
