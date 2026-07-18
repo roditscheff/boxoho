@@ -43,7 +43,6 @@ const en = {
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
   },
-  postmark: ["MÜRREN", "CAR-FREE", "ALWAYS"],
   offers: {
     eyebrow: "A keepsake from Mürren",
     title: "Two ways.",
@@ -343,7 +342,6 @@ const de = {
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
   },
-  postmark: ["MÜRREN", "AUTOFREI", "SEIT JEHER"],
   offers: {
     eyebrow: "Andenken aus Mürren",
     title: "Zwei Wege.",

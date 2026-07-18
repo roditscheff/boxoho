@@ -5,7 +5,6 @@ import type { Dictionary } from "@/i18n/dictionary";
 import { localePath } from "@/i18n/paths";
 import { site } from "@/lib/site";
 import { CollectorsMap } from "./CollectorsMap";
-import { Postmark } from "./Postmark";
 import { RegisterForm } from "./RegisterForm";
 import { SubscriptionCheckout } from "./SubscriptionCheckout";
 
@@ -33,22 +32,19 @@ export function OnePager({ locale, dict }: OnePagerProps) {
         <p className="fade-up-delay-2 mx-auto mt-6 max-w-xl text-xl leading-relaxed text-ink-soft md:text-2xl">
           {home.lead}
         </p>
-        <div className="mt-12 flex flex-col items-center gap-10">
-          <Postmark lines={dict.postmark} />
-          <div className="fade-up-delay-2 flex flex-wrap items-center justify-center gap-4 font-mono text-[0.72rem] uppercase tracking-[0.14em]">
-            <a
-              href="#offers"
-              className="border border-ink px-5 py-3 text-ink transition-colors hover:bg-ink hover:text-paper"
-            >
-              {home.ctaPrimary}
-            </a>
-            <a
-              href="#register"
-              className="border border-transparent px-5 py-3 text-stamp underline-offset-4 hover:underline"
-            >
-              {home.ctaSecondary}
-            </a>
-          </div>
+        <div className="fade-up-delay-2 mt-12 flex flex-wrap items-center justify-center gap-4 font-mono text-[0.72rem] uppercase tracking-[0.14em]">
+          <a
+            href="#offers"
+            className="border border-ink px-5 py-3 text-ink transition-colors hover:bg-ink hover:text-paper"
+          >
+            {home.ctaPrimary}
+          </a>
+          <a
+            href="#register"
+            className="border border-transparent px-5 py-3 text-stamp underline-offset-4 hover:underline"
+          >
+            {home.ctaSecondary}
+          </a>
         </div>
       </section>
 
