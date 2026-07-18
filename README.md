@@ -40,8 +40,9 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000) · Admin: `/en/admin`
    - URL (local via Stripe CLI): `http://127.0.0.1:3000/api/stripe/webhook`  
    - Event: `checkout.session.completed`  
    - Secret → `STRIPE_WEBHOOK_SECRET`
-4. Run SQL: `supabase/migrations/002_postcard_stripe.sql`
+4. Run SQL: `supabase/migrations/001_initial.sql`, then `002_postcard_stripe.sql`, then `003_postcard_customers.sql`
 5. Customer Portal: Settings → Billing → Customer portal → enable cancellation
+6. Webhook events (Live): `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`
 
 Local webhook forwarding:
 
