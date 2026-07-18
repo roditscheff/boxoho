@@ -46,7 +46,7 @@ const en = {
   offers: {
     eyebrow: "A keepsake from Mürren",
     title: "Two ways.",
-    intro: "Take a piece of Mürren home — instantly from the machine, or by post to wherever you live.",
+    intro: "Take Mürren home in a box — to wherever you live.",
     art: {
       eyebrow: "Artwork",
       title: "Tiny Art Surprises",
@@ -120,25 +120,35 @@ const en = {
     title: "Get Mürren home to you.",
     intro:
       "Stay connected with the most beautiful place in the world. A Mürren motif, a short story — delivered wherever you are.",
-    body: "The current motif is printed and mailed. You hear from the artist — and keep receiving a little piece of Mürren.",
+    body: "Each month: one postcard from Mürren with a short story from the artist. Sent by standard mail (not tracked). Choose monthly, or pay once for a full year.",
+    firstShipNote:
+      "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
+    productImageAlt:
+      "BOXOHO postcard from Mürren — front with alpine meadow and peaks, back with July letter and address",
     subscription: {
-      eyebrow: "Get postcards",
-      title: "Choose how you stay connected",
-      body: "Monthly subscription, or pay once for a full year of cards. Monthly plans can be cancelled anytime via the Stripe customer portal. Yearly packs are one payment — we’ll email you before the year ends if you’d like to continue.",
-      priceMonth: "CHF 9.00 / month · subscription",
-      priceYear: "CHF 90.00 · one year, paid once (only CHF 7.50 per month)",
+      eyebrow: "Choose your plan",
+      title: "How do you want to stay connected?",
+      body: "Pick monthly or yearly, then enter your details. Shipping address is collected securely in Stripe Checkout.",
+      planMonthTitle: "Monthly",
+      planMonthBody:
+        "CHF 9.00 every month. Cancel anytime for the next billing period via the Stripe customer portal.",
+      planYearTitle: "One year (no subscription)",
+      planYearBody:
+        "CHF 90.00 paid once — 12 cards, 12 stories (only CHF 7.50 per month). This is not a recurring subscription and does not renew automatically. Before the year ends, we’ll write to you and ask whether you’d like to sign up again.",
+      priceMonth: "CHF 9.00 / month",
+      priceYear: "CHF 90.00 · paid once · no subscription",
       firstName: "First name",
       email: "Email",
       place: "Town / region (for the map)",
       placePlaceholder: "City and country",
       mapConsent:
         "Optional: I agree that a blurred location (~100 km radius) of where my postcards are sent, and my first name, may appear on the public collectors’ map. The exact address stays private.",
-      ctaMonth: "Subscribe monthly",
-      ctaYear: "Pay for one year",
+      ctaMonth: "Continue with monthly",
+      ctaYear: "Continue with one year",
       manageCta: "Manage or cancel monthly subscription",
       loading: "Redirecting…",
       shippingNote:
-        "Shipping address is collected securely in Stripe Checkout. Cards are sent by standard mail (not tracked).",
+        "Cards are sent by standard mail, not tracked. Exact shipping address is entered in Stripe Checkout.",
       successBanner: "Thank you — your Mürren postcards are on the way.",
       cancelBanner: "Checkout cancelled. You can try again anytime.",
       errorGeneric: "Something went wrong. Please try again.",
@@ -148,14 +158,14 @@ const en = {
     shop: {
       eyebrow: "Shop",
       title: "Other things to buy & stay connected",
-      body: "Past motifs, blank cards, and more — browse the shop when you want something beyond the postcard offer.",
+      body: "Past motifs, blank cards, and more — coming later in the shop.",
       cta: "Visit the shop →",
       ctaSoon: "Shop · coming soon",
     },
     bullets: [
       "A fresh Mürren motif and story with each card",
-      "Monthly subscription — or 12 cards, paid once",
-      "Delivered worldwide by standard mail",
+      "Worldwide delivery by standard mail",
+      "Your exact address stays private",
     ],
     onSiteNote:
       "Visiting Mürren? Next to the machine you can also pick up a postcard on site — one in hand now, another follows by mail.",
@@ -345,8 +355,7 @@ const de = {
   offers: {
     eyebrow: "Andenken aus Mürren",
     title: "Zwei Wege.",
-    intro:
-      "Nimm ein Stück Mürren mit nach Hause — sofort aus dem Automaten, oder per Post dorthin, wo du lebst.",
+    intro: "Nimm Mürren in einer Box mit nach Hause — dorthin, wo du lebst.",
     art: {
       eyebrow: "Kunstwerk",
       title: "Tiny Art Surprises",
@@ -421,25 +430,35 @@ const de = {
     title: "Mürren zu dir nach Hause.",
     intro:
       "Bleib connected mit dem schönsten Ort der Welt. Ein Sujet aus Mürren, eine kleine Story — zugestellt, wo immer du bist.",
-    body: "Das aktuelle Motiv wird gedruckt und verschickt. Du hörst von der Künstlerin — und bekommst immer wieder ein Stück Mürren.",
+    body: "Jeden Monat: eine Postkarte aus Mürren mit einer kurzen Story von der Künstlerin. Versand als normale Post (ohne Tracking). Wähle monatlich — oder einmal zahlen für ein ganzes Jahr.",
+    firstShipNote:
+      "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
+    productImageAlt:
+      "BOXOHO-Postkarte aus Mürren — Vorderseite mit Alpwiese und Gipfeln, Rückseite mit Juli-Brief und Adresse",
     subscription: {
-      eyebrow: "Postkarten holen",
-      title: "So bleibst du connected",
-      body: "Monatsabo — oder einmal zahlen für ein ganzes Jahr Karten. Das Monatsabo kannst du jederzeit über das Stripe-Kundenportal kündigen. Das Jahrespaket ist eine Einmalzahlung — vor Ablauf melden wir uns per E-Mail, falls du verlängern möchtest.",
-      priceMonth: "CHF 9.00 / Monat · Abo",
-      priceYear: "CHF 90.00 · ein Jahr, einmalig (nur CHF 7.50 pro Monat)",
+      eyebrow: "Dein Plan",
+      title: "Wie möchtest du connected bleiben?",
+      body: "Wähle monatlich oder jährlich, dann deine Angaben. Die Versandadresse erfasst Stripe sicher im Checkout.",
+      planMonthTitle: "Monatlich",
+      planMonthBody:
+        "CHF 9.00 jeden Monat. Kündigung jederzeit auf den nächsten Abrechnungszeitraum über das Stripe-Kundenportal.",
+      planYearTitle: "Ein Jahr (kein Abo)",
+      planYearBody:
+        "CHF 90.00 einmalig — 12 Karten, 12 Stories (nur CHF 7.50 pro Monat). Das ist kein laufendes Abonnement und verlängert sich nicht automatisch. Vor Ablauf schreiben wir dir und fragen, ob du dich wieder einschreiben möchtest.",
+      priceMonth: "CHF 9.00 / Monat",
+      priceYear: "CHF 90.00 · einmalig · kein Abo",
       firstName: "Vorname",
       email: "E-Mail",
       place: "Ort / Region (für die Karte)",
       placePlaceholder: "Stadt und Land",
       mapConsent:
         "Optional: Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) des Versandorts meiner Postkarten sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat.",
-      ctaMonth: "Monatlich abonnieren",
-      ctaYear: "Ein Jahr bezahlen",
+      ctaMonth: "Weiter mit monatlich",
+      ctaYear: "Weiter mit einem Jahr",
       manageCta: "Monatsabo verwalten oder kündigen",
       loading: "Weiterleitung…",
       shippingNote:
-        "Die Versandadresse wird sicher im Stripe-Checkout erfasst. Versand als normale Post (ohne Tracking).",
+        "Versand als normale Post, ohne Tracking. Die genaue Adresse gibst du im Stripe-Checkout ein.",
       successBanner: "Danke — deine Mürren-Postkarten sind unterwegs.",
       cancelBanner: "Checkout abgebrochen. Du kannst es jederzeit erneut versuchen.",
       errorGeneric: "Etwas ist schiefgelaufen. Bitte nochmals versuchen.",
@@ -449,14 +468,14 @@ const de = {
     shop: {
       eyebrow: "Shop",
       title: "Mehr kaufen & connected bleiben",
-      body: "Frühere Motive, leere Karten und mehr — im Shop, wenn du etwas über das Postkarten-Angebot hinaus möchtest.",
+      body: "Frühere Motive, leere Karten und mehr — später im Shop.",
       cta: "Zum Shop →",
       ctaSoon: "Shop · folgt bald",
     },
     bullets: [
       "Frisches Mürren-Motiv und Story mit jeder Karte",
-      "Monatsabo — oder 12 Karten, einmal bezahlt",
       "Weltweiter Versand als normale Post",
+      "Deine genaue Adresse bleibt privat",
     ],
     onSiteNote:
       "In Mürren vor Ort? Neben dem Automaten kannst du auch eine Postkarte mitnehmen — eine sofort in der Hand, eine weitere folgt per Post.",

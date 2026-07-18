@@ -213,54 +213,63 @@ export function OnePager({ locale, dict }: OnePagerProps) {
         </div>
       </section>
 
-      {/* 4b · Postcard deep */}
-      <section id="postcard" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
-        <div className="mx-auto max-w-5xl">
+      {/* 4b · Postcard product */}
+      <section id="postcard" className="scroll-mt-24 border-t border-rule py-20">
+        <div className="mx-auto max-w-3xl px-6 md:px-10">
           <p className="eyebrow mb-4">{postcard.eyebrow}</p>
-          <h2 className="max-w-2xl text-4xl text-ink md:text-5xl">{postcard.title}</h2>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">{postcard.intro}</p>
-          <p className="mt-6 max-w-2xl leading-relaxed text-ink-soft">{postcard.body}</p>
+          <h2 className="text-4xl text-ink md:text-5xl">{postcard.title}</h2>
+        </div>
 
-          <div className="mt-12 grid gap-12 md:grid-cols-2 md:gap-16">
-            <article className="border-t border-rule pt-6">
-              <p className="eyebrow mb-2">{postcard.subscription.eyebrow}</p>
-              <h3 className="text-2xl text-ink md:text-3xl">{postcard.subscription.title}</h3>
-              <p className="mt-3 leading-relaxed text-ink-soft">{postcard.subscription.body}</p>
-              <ul className="mt-6 space-y-2 text-ink-soft">
-                {postcard.bullets.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <SubscriptionCheckout locale={locale} postcard={postcard} />
-              </div>
-            </article>
+        <figure className="relative mx-auto mt-10 aspect-[9/16] w-full max-w-md overflow-hidden bg-paper-deep md:mt-12 md:max-w-lg">
+          <Image
+            src="/postcard-product.png"
+            alt={postcard.productImageAlt}
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 768px) 100vw, 512px"
+            priority={false}
+          />
+        </figure>
 
-            <article className="border-t border-rule pt-6">
-              <p className="eyebrow mb-2">{postcard.shop.eyebrow}</p>
-              <h3 className="text-2xl text-ink md:text-3xl">{postcard.shop.title}</h3>
-              <p className="mt-3 leading-relaxed text-ink-soft">{postcard.shop.body}</p>
-              {site.shopUrl ? (
-                <a
-                  href={site.shopUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-8 inline-block border border-ink px-5 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper"
-                >
-                  {postcard.shop.cta}
-                </a>
-              ) : (
-                <p className="mt-8 inline-block font-mono text-[0.72rem] uppercase tracking-[0.14em] text-stamp">
-                  {postcard.shop.ctaSoon}
-                </p>
-              )}
-            </article>
+        <div className="mx-auto mt-10 max-w-3xl px-6 md:mt-12 md:px-10">
+          <p className="text-lg leading-relaxed text-ink-soft">{postcard.intro}</p>
+          <p className="mt-6 leading-relaxed text-ink-soft">{postcard.body}</p>
+          <p className="mt-6 font-mono text-sm leading-relaxed tracking-[0.02em] text-stamp">
+            {postcard.firstShipNote}
+          </p>
+          <ul className="mt-8 space-y-2 text-ink-soft">
+            {postcard.bullets.map((item) => (
+              <li key={item} className="flex gap-3">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-12 border-t border-rule pt-10">
+            <p className="eyebrow mb-2">{postcard.subscription.eyebrow}</p>
+            <h3 className="text-2xl text-ink md:text-3xl">{postcard.subscription.title}</h3>
+            <p className="mt-3 leading-relaxed text-ink-soft">{postcard.subscription.body}</p>
+            <div className="mt-8">
+              <SubscriptionCheckout locale={locale} postcard={postcard} />
+            </div>
           </div>
 
-          <p className="mt-14 max-w-2xl text-sm leading-relaxed text-muted">{postcard.onSiteNote}</p>
+          <p className="mt-14 text-sm leading-relaxed text-muted">{postcard.onSiteNote}</p>
+          {site.shopUrl ? (
+            <a
+              href={site.shopUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline"
+            >
+              {postcard.shop.cta}
+            </a>
+          ) : (
+            <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+              {postcard.shop.ctaSoon}
+            </p>
+          )}
 
           <p className="mt-6 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-muted">
             {postcard.note}{" "}
