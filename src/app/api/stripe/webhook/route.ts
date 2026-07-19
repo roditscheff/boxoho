@@ -24,13 +24,16 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
         : "monthly";
   const mapConsent = meta.mapConsent === "true";
   const shipping = session.collected_information?.shipping_details;
-  const address = shipping?.address;
+  const shippingAddress = shipping?.address;
+  const billingAddress = session.customer_details?.address;
+  // Prefer shipping (postcards); fall back to billing (newsletter / map consent)
+  const address = shippingAddress?.line1 ? shippingAddress : billingAddress;
   const fullName =
     (shipping?.name || session.customer_details?.name || meta.firstName || "").trim();
   const firstName = fullName.split(/\s+/)[0] || "Friend";
-  const place =
-    (meta.place || "").trim() ||
-    [address?.city, address?.country].filter(Boolean).join(", ");
+  const place = [address?.city, address?.postal_code, address?.country]
+    .filter(Boolean)
+    .join(", ");
 
   const email =
     session.customer_details?.email ||
@@ -47,6 +50,7 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
   let lat: number | null = null;
   let lng: number | null = null;
 
+  // Geocode from Stripe address; blur ~40–100 km server-side when map consent is on
   if (place) {
     const geo = await geocodePlace(place);
     if (geo) {
@@ -97,7 +101,7 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
   const payload = {
     first_name: firstName,
     email,
-    place_text: place || [address?.city, address?.country].filter(Boolean).join(", ") || "—",
+    place_text: place || "—",
     lat,
     lng,
     public_lat: mapConsent ? publicLat : null,
@@ -107,7 +111,7 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
     stripe_subscription_id: subscriptionId,
     plan,
     status: "active",
-    shipping_name: shipping?.name ?? null,
+    shipping_name: shipping?.name ?? session.customer_details?.name ?? null,
     shipping_line1: address?.line1 ?? null,
     shipping_line2: address?.line2 ?? null,
     shipping_city: address?.city ?? null,

@@ -181,7 +181,7 @@ const en = {
         "12 months paid once — does not auto-renew",
       ],
       mapConsent:
-        "I agree that a blurred location (~100 km radius) of my shipping address, and my first name, may appear on the public collectors’ map. The exact address stays private. (optional)",
+        "I agree that a blurred location (~100 km radius) and my first name may appear on the public collectors’ map. The exact address stays private — we calculate the blur automatically. (optional)",
       legalConsentBefore: "I accept the",
       legalConsentTerms: "Terms",
       legalConsentAnd: "and the",
@@ -543,7 +543,7 @@ const de = {
         "12 Monate einmal bezahlt — keine automatische Verlängerung",
       ],
       mapConsent:
-        "Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) meiner Versandadresse sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat. (optional)",
+        "Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat — die Unschärfe berechnen wir automatisch. (optional)",
       legalConsentBefore: "Ich akzeptiere die",
       legalConsentTerms: "AGB",
       legalConsentAnd: "und die",

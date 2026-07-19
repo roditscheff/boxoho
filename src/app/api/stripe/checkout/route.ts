@@ -56,9 +56,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const { plan, locale } = parsed.data;
+  const { plan, locale, mapConsent } = parsed.data;
   const physical = isPhysicalPostcardPlan(plan as Plan);
-  const mapConsent = physical && parsed.data.mapConsent;
 
   if (plan === "newsletter" && !isNewsletterPriceConfigured()) {
     return NextResponse.json(
@@ -89,8 +88,9 @@ export async function POST(request: Request) {
     locale: (locale === "de" ? "de" : "en") as "de" | "en",
   };
 
-  // Newsletter + monthly = subscription; yearly = one-time payment for 12 cards
-  // Name, email, and shipping address are collected in Stripe Checkout.
+  // Newsletter + monthly = subscription; yearly = one-time payment for 12 cards.
+  // Name/email/address in Stripe. Map blur (~100 km) is computed server-side from that address.
+  // Newsletter: billing address when map consent is on (no shipping).
   const session =
     plan === "yearly"
       ? await stripe.checkout.sessions.create({
@@ -105,7 +105,9 @@ export async function POST(request: Request) {
           mode: "subscription",
           ...(physical
             ? { shipping_address_collection: { allowed_countries: [...shippingCountries] } }
-            : {}),
+            : mapConsent
+              ? { billing_address_collection: "required" as const }
+              : {}),
           subscription_data: { metadata },
         });
 

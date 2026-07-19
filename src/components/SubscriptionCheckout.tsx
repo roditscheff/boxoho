@@ -23,8 +23,6 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
   const [error, setError] = useState<string | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
 
-  const isPhysical = plan === "monthly" || plan === "yearly";
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("subscribed") === "1") setBanner(t.successBanner);
@@ -45,7 +43,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           plan,
-          mapConsent: isPhysical ? mapConsent : false,
+          mapConsent,
           legalConsent: true,
           locale,
         }),
@@ -142,17 +140,15 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         </ul>
       </div>
 
-      {isPhysical ? (
-        <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
-          <input
-            type="checkbox"
-            checked={mapConsent}
-            onChange={(e) => setMapConsent(e.target.checked)}
-            className="mt-1 accent-[var(--stamp)]"
-          />
-          <span>{t.mapConsent}</span>
-        </label>
-      ) : null}
+      <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
+        <input
+          type="checkbox"
+          checked={mapConsent}
+          onChange={(e) => setMapConsent(e.target.checked)}
+          className="mt-1 accent-[var(--stamp)]"
+        />
+        <span>{t.mapConsent}</span>
+      </label>
 
       <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
         <input
