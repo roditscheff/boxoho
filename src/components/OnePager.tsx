@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 import { CollectorsMap } from "./CollectorsMap";
 import { HeroMedia } from "./HeroMedia";
 import { RegisterForm } from "./RegisterForm";
-import { SubscriptionCheckout } from "./SubscriptionCheckout";
+import { PostcardShop } from "./PostcardShop";
 
 type OnePagerProps = {
   locale: Locale;
@@ -123,30 +123,7 @@ export function OnePager({ locale, dict }: OnePagerProps) {
 
       {/* 4 · Postcard product */}
       <section id="postcard" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-14 lg:gap-20">
-          <figure className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
-            <Image
-              src="/postcard-product.jpg"
-              alt={postcard.productImageAlt}
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority={false}
-            />
-          </figure>
-
-          <div className="min-w-0">
-            <p className="eyebrow mb-3 sm:mb-4">{postcard.eyebrow}</p>
-            <h2 className="text-3xl text-ink sm:text-4xl md:text-5xl">{postcard.title}</h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
-              {postcard.intro}
-            </p>
-
-            <div className="mt-8 sm:mt-10">
-              <SubscriptionCheckout locale={locale} postcard={postcard} />
-            </div>
-          </div>
-        </div>
+        <PostcardShop locale={locale} postcard={postcard} />
       </section>
 
       {/* 4b · On site in Mürren */}

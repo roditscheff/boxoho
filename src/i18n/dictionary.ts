@@ -146,6 +146,8 @@ const en = {
       "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
     productImageAlt:
       "Comic: hand holding a Mürren postcard with alpine greeting from Sandrine",
+    newsletterImageAlt:
+      "Comic: Mürren newsletter email with alpine greeting from Sandrine",
     subscription: {
       eyebrow: "Choose your plan",
       title: "How do you want to stay connected?",
@@ -516,6 +518,8 @@ const de = {
       "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
     productImageAlt:
       "Comic: Hand hält eine Mürren-Postkarte mit Alpengruss von Sandrine",
+    newsletterImageAlt:
+      "Comic: Mürren-Newsletter-E-Mail mit Alpengruss von Sandrine",
     subscription: {
       eyebrow: "Dein Plan",
       title: "Wie möchtest du connected bleiben?",

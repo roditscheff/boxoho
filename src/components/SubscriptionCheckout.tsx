@@ -10,11 +10,17 @@ import type { Plan } from "@/lib/stripe";
 type SubscriptionCheckoutProps = {
   locale: Locale;
   postcard: Dictionary["postcard"];
+  plan: Plan;
+  onPlanChange: (plan: Plan) => void;
 };
 
-export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutProps) {
+export function SubscriptionCheckout({
+  locale,
+  postcard,
+  plan,
+  onPlanChange,
+}: SubscriptionCheckoutProps) {
   const t = postcard.subscription;
-  const [plan, setPlan] = useState<Plan>("monthly");
   const [mapConsent, setMapConsent] = useState(false);
   const [legalConsent, setLegalConsent] = useState(false);
   const [showPortal, setShowPortal] = useState(false);
@@ -113,7 +119,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
           <select
             id="postcard-plan"
             value={plan}
-            onChange={(e) => setPlan(e.target.value as Plan)}
+            onChange={(e) => onPlanChange(e.target.value as Plan)}
             className="w-full appearance-none rounded-full border-2 border-stamp bg-paper px-5 py-3.5 pr-12 font-mono text-[0.85rem] text-ink outline-none transition-colors focus:border-stamp-soft"
           >
             <option value="newsletter">{t.planNewsletterOption}</option>
