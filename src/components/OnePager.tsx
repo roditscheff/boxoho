@@ -21,18 +21,18 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       {/* 1 · Hero */}
       <section
         id="top"
-        className="relative flex min-h-[calc(100vh-9rem)] flex-col items-center px-6 pb-20 pt-14 text-center md:px-10 md:pt-20"
+        className="relative flex flex-col items-center px-4 pb-14 pt-10 text-center sm:px-6 sm:pb-16 sm:pt-12 md:min-h-[calc(100vh-9rem)] md:px-10 md:pb-20 md:pt-16"
       >
-        <p className="eyebrow fade-up mb-5">{home.eyebrow}</p>
-        <h1 className="fade-up-delay max-w-3xl text-5xl tracking-tight text-ink md:text-7xl">
+        <p className="eyebrow fade-up mb-4">{home.eyebrow}</p>
+        <h1 className="fade-up-delay max-w-3xl text-4xl tracking-tight text-ink sm:text-5xl md:text-7xl">
           {home.title}
         </h1>
-        <p className="fade-up-delay-2 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft md:text-xl">
+        <p className="fade-up-delay-2 mx-auto mt-4 max-w-md text-base leading-relaxed text-ink-soft sm:mt-5 sm:max-w-xl sm:text-lg md:text-xl">
           {home.lead}
         </p>
 
-        <div className="mx-auto mt-12 flex w-full max-w-md flex-col gap-8 md:mt-14">
-          <div className="flex flex-col gap-4">
+        <div className="mx-auto mt-8 grid w-full max-w-sm grid-cols-1 gap-8 sm:mt-10 md:mt-12 md:max-w-4xl md:grid-cols-2 md:gap-8 lg:gap-10">
+          <div className="flex flex-col gap-3">
             <HeroMedia
               gifSrc="/hero/postcard.gif"
               fallbackSrc="/hero/postcard.png"
@@ -41,13 +41,13 @@ export function OnePager({ locale, dict }: OnePagerProps) {
             />
             <a
               href="#postcard"
-              className="rounded-full bg-stamp px-8 py-4 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft"
+              className="w-full rounded-full bg-stamp px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:px-6 sm:py-4 sm:text-[0.78rem]"
             >
               {home.ctaPrimary}
             </a>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <HeroMedia
               gifSrc="/hero/automat.gif"
               fallbackSrc="/hero/automat.png"
@@ -56,7 +56,7 @@ export function OnePager({ locale, dict }: OnePagerProps) {
             />
             <a
               href="#register"
-              className="rounded-full bg-stamp px-8 py-4 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft"
+              className="w-full rounded-full bg-stamp px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:px-6 sm:py-4 sm:text-[0.78rem]"
             >
               {home.ctaSecondary}
             </a>
@@ -65,26 +65,28 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       </section>
 
       {/* 2 · Map */}
-      <section id="map" className="scroll-mt-24 border-t border-rule bg-paper-deep/40 px-6 py-20 md:px-10">
+      <section id="map" className="scroll-mt-24 border-t border-rule bg-paper-deep/40 px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-5xl">
-          <p className="eyebrow mb-4">{map.eyebrow}</p>
-          <h2 className="max-w-2xl text-4xl text-ink md:text-5xl">{map.title}</h2>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">{map.intro}</p>
+          <p className="eyebrow mb-3 sm:mb-4">{map.eyebrow}</p>
+          <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{map.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
+            {map.intro}
+          </p>
 
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <CollectorsMap map={map} />
           </div>
 
-          <div className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
               href="#register"
-              className="rounded-full bg-stamp px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft"
+              className="w-full rounded-full bg-stamp px-5 py-3.5 text-center font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:w-auto sm:px-6"
             >
               {map.ctaRegister}
             </a>
             <a
               href="#postcard"
-              className="rounded-full bg-stamp px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft"
+              className="w-full rounded-full bg-stamp px-5 py-3.5 text-center font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:w-auto sm:px-6"
             >
               {map.ctaPostcard}
             </a>
@@ -93,16 +95,16 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       </section>
 
       {/* 3 · About BOXOHO + Sandrine */}
-      <section id="about" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
+      <section id="about" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-5xl">
-          <p className="eyebrow mb-4">{about.eyebrow}</p>
-          <h2 className="max-w-2xl text-4xl text-ink md:text-5xl">{about.title}</h2>
+          <p className="eyebrow mb-3 sm:mb-4">{about.eyebrow}</p>
+          <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{about.title}</h2>
 
-          <div className="mt-12 grid items-start gap-10 md:grid-cols-2 md:gap-14">
-            <p className="text-lg leading-relaxed text-ink-soft">{about.body}</p>
+          <div className="mt-8 grid grid-cols-1 items-start gap-8 sm:mt-10 md:mt-12 md:grid-cols-2 md:gap-14">
+            <p className="text-base leading-relaxed text-ink-soft sm:text-lg">{about.body}</p>
 
-            <div className="flex gap-5">
-              <figure className="relative h-28 w-28 shrink-0 overflow-hidden bg-paper-deep sm:h-32 sm:w-32">
+            <div className="flex gap-4 sm:gap-5">
+              <figure className="relative h-24 w-24 shrink-0 overflow-hidden bg-paper-deep sm:h-32 sm:w-32">
                 <Image
                   src="/sandrine.jpg"
                   alt={about.portraitAlt}
@@ -113,8 +115,10 @@ export function OnePager({ locale, dict }: OnePagerProps) {
               </figure>
               <div>
                 <p className="eyebrow mb-2">{about.creatorEyebrow}</p>
-                <h3 className="text-2xl text-ink">{about.creatorName}</h3>
-                <p className="mt-3 leading-relaxed text-ink-soft">{about.creatorBody}</p>
+                <h3 className="text-xl text-ink sm:text-2xl">{about.creatorName}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:mt-3 sm:text-base">
+                  {about.creatorBody}
+                </p>
               </div>
             </div>
           </div>
@@ -122,9 +126,9 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       </section>
 
       {/* 4 · Postcard product */}
-      <section id="postcard" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
-        <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
-          <figure className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep md:mx-0 md:sticky md:top-24 md:max-w-none">
+      <section id="postcard" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <figure className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
             <Image
               src="/postcard-product.png"
               alt={postcard.productImageAlt}
@@ -136,13 +140,13 @@ export function OnePager({ locale, dict }: OnePagerProps) {
           </figure>
 
           <div className="min-w-0">
-            <p className="eyebrow mb-4">{postcard.eyebrow}</p>
-            <h2 className="text-4xl text-ink md:text-5xl">{postcard.title}</h2>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
+            <p className="eyebrow mb-3 sm:mb-4">{postcard.eyebrow}</p>
+            <h2 className="text-3xl text-ink sm:text-4xl md:text-5xl">{postcard.title}</h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
               {postcard.intro}
             </p>
 
-            <div className="mt-10">
+            <div className="mt-8 sm:mt-10">
               <SubscriptionCheckout locale={locale} postcard={postcard} />
             </div>
           </div>
@@ -157,23 +161,25 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       </section>
 
       {/* 5 · Art registration */}
-      <section id="register" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
+      <section id="register" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-xl">
-          <p className="eyebrow mb-4">{register.eyebrow}</p>
-          <h2 className="text-4xl text-ink md:text-5xl">{register.title}</h2>
-          <p className="mt-4 leading-relaxed text-ink-soft">{register.intro}</p>
-          <div className="mt-8">
+          <p className="eyebrow mb-3 sm:mb-4">{register.eyebrow}</p>
+          <h2 className="text-3xl text-ink sm:text-4xl md:text-5xl">{register.title}</h2>
+          <p className="mt-3 text-base leading-relaxed text-ink-soft sm:mt-4 sm:text-lg">
+            {register.intro}
+          </p>
+          <div className="mt-6 sm:mt-8">
             <RegisterForm register={register} ctaLabel={map.ctaRegister} />
           </div>
         </div>
       </section>
 
       {/* 6 · Impressions + Instagram */}
-      <section id="impressions" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
+      <section id="impressions" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-5xl">
-          <p className="eyebrow mb-4">{impressions.eyebrow}</p>
-          <h2 className="max-w-2xl text-4xl text-ink md:text-5xl">{impressions.title}</h2>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+          <p className="eyebrow mb-3 sm:mb-4">{impressions.eyebrow}</p>
+          <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{impressions.title}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
             {impressions.intro}
           </p>
           <a

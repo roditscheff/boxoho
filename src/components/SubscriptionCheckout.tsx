@@ -189,7 +189,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
           type="button"
           disabled={loading !== null || !legalConsent}
           onClick={startCheckout}
-          className="w-full rounded-full bg-stamp px-6 py-4 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40 sm:w-auto"
+          className="w-full rounded-full bg-stamp px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40 sm:px-6 sm:py-4 sm:text-[0.78rem] md:w-auto"
         >
           {loading === "checkout" ? t.loading : t.ctaBuy}
         </button>

@@ -23,7 +23,7 @@ export function HeroMedia({ gifSrc, fallbackSrc, alt, label }: HeroMediaProps) {
   }, [gifSrc]);
 
   return (
-    <figure className="fade-up-delay relative aspect-[3/4] overflow-hidden rounded-3xl bg-paper-deep shadow-[0_1px_0_0_var(--stamp)]">
+    <figure className="fade-up-delay relative aspect-[3/4] overflow-hidden rounded-2xl bg-paper-deep shadow-[0_1px_0_0_var(--stamp)] sm:rounded-3xl">
       {/* eslint-disable-next-line @next/next/no-img-element -- GIF + runtime fallback */}
       <img
         src={src}
@@ -33,7 +33,7 @@ export function HeroMedia({ gifSrc, fallbackSrc, alt, label }: HeroMediaProps) {
           if (src !== fallbackSrc) setSrc(fallbackSrc);
         }}
       />
-      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/35 to-transparent px-5 pb-5 pt-16 text-left font-serif text-lg leading-snug text-paper md:text-xl">
+      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/35 to-transparent px-4 pb-4 pt-12 text-left font-serif text-base leading-snug text-paper sm:px-5 sm:pb-5 sm:pt-16 sm:text-lg md:text-xl">
         {label}
       </figcaption>
     </figure>

@@ -30,7 +30,7 @@ const en = {
   home: {
     eyebrow: "Post & art from Mürren",
     title: "Box Ohooo!",
-    lead: "A piece of Mürren for home — wherever you live. A postcard in the mail every month. And a good excuse to visit the machine in Mürren in person.",
+    lead: "A piece of Mürren for your home - wherever you live.",
     ctaPrimary: "Subscribe to the postcard",
     ctaSecondary: "Register artwork",
     mediaAutomatLabel: "Open a little box at the machine",
@@ -391,7 +391,7 @@ const de = {
   home: {
     eyebrow: "Post & Kunst aus Mürren",
     title: "Box Ohooo!",
-    lead: "Ein Stück Mürren für zu Hause — egal wo du wohnst. Jeden Monat eine Postkarte per Post. Und eine gute Ausrede, den Automaten in Mürren mal live zu besuchen.",
+    lead: "Ein Stück Mürren für zu Hause - egal wo du wohnst.",
     ctaPrimary: "Postkarte abonnieren",
     ctaSecondary: "Kunstwerk registrieren",
     mediaAutomatLabel: "Schachteli öffnen am Automaten",
