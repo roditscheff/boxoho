@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { getAppUrl } from "@/lib/site";
 import {
   getStripe,
   isNewsletterPriceConfigured,
@@ -66,10 +67,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(
-    /\/$/,
-    "",
-  );
+  const appUrl = getAppUrl();
   const stripe = getStripe();
   const metadata = {
     mapConsent: mapConsent ? "true" : "false",

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { getAppUrl } from "@/lib/site";
 import { getStripe, isStripeConfigured } from "@/lib/stripe";
 
 const schema = z.object({
@@ -28,10 +29,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No customer found for that email" }, { status: 404 });
   }
 
-  const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(
-    /\/$/,
-    "",
-  );
+  const appUrl = getAppUrl();
   const portal = await stripe.billingPortal.sessions.create({
     customer: customer.id,
     return_url: `${appUrl}/${parsed.data.locale}#postcard`,

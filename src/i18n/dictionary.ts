@@ -11,10 +11,10 @@ const en = {
     main: "Main navigation",
     mobile: "Mobile navigation",
     items: [
-      { href: "#map", label: "Map" },
-      { href: "#about", label: "About" },
       { href: "#postcard", label: "Postcard" },
       { href: "#register", label: "Register" },
+      { href: "#map", label: "Worldmap" },
+      { href: "#about", label: "About" },
       { href: "#impressions", label: "Mürren" },
     ],
     legal: [
@@ -372,10 +372,10 @@ const de = {
     main: "Hauptnavigation",
     mobile: "Mobile Navigation",
     items: [
-      { href: "#map", label: "Karte" },
-      { href: "#about", label: "Über uns" },
       { href: "#postcard", label: "Postkarte" },
       { href: "#register", label: "Registrieren" },
+      { href: "#map", label: "Weltkarte" },
+      { href: "#about", label: "Über uns" },
       { href: "#impressions", label: "Mürren" },
     ],
     legal: [
