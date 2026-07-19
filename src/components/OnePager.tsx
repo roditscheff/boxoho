@@ -124,9 +124,9 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       {/* 4 · Postcard product */}
       <section id="postcard" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-14 lg:gap-20">
-          <figure className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
+          <figure className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
             <Image
-              src="/postcard-product.png"
+              src="/postcard-product.jpg"
               alt={postcard.productImageAlt}
               fill
               className="object-cover object-center"

@@ -145,7 +145,7 @@ const en = {
     firstShipNote:
       "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
     productImageAlt:
-      "BOXOHO postcard from Mürren — front with alpine meadow and peaks, back with letter and address",
+      "Comic: hand holding a Mürren postcard with alpine greeting from Sandrine",
     subscription: {
       eyebrow: "Choose your plan",
       title: "How do you want to stay connected?",
@@ -515,7 +515,7 @@ const de = {
     firstShipNote:
       "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
     productImageAlt:
-      "BOXOHO-Postkarte aus Mürren — Vorderseite mit Alpwiese und Gipfeln, Rückseite mit Brief und Adresse",
+      "Comic: Hand hält eine Mürren-Postkarte mit Alpengruss von Sandrine",
     subscription: {
       eyebrow: "Dein Plan",
       title: "Wie möchtest du connected bleiben?",
