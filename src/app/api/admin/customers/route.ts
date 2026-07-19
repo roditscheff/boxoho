@@ -15,6 +15,7 @@ import {
 
 const FILTERS: CustomerFilter[] = [
   "all",
+  "active_newsletter",
   "active_monthly",
   "yearly",
   "cancelled",

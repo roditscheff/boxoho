@@ -21,6 +21,14 @@ export function Footer({ locale, dict }: FooterProps) {
             <p className="max-w-md text-lg leading-relaxed text-ink-soft">
               {dict.footer.blurb}
             </p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">
+              {fill(dict.footer.contact, {
+                company: site.company,
+                address: site.address,
+                uid: site.uid,
+                email: site.email,
+              })}
+            </p>
           </div>
           <div className="flex flex-col gap-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-muted md:items-end">
             {dict.nav.legal.map((item) => (
@@ -39,6 +47,9 @@ export function Footer({ locale, dict }: FooterProps) {
               className="hover:text-stamp"
             >
               {dict.footer.instagram}
+            </a>
+            <a href={`mailto:${site.email}`} className="normal-case tracking-normal hover:text-stamp">
+              {site.email}
             </a>
           </div>
         </div>

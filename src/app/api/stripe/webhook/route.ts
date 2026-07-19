@@ -16,7 +16,12 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
   const meta = session.metadata || {};
   if (meta.source !== "boxoho-postcard") return;
 
-  const plan = meta.plan === "yearly" ? "yearly" : "monthly";
+  const plan =
+    meta.plan === "yearly"
+      ? "yearly"
+      : meta.plan === "newsletter"
+        ? "newsletter"
+        : "monthly";
   const mapConsent = meta.mapConsent === "true";
   const firstName = (meta.firstName || "").trim() || "Friend";
   const shipping = session.collected_information?.shipping_details;

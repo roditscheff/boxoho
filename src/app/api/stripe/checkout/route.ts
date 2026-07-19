@@ -1,12 +1,19 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getStripe, isStripeConfigured, priceIdForPlan, type Plan } from "@/lib/stripe";
+import {
+  getStripe,
+  isNewsletterPriceConfigured,
+  isPhysicalPostcardPlan,
+  isStripeConfigured,
+  priceIdForPlan,
+  type Plan,
+} from "@/lib/stripe";
 
 const schema = z.object({
-  plan: z.enum(["monthly", "yearly"]),
+  plan: z.enum(["newsletter", "monthly", "yearly"]),
   firstName: z.string().min(1).max(80),
   email: z.string().email().max(200),
-  place: z.string().min(2).max(200),
+  place: z.string().max(200).optional().default(""),
   mapConsent: z.boolean().default(false),
   locale: z.enum(["en", "de"]).default("en"),
 });
@@ -51,7 +58,28 @@ export async function POST(request: Request) {
     );
   }
 
-  const { plan, firstName, email, place, mapConsent, locale } = parsed.data;
+  const { plan, firstName, email, locale } = parsed.data;
+  let { place, mapConsent } = parsed.data;
+
+  if (plan === "newsletter" && !isNewsletterPriceConfigured()) {
+    return NextResponse.json(
+      { error: "Newsletter price is not configured yet." },
+      { status: 503 },
+    );
+  }
+
+  const physical = isPhysicalPostcardPlan(plan as Plan);
+  if (physical && place.trim().length < 2) {
+    return NextResponse.json(
+      { error: "Place is required for postcard plans." },
+      { status: 400 },
+    );
+  }
+  if (!physical) {
+    place = "";
+    mapConsent = false;
+  }
+
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(
     /\/$/,
     "",
@@ -65,33 +93,33 @@ export async function POST(request: Request) {
     source: "boxoho-postcard",
   };
 
-  // Monthly = recurring subscription; yearly = one-time payment for 12 cards
+  const common = {
+    customer_email: email,
+    line_items: [{ price: priceIdForPlan(plan as Plan), quantity: 1 }],
+    success_url: `${appUrl}/${locale}?subscribed=1#postcard`,
+    cancel_url: `${appUrl}/${locale}?cancelled=1#postcard`,
+    phone_number_collection: { enabled: false },
+    metadata,
+    locale: (locale === "de" ? "de" : "en") as "de" | "en",
+  };
+
+  // Newsletter + monthly = subscription; yearly = one-time payment for 12 cards
   const session =
-    plan === "monthly"
+    plan === "yearly"
       ? await stripe.checkout.sessions.create({
-          mode: "subscription",
-          customer_email: email,
-          line_items: [{ price: priceIdForPlan(plan as Plan), quantity: 1 }],
-          success_url: `${appUrl}/${locale}?subscribed=1#postcard`,
-          cancel_url: `${appUrl}/${locale}?cancelled=1#postcard`,
+          ...common,
+          mode: "payment",
+          customer_creation: "always",
           shipping_address_collection: { allowed_countries: [...shippingCountries] },
-          phone_number_collection: { enabled: false },
-          metadata,
-          subscription_data: { metadata },
-          locale: locale === "de" ? "de" : "en",
+          payment_intent_data: { metadata },
         })
       : await stripe.checkout.sessions.create({
-          mode: "payment",
-          customer_email: email,
-          customer_creation: "always",
-          line_items: [{ price: priceIdForPlan(plan as Plan), quantity: 1 }],
-          success_url: `${appUrl}/${locale}?subscribed=1#postcard`,
-          cancel_url: `${appUrl}/${locale}?cancelled=1#postcard`,
-          shipping_address_collection: { allowed_countries: [...shippingCountries] },
-          phone_number_collection: { enabled: false },
-          metadata,
-          payment_intent_data: { metadata },
-          locale: locale === "de" ? "de" : "en",
+          ...common,
+          mode: "subscription",
+          ...(physical
+            ? { shipping_address_collection: { allowed_countries: [...shippingCountries] } }
+            : {}),
+          subscription_data: { metadata },
         });
 
   if (!session.url) {

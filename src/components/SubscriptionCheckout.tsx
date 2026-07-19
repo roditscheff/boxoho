@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
-
-type Plan = "monthly" | "yearly";
+import type { Plan } from "@/lib/stripe";
 
 type SubscriptionCheckoutProps = {
   locale: Locale;
@@ -21,6 +20,8 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
   const [loading, setLoading] = useState<"checkout" | "portal" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
+
+  const isPhysical = plan === "monthly" || plan === "yearly";
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -39,14 +40,18 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
           plan,
           firstName,
           email,
-          place,
-          mapConsent,
+          place: isPhysical ? place : "",
+          mapConsent: isPhysical ? mapConsent : false,
           locale,
         }),
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || t.errorGeneric);
+        const msg =
+          plan === "newsletter" && res.status === 503
+            ? t.newsletterMissingPrice
+            : data.error || t.errorGeneric;
+        setError(msg);
         setLoading(null);
         return;
       }
@@ -81,6 +86,12 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
 
   const plans: { id: Plan; title: string; body: string; price: string }[] = [
     {
+      id: "newsletter",
+      title: t.planNewsletterTitle,
+      body: t.planNewsletterBody,
+      price: t.priceNewsletter,
+    },
+    {
       id: "monthly",
       title: t.planMonthTitle,
       body: t.planMonthBody,
@@ -94,6 +105,12 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
     },
   ];
 
+  const ctaLabel =
+    plan === "newsletter" ? t.ctaNewsletter : plan === "monthly" ? t.ctaMonth : t.ctaYear;
+
+  const canCheckout =
+    Boolean(firstName && email) && (!isPhysical || Boolean(place.trim().length >= 2));
+
   return (
     <div className="space-y-8">
       {banner ? (
@@ -103,7 +120,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
       ) : null}
 
       <div
-        className="grid gap-4 md:grid-cols-2"
+        className="grid gap-4 md:grid-cols-3"
         role="radiogroup"
         aria-label={t.eyebrow}
       >
@@ -157,43 +174,43 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
             className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
           />
         </label>
-        <label className="block">
-          <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-            {t.place}
-          </span>
-          <input
-            type="text"
-            value={place}
-            onChange={(e) => setPlace(e.target.value)}
-            placeholder={t.placePlaceholder}
-            required
-            className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-          />
-        </label>
+        {isPhysical ? (
+          <label className="block">
+            <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+              {t.place}
+            </span>
+            <input
+              type="text"
+              value={place}
+              onChange={(e) => setPlace(e.target.value)}
+              placeholder={t.placePlaceholder}
+              required
+              className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
+            />
+          </label>
+        ) : null}
       </div>
 
-      <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
-        <input
-          type="checkbox"
-          checked={mapConsent}
-          onChange={(e) => setMapConsent(e.target.checked)}
-          className="mt-1 accent-[var(--stamp)]"
-        />
-        <span>{t.mapConsent}</span>
-      </label>
+      {isPhysical ? (
+        <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
+          <input
+            type="checkbox"
+            checked={mapConsent}
+            onChange={(e) => setMapConsent(e.target.checked)}
+            className="mt-1 accent-[var(--stamp)]"
+          />
+          <span>{t.mapConsent}</span>
+        </label>
+      ) : null}
 
       <div className="flex flex-wrap items-center gap-4">
         <button
           type="button"
-          disabled={loading !== null || !firstName || !email || !place}
+          disabled={loading !== null || !canCheckout}
           onClick={startCheckout}
-          className="border border-ink px-5 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-40"
+          className="rounded-full bg-stamp px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40"
         >
-          {loading === "checkout"
-            ? t.loading
-            : plan === "monthly"
-              ? t.ctaMonth
-              : t.ctaYear}
+          {loading === "checkout" ? t.loading : ctaLabel}
         </button>
         <button
           type="button"

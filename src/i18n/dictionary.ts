@@ -11,13 +11,11 @@ const en = {
     main: "Main navigation",
     mobile: "Mobile navigation",
     items: [
-      { href: "#offers", label: "Two ways" },
-      { href: "#story", label: "Story" },
-      { href: "#impressions", label: "Mürren" },
-      { href: "#creator", label: "Creator" },
-      { href: "#artwork", label: "Artwork" },
-      { href: "#postcard", label: "Postcard" },
       { href: "#map", label: "Map" },
+      { href: "#about", label: "About" },
+      { href: "#postcard", label: "Postcard" },
+      { href: "#register", label: "Register" },
+      { href: "#impressions", label: "Mürren" },
     ],
     legal: [
       { href: "/terms", label: "Terms" },
@@ -31,10 +29,24 @@ const en = {
   },
   home: {
     eyebrow: "Post & art from Mürren",
-    title: "BOXOHO",
-    lead: "A piece of Mürren for your home — wherever you are in the world. Two ways to take it with you: instantly from the machine, or later by post.",
-    ctaPrimary: "Discover two ways",
-    ctaSecondary: "Register your artwork",
+    title: "Box Ohooo!",
+    lead: "A piece of Mürren for home — wherever you live. A postcard in the mail every month. And a good excuse to visit the machine in Mürren in person.",
+    ctaPrimary: "Subscribe to the postcard",
+    ctaSecondary: "Register artwork",
+    mediaAutomatLabel: "Open a little box at the machine",
+    mediaPostcardLabel: "A postcard arrives in your mailbox",
+    mediaAutomatAlt: "How the Tiny Art Surprise box opens at the machine",
+    mediaPostcardAlt: "How a Mürren postcard arrives by mail",
+  },
+  about: {
+    eyebrow: "About BOXOHO",
+    title: "Mürren, in a box — and by mail.",
+    body: "BOXOHO is made in Mürren: Tiny Art Surprises from the retro machine, and postcards that keep you connected to the most beautiful place in the world. Sandrine creates both — with love for this place, and for the people who carry a piece of it home.",
+    creatorEyebrow: "Creator",
+    creatorName: "Sandrine",
+    creatorBody:
+      "Born in Basel, second home Mürren. Creator and entrepreneur — she hopes her twin boys will love this place as she does.",
+    portraitAlt: "Sandrine in Mürren",
   },
   footer: {
     eyebrow: "Boxoho · Mürren",
@@ -42,6 +54,7 @@ const en = {
       "A piece of Mürren for your home. Tiny Art Surprises from the vintage machine — and postcards that keep the connection alive.",
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
+    contact: "{company} · {address} · {uid} · {email}",
   },
   offers: {
     eyebrow: "A keepsake from Mürren",
@@ -78,6 +91,7 @@ const en = {
     eyebrow: "Mürren",
     title: "Impressions.",
     intro: "A few moments from the place this is all about — car-free, high above the valley.",
+    instagramCta: "Follow on Instagram →",
     images: [
       { src: "/muerren/01-peaks.jpg", alt: "Snow-capped alpine peaks above green meadows near Mürren" },
       { src: "/muerren/02-huts.jpg", alt: "Alpine huts and mountains with paragliders in the sky" },
@@ -120,7 +134,7 @@ const en = {
     title: "Get Mürren home to you.",
     intro:
       "Stay connected with the most beautiful place in the world. A Mürren motif, a short story — delivered wherever you are.",
-    body: "Each month: one postcard from Mürren with a short story from the artist. Sent by standard mail (not tracked). Choose monthly, or pay once for a full year.",
+    body: "Three ways to stay with Mürren: a digital newsletter, a monthly postcard with story and QR to the newsletter, or a full year paid once.",
     firstShipNote:
       "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
     productImageAlt:
@@ -128,28 +142,35 @@ const en = {
     subscription: {
       eyebrow: "Choose your plan",
       title: "How do you want to stay connected?",
-      body: "Pick monthly or yearly, then enter your details. Shipping address is collected securely in Stripe Checkout.",
-      planMonthTitle: "Monthly",
+      body: "Pick an option, then enter your details. For postcards, the shipping address is collected securely in Stripe Checkout.",
+      planNewsletterTitle: "Newsletter",
+      planNewsletterBody:
+        "Impressions and what’s up in Mürren — by email every month. Digital only, no physical shipping.",
+      planMonthTitle: "Postcard monthly",
       planMonthBody:
-        "CHF 9.00 every month. Cancel anytime for the next billing period via the Stripe customer portal.",
+        "Motif, story, and a QR code to the newsletter — one postcard every month by standard mail.",
       planYearTitle: "One year (no subscription)",
       planYearBody:
-        "CHF 90.00 paid once — 12 cards, 12 stories (only CHF 7.50 per month). This is not a recurring subscription and does not renew automatically. Before the year ends, we’ll write to you and ask whether you’d like to sign up again.",
+        "12 postcards, 12 stories, paid once. Does not renew automatically — we’ll write before the year ends and ask if you’d like to sign up again.",
+      priceNewsletter: "CHF 5.00 / month",
       priceMonth: "CHF 9.00 / month",
-      priceYear: "CHF 90.00 · paid once · no subscription",
+      priceYear: "CHF 90.00 · paid once",
       firstName: "First name",
       email: "Email",
       place: "Town / region (for the map)",
       placePlaceholder: "City and country",
       mapConsent:
         "Optional: I agree that a blurred location (~100 km radius) of where my postcards are sent, and my first name, may appear on the public collectors’ map. The exact address stays private.",
-      ctaMonth: "Continue with monthly",
+      ctaContinue: "Continue to checkout",
+      ctaNewsletter: "Continue with newsletter",
+      ctaMonth: "Continue with monthly postcard",
       ctaYear: "Continue with one year",
-      manageCta: "Manage or cancel monthly subscription",
+      manageCta: "Manage or cancel a subscription",
       loading: "Redirecting…",
       shippingNote:
-        "Cards are sent by standard mail, not tracked. Exact shipping address is entered in Stripe Checkout.",
-      successBanner: "Thank you — your Mürren postcards are on the way.",
+        "Postcards: standard mail, not tracked — address in Stripe Checkout. Newsletter: email only.",
+      newsletterMissingPrice: "Newsletter checkout is almost ready — price ID still missing in Stripe env.",
+      successBanner: "Thank you — you’re connected with Mürren.",
       cancelBanner: "Checkout cancelled. You can try again anytime.",
       errorGeneric: "Something went wrong. Please try again.",
       cta: "Get postcards",
@@ -186,7 +207,8 @@ const en = {
     teaserLabel: "Map · Coming soon",
     teaserBody:
       "Soon: an interactive map of registered Tiny Art Surprises and postcard homes — always softly blurred.",
-    ctaRegister: "Register my artwork",
+    ctaRegister: "Register artwork",
+    ctaPostcard: "Subscribe to the postcard",
   },
   register: {
     eyebrow: "Authenticity · Number",
@@ -320,13 +342,11 @@ const de = {
     main: "Hauptnavigation",
     mobile: "Mobile Navigation",
     items: [
-      { href: "#offers", label: "Zwei Wege" },
-      { href: "#story", label: "Story" },
-      { href: "#impressions", label: "Mürren" },
-      { href: "#creator", label: "Creator" },
-      { href: "#artwork", label: "Kunstwerk" },
-      { href: "#postcard", label: "Postkarte" },
       { href: "#map", label: "Karte" },
+      { href: "#about", label: "Über uns" },
+      { href: "#postcard", label: "Postkarte" },
+      { href: "#register", label: "Registrieren" },
+      { href: "#impressions", label: "Mürren" },
     ],
     legal: [
       { href: "/terms", label: "AGB" },
@@ -340,10 +360,24 @@ const de = {
   },
   home: {
     eyebrow: "Post & Kunst aus Mürren",
-    title: "BOXOHO",
-    lead: "Ein Stück Mürren für dich zu Hause — wo immer du auf der Welt bist. Zwei Wege, es mitzunehmen: sofort aus dem Automaten, oder später per Post.",
-    ctaPrimary: "Zwei Wege entdecken",
+    title: "Box Ohooo!",
+    lead: "Ein Stück Mürren für zu Hause — egal wo du wohnst. Jeden Monat eine Postkarte per Post. Und eine gute Ausrede, den Automaten in Mürren mal live zu besuchen.",
+    ctaPrimary: "Postkarte abonnieren",
     ctaSecondary: "Kunstwerk registrieren",
+    mediaAutomatLabel: "Schachteli öffnen am Automaten",
+    mediaPostcardLabel: "Postkarte kommt im Briefkasten an",
+    mediaAutomatAlt: "So öffnet sich das Tiny-Art-Surprise-Schachteli am Automaten",
+    mediaPostcardAlt: "So kommt die Mürren-Postkarte per Post an",
+  },
+  about: {
+    eyebrow: "Über BOXOHO",
+    title: "Mürren, im Schachteli — und per Post.",
+    body: "BOXOHO entsteht in Mürren: Tiny Art Surprises aus dem retro Automaten und Postkarten, die dich mit dem schönsten Ort der Welt verbunden halten. Sandrine macht beides — aus Liebe zu diesem Ort und zu den Menschen, die ein Stück davon mitnehmen.",
+    creatorEyebrow: "Creatorin",
+    creatorName: "Sandrine",
+    creatorBody:
+      "Geboren in Basel, zweites Zuhause Mürren. Creatorin und Unternehmerin — sie hofft, dass ihre Zwillingsjungs diesen Ort ebenso lieben.",
+    portraitAlt: "Sandrine in Mürren",
   },
   footer: {
     eyebrow: "Boxoho · Mürren",
@@ -351,6 +385,7 @@ const de = {
       "Ein Stück Mürren für dich zu Hause. Tiny Art Surprises aus dem Automaten — und Postkarten, die die Verbindung lebendig halten.",
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
+    contact: "{company} · {address} · {uid} · {email}",
   },
   offers: {
     eyebrow: "Andenken aus Mürren",
@@ -387,6 +422,7 @@ const de = {
     eyebrow: "Mürren",
     title: "Impressionen.",
     intro: "Ein paar Momente von dem Ort, um den es geht — autofrei, hoch über dem Tal.",
+    instagramCta: "Auf Instagram folgen →",
     images: [
       { src: "/muerren/01-peaks.jpg", alt: "Schneebedeckte Gipfel über grünen Wiesen bei Mürren" },
       { src: "/muerren/02-huts.jpg", alt: "Alphütten und Berge mit Gleitschirmfliegern am Himmel" },
@@ -430,7 +466,7 @@ const de = {
     title: "Mürren zu dir nach Hause.",
     intro:
       "Bleib connected mit dem schönsten Ort der Welt. Ein Sujet aus Mürren, eine kleine Story — zugestellt, wo immer du bist.",
-    body: "Jeden Monat: eine Postkarte aus Mürren mit einer kurzen Story von der Künstlerin. Versand als normale Post (ohne Tracking). Wähle monatlich — oder einmal zahlen für ein ganzes Jahr.",
+    body: "Drei Wege: digitaler Newsletter, monatliche Postkarte mit Motiv, Geschichte und QR zum Newsletter — oder ein ganzes Jahr einmal bezahlt.",
     firstShipNote:
       "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
     productImageAlt:
@@ -438,28 +474,36 @@ const de = {
     subscription: {
       eyebrow: "Dein Plan",
       title: "Wie möchtest du connected bleiben?",
-      body: "Wähle monatlich oder jährlich, dann deine Angaben. Die Versandadresse erfasst Stripe sicher im Checkout.",
-      planMonthTitle: "Monatlich",
+      body: "Wähle eine Option, dann deine Angaben. Bei Postkarten erfasst Stripe die Versandadresse sicher im Checkout.",
+      planNewsletterTitle: "Newsletter",
+      planNewsletterBody:
+        "Impressionen und what’s up in Mürren — jeden Monat per E-Mail. Nur digital, kein physischer Versand.",
+      planMonthTitle: "Postkarte monatlich",
       planMonthBody:
-        "CHF 9.00 jeden Monat. Kündigung jederzeit auf den nächsten Abrechnungszeitraum über das Stripe-Kundenportal.",
+        "Motiv, Geschichte und QR-Code zum Newsletter — jede Monat eine Postkarte als normale Post.",
       planYearTitle: "Ein Jahr (kein Abo)",
       planYearBody:
-        "CHF 90.00 einmalig — 12 Karten, 12 Stories (nur CHF 7.50 pro Monat). Das ist kein laufendes Abonnement und verlängert sich nicht automatisch. Vor Ablauf schreiben wir dir und fragen, ob du dich wieder einschreiben möchtest.",
+        "12 Postkarten, 12 Stories, einmal bezahlt. Verlängert sich nicht automatisch — vor Ablauf fragen wir, ob du wieder mitmachen möchtest.",
+      priceNewsletter: "CHF 5.00 / Monat",
       priceMonth: "CHF 9.00 / Monat",
-      priceYear: "CHF 90.00 · einmalig · kein Abo",
+      priceYear: "CHF 90.00 · einmalig",
       firstName: "Vorname",
       email: "E-Mail",
       place: "Ort / Region (für die Karte)",
       placePlaceholder: "Stadt und Land",
       mapConsent:
         "Optional: Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) des Versandorts meiner Postkarten sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat.",
-      ctaMonth: "Weiter mit monatlich",
+      ctaContinue: "Weiter zum Checkout",
+      ctaNewsletter: "Weiter mit Newsletter",
+      ctaMonth: "Weiter mit monatlicher Postkarte",
       ctaYear: "Weiter mit einem Jahr",
-      manageCta: "Monatsabo verwalten oder kündigen",
+      manageCta: "Abo verwalten oder kündigen",
       loading: "Weiterleitung…",
       shippingNote:
-        "Versand als normale Post, ohne Tracking. Die genaue Adresse gibst du im Stripe-Checkout ein.",
-      successBanner: "Danke — deine Mürren-Postkarten sind unterwegs.",
+        "Postkarten: normale Post, ohne Tracking — Adresse im Stripe-Checkout. Newsletter: nur E-Mail.",
+      newsletterMissingPrice:
+        "Newsletter-Checkout ist fast bereit — die Stripe-Preis-ID fehlt noch in den Env-Variablen.",
+      successBanner: "Danke — du bleibst mit Mürren verbunden.",
       cancelBanner: "Checkout abgebrochen. Du kannst es jederzeit erneut versuchen.",
       errorGeneric: "Etwas ist schiefgelaufen. Bitte nochmals versuchen.",
       cta: "Postkarten holen",
@@ -496,7 +540,8 @@ const de = {
     teaserLabel: "Karte · Folgt bald",
     teaserBody:
       "Bald: eine interaktive Karte mit registrierten Tiny Art Surprises und Postkarten-Zuhause — immer unscharf dargestellt.",
-    ctaRegister: "Mein Kunstwerk registrieren",
+    ctaRegister: "Kunstwerk registrieren",
+    ctaPostcard: "Postkarte abonnieren",
   },
   register: {
     eyebrow: "Echtheit · Nummer",

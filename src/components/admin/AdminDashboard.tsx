@@ -44,6 +44,7 @@ type CustomerRow = {
 type Tab = "artworks" | "collectors" | "customers";
 type CustomerFilter =
   | "all"
+  | "active_newsletter"
   | "active_monthly"
   | "yearly"
   | "cancelled"
@@ -52,6 +53,7 @@ type CustomerFilter =
 const CUSTOMER_FILTERS: { id: CustomerFilter; label: string }[] = [
   { id: "ship_this_month", label: "Ship this month" },
   { id: "active_monthly", label: "Active monthly" },
+  { id: "active_newsletter", label: "Active newsletter" },
   { id: "yearly", label: "Yearly pack" },
   { id: "cancelled", label: "Cancelled / expired" },
   { id: "all", label: "All" },

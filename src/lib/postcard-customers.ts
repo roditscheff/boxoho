@@ -1,8 +1,9 @@
-export type PostcardPlan = "monthly" | "yearly";
+export type PostcardPlan = "newsletter" | "monthly" | "yearly";
 export type PostcardStatus = "active" | "cancelled" | "expired";
 
 export type CustomerFilter =
   | "all"
+  | "active_newsletter"
   | "active_monthly"
   | "yearly"
   | "cancelled"
@@ -64,6 +65,8 @@ export function matchesCustomerFilter(
   switch (filter) {
     case "all":
       return true;
+    case "active_newsletter":
+      return plan === "newsletter" && status === "active";
     case "active_monthly":
       return plan === "monthly" && status === "active";
     case "yearly":
