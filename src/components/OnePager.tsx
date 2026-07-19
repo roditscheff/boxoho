@@ -1,8 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
-import { localePath } from "@/i18n/paths";
 import { site } from "@/lib/site";
 import { CollectorsMap } from "./CollectorsMap";
 import { HeroMedia } from "./HeroMedia";
@@ -124,62 +122,38 @@ export function OnePager({ locale, dict }: OnePagerProps) {
       </section>
 
       {/* 4 · Postcard product */}
-      <section id="postcard" className="scroll-mt-24 border-t border-rule py-20">
-        <div className="mx-auto max-w-3xl px-6 md:px-10">
-          <p className="eyebrow mb-4">{postcard.eyebrow}</p>
-          <h2 className="text-4xl text-ink md:text-5xl">{postcard.title}</h2>
-        </div>
+      <section id="postcard" className="scroll-mt-24 border-t border-rule px-6 py-20 md:px-10">
+        <div className="mx-auto grid max-w-6xl items-start gap-10 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <figure className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep md:mx-0 md:sticky md:top-24 md:max-w-none">
+            <Image
+              src="/postcard-product.png"
+              alt={postcard.productImageAlt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              priority={false}
+            />
+          </figure>
 
-        <figure className="relative mx-auto mt-10 aspect-[9/16] w-full max-w-md overflow-hidden bg-paper-deep md:mt-12 md:max-w-lg">
-          <Image
-            src="/postcard-product.png"
-            alt={postcard.productImageAlt}
-            fill
-            className="object-cover object-center"
-            sizes="(max-width: 768px) 100vw, 512px"
-            priority={false}
-          />
-        </figure>
+          <div className="min-w-0">
+            <p className="eyebrow mb-4">{postcard.eyebrow}</p>
+            <h2 className="text-4xl text-ink md:text-5xl">{postcard.title}</h2>
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
+              {postcard.intro}
+            </p>
 
-        <div className="mx-auto mt-10 max-w-3xl px-6 md:mt-12 md:px-10">
-          <p className="text-lg leading-relaxed text-ink-soft">{postcard.intro}</p>
-          <p className="mt-6 leading-relaxed text-ink-soft">{postcard.body}</p>
-          <p className="mt-6 font-mono text-sm leading-relaxed tracking-[0.02em] text-stamp">
-            {postcard.firstShipNote}
-          </p>
-
-          <div className="mt-12 border-t border-rule pt-10">
-            <p className="eyebrow mb-2">{postcard.subscription.eyebrow}</p>
-            <h3 className="text-2xl text-ink md:text-3xl">{postcard.subscription.title}</h3>
-            <p className="mt-3 leading-relaxed text-ink-soft">{postcard.subscription.body}</p>
-            <div className="mt-8">
+            <div className="mt-10">
               <SubscriptionCheckout locale={locale} postcard={postcard} />
             </div>
           </div>
-
-          <p className="mt-14 text-sm leading-relaxed text-muted">{postcard.onSiteNote}</p>
-          {site.shopUrl ? (
-            <a
-              href={site.shopUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-block font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline"
-            >
-              {postcard.shop.cta}
-            </a>
-          ) : (
-            <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
-              {postcard.shop.ctaSoon}
-            </p>
-          )}
-
-          <p className="mt-6 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-muted">
-            {postcard.note}{" "}
-            <Link href={localePath(locale, "/terms")} className="text-stamp hover:underline">
-              {postcard.termsLink}
-            </Link>
-          </p>
         </div>
+      </section>
+
+      {/* 4b · On site in Mürren */}
+      <section id="onsite" className="scroll-mt-24 border-t border-rule px-6 py-7 md:px-10">
+        <p className="mx-auto max-w-lg text-center text-sm leading-snug text-muted">
+          {postcard.onSite.title} {postcard.onSite.body}
+        </p>
       </section>
 
       {/* 5 · Art registration */}

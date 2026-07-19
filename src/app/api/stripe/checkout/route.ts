@@ -12,6 +12,7 @@ import {
 const schema = z.object({
   plan: z.enum(["newsletter", "monthly", "yearly"]),
   mapConsent: z.boolean().default(false),
+  legalConsent: z.literal(true),
   locale: z.enum(["en", "de"]).default("en"),
 });
 
@@ -73,6 +74,8 @@ export async function POST(request: Request) {
   const stripe = getStripe();
   const metadata = {
     mapConsent: mapConsent ? "true" : "false",
+    legalConsent: "true",
+    legalConsentAt: new Date().toISOString(),
     plan,
     source: "boxoho-postcard",
   };

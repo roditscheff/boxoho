@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
+import { localePath } from "@/i18n/paths";
 import type { Plan } from "@/lib/stripe";
 
 type SubscriptionCheckoutProps = {
@@ -14,6 +16,8 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
   const t = postcard.subscription;
   const [plan, setPlan] = useState<Plan>("monthly");
   const [mapConsent, setMapConsent] = useState(false);
+  const [legalConsent, setLegalConsent] = useState(false);
+  const [showPortal, setShowPortal] = useState(false);
   const [portalEmail, setPortalEmail] = useState("");
   const [loading, setLoading] = useState<"checkout" | "portal" | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -28,6 +32,11 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
   }, [t.cancelBanner, t.successBanner]);
 
   async function startCheckout() {
+    if (!legalConsent) {
+      setError(t.legalConsentRequired);
+      return;
+    }
+
     setLoading("checkout");
     setError(null);
     try {
@@ -37,6 +46,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         body: JSON.stringify({
           plan,
           mapConsent: isPhysical ? mapConsent : false,
+          legalConsent: true,
           locale,
         }),
       });
@@ -79,66 +89,57 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
     }
   }
 
-  const plans: { id: Plan; title: string; body: string; price: string }[] = [
-    {
-      id: "newsletter",
-      title: t.planNewsletterTitle,
-      body: t.planNewsletterBody,
-      price: t.priceNewsletter,
-    },
-    {
-      id: "monthly",
-      title: t.planMonthTitle,
-      body: t.planMonthBody,
-      price: t.priceMonth,
-    },
-    {
-      id: "yearly",
-      title: t.planYearTitle,
-      body: t.planYearBody,
-      price: t.priceYear,
-    },
-  ];
-
-  const ctaLabel =
-    plan === "newsletter" ? t.ctaNewsletter : plan === "monthly" ? t.ctaMonth : t.ctaYear;
+  const selected =
+    plan === "newsletter"
+      ? t.factsNewsletter
+      : plan === "yearly"
+        ? t.factsYear
+        : t.factsMonth;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {banner ? (
         <p className="border border-rule bg-paper-deep/50 px-4 py-3 text-sm text-ink-soft">
           {banner}
         </p>
       ) : null}
 
-      <div
-        className="grid gap-4 md:grid-cols-3"
-        role="radiogroup"
-        aria-label={t.eyebrow}
-      >
-        {plans.map((item) => {
-          const selected = plan === item.id;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              role="radio"
-              aria-checked={selected}
-              onClick={() => setPlan(item.id)}
-              className={`border px-5 py-5 text-left transition-colors ${
-                selected
-                  ? "border-ink bg-paper-deep/40"
-                  : "border-rule hover:border-ink/50"
-              }`}
-            >
-              <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
-                {item.title}
-              </p>
-              <p className="mt-2 text-2xl text-ink">{item.price}</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink-soft">{item.body}</p>
-            </button>
-          );
-        })}
+      <div>
+        <label
+          htmlFor="postcard-plan"
+          className="mb-2 block font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted"
+        >
+          {t.planSelectLabel} ▾
+        </label>
+        <div className="relative">
+          <select
+            id="postcard-plan"
+            value={plan}
+            onChange={(e) => setPlan(e.target.value as Plan)}
+            className="w-full appearance-none rounded-full border-2 border-stamp bg-paper px-5 py-3.5 pr-12 font-mono text-[0.85rem] text-ink outline-none transition-colors focus:border-stamp-soft"
+          >
+            <option value="newsletter">{t.planNewsletterOption}</option>
+            <option value="monthly">{t.planMonthOption}</option>
+            <option value="yearly">{t.planYearOption}</option>
+          </select>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-5 flex items-center text-stamp"
+          >
+            ▾
+          </span>
+        </div>
+      </div>
+
+      <div className="border-l-2 border-dashed border-stamp/40 pl-4">
+        <ul className="space-y-2 text-[0.95rem] leading-relaxed text-ink-soft">
+          {selected.map((fact) => (
+            <li key={fact} className="flex gap-2">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-stamp/70" aria-hidden />
+              {fact}
+            </li>
+          ))}
+        </ul>
       </div>
 
       {isPhysical ? (
@@ -153,49 +154,85 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         </label>
       ) : null}
 
-      <div className="flex flex-wrap items-center gap-4">
+      <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+        <input
+          type="checkbox"
+          checked={legalConsent}
+          onChange={(e) => {
+            setLegalConsent(e.target.checked);
+            if (e.target.checked) setError(null);
+          }}
+          required
+          className="mt-1 accent-[var(--stamp)]"
+        />
+        <span>
+          {t.legalConsentBefore}{" "}
+          <Link
+            href={localePath(locale, "/terms")}
+            className="text-stamp underline underline-offset-2 hover:text-stamp-soft"
+          >
+            {t.legalConsentTerms}
+          </Link>{" "}
+          {t.legalConsentAnd}{" "}
+          <Link
+            href={localePath(locale, "/privacy")}
+            className="text-stamp underline underline-offset-2 hover:text-stamp-soft"
+          >
+            {t.legalConsentPrivacy}
+          </Link>
+          .
+        </span>
+      </label>
+
+      <div>
         <button
           type="button"
-          disabled={loading !== null}
+          disabled={loading !== null || !legalConsent}
           onClick={startCheckout}
-          className="rounded-full bg-stamp px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40"
+          className="w-full rounded-full bg-stamp px-6 py-4 font-mono text-[0.78rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40 sm:w-auto"
         >
-          {loading === "checkout" ? t.loading : ctaLabel}
+          {loading === "checkout" ? t.loading : t.ctaBuy}
         </button>
+        <p className="mt-3 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-muted">
+          {postcard.note}
+        </p>
       </div>
 
-      <div className="border-t border-rule pt-6">
-        <p className="mb-3 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowPortal((v) => !v)}
+          className="text-sm text-ink-soft underline decoration-rule underline-offset-4 transition-colors hover:text-stamp hover:decoration-stamp"
+        >
           {t.manageCta}
-        </p>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <label className="block min-w-0 flex-1">
-            <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-              {t.portalEmail}
-            </span>
-            <input
-              type="email"
-              value={portalEmail}
-              onChange={(e) => setPortalEmail(e.target.value)}
-              placeholder={t.portalEmailPlaceholder}
-              className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-            />
-          </label>
-          <button
-            type="button"
-            disabled={loading !== null || !portalEmail}
-            onClick={openPortal}
-            className="shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline disabled:opacity-40"
-          >
-            {loading === "portal" ? t.loading : t.manageSubmit}
-          </button>
-        </div>
+        </button>
+        {showPortal ? (
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
+            <label className="block min-w-0 flex-1">
+              <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                {t.portalEmail}
+              </span>
+              <input
+                type="email"
+                value={portalEmail}
+                onChange={(e) => setPortalEmail(e.target.value)}
+                placeholder={t.portalEmailPlaceholder}
+                className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
+              />
+            </label>
+            <button
+              type="button"
+              disabled={loading !== null || !portalEmail}
+              onClick={openPortal}
+              className="shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline disabled:opacity-40"
+            >
+              {loading === "portal" ? t.loading : t.manageSubmit}
+            </button>
+          </div>
+        ) : null}
       </div>
 
       {error ? <p className="text-sm text-stamp">{error}</p> : null}
-      <p className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
-        {t.shippingNote}
-      </p>
     </div>
   );
 }

@@ -5,9 +5,9 @@
   --paper-deep: #ebe6dc;
   --ink: #1c1917;
   --ink-soft: #3f3a36;
-  --muted: #6b645c;
-  --stamp: #9c4f3a;
-  --stamp-soft: #b86a52;
+  --muted: #4a453f;
+  --stamp: #7d3f2e;
+  --stamp-soft: #9c4f3a;
   --rule: #d4cfc6;
   --airmail: #c4282d;
   --focus: #9c4f3a;
@@ -53,6 +53,8 @@ body {
 
 .font-mono {
   font-family: var(--font-mono);
+  font-weight: 600;
+  -webkit-font-smoothing: auto;
 }
 
 .paper-grain {
@@ -93,9 +95,11 @@ body {
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--stamp);
+  -webkit-font-smoothing: auto;
 }
 
 .fade-up {
