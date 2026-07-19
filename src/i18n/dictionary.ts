@@ -36,7 +36,7 @@ const en = {
     mediaAutomatLabel: "Open your Tiny Art Surprise",
     mediaPostcardLabel: "A postcard arrives in your mailbox",
     mediaAutomatAlt: "Comic: opening a Box Ohooo! Tiny Art Surprise",
-    mediaPostcardAlt: "How a Mürren postcard arrives by mail",
+    mediaPostcardAlt: "Comic: a Mürren postcard arriving by mail",
   },
   about: {
     eyebrow: "About BOXOHO",
@@ -405,7 +405,7 @@ const de = {
     mediaAutomatLabel: "Dein Tiny Art Surprise öffnen",
     mediaPostcardLabel: "Postkarte kommt im Briefkasten an",
     mediaAutomatAlt: "Comic: Box Ohooo! Tiny Art Surprise öffnen",
-    mediaPostcardAlt: "So kommt die Mürren-Postkarte per Post an",
+    mediaPostcardAlt: "Comic: Mürren-Postkarte kommt per Post an",
   },
   about: {
     eyebrow: "Über BOXOHO",

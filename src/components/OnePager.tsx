@@ -34,10 +34,8 @@ export function OnePager({ locale, dict }: OnePagerProps) {
         <div className="mx-auto mt-8 grid w-full max-w-sm grid-cols-1 gap-8 sm:mt-10 md:mt-12 md:max-w-4xl md:grid-cols-2 md:gap-8 lg:gap-10">
           <div className="flex flex-col gap-3">
             <HeroMedia
-              gifSrc="/hero/postcard.gif"
-              fallbackSrc="/hero/postcard.png"
+              fallbackSrc="/hero/postcard-hero.jpg"
               alt={home.mediaPostcardAlt}
-              label={home.mediaPostcardLabel}
             />
             <a
               href="#postcard"
