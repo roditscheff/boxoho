@@ -23,9 +23,11 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
         ? "newsletter"
         : "monthly";
   const mapConsent = meta.mapConsent === "true";
-  const firstName = (meta.firstName || "").trim() || "Friend";
   const shipping = session.collected_information?.shipping_details;
   const address = shipping?.address;
+  const fullName =
+    (shipping?.name || session.customer_details?.name || meta.firstName || "").trim();
+  const firstName = fullName.split(/\s+/)[0] || "Friend";
   const place =
     (meta.place || "").trim() ||
     [address?.city, address?.country].filter(Boolean).join(", ");

@@ -13,10 +13,8 @@ type SubscriptionCheckoutProps = {
 export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutProps) {
   const t = postcard.subscription;
   const [plan, setPlan] = useState<Plan>("monthly");
-  const [firstName, setFirstName] = useState("");
-  const [email, setEmail] = useState("");
-  const [place, setPlace] = useState("");
   const [mapConsent, setMapConsent] = useState(false);
+  const [portalEmail, setPortalEmail] = useState("");
   const [loading, setLoading] = useState<"checkout" | "portal" | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [banner, setBanner] = useState<string | null>(null);
@@ -38,9 +36,6 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           plan,
-          firstName,
-          email,
-          place: isPhysical ? place : "",
           mapConsent: isPhysical ? mapConsent : false,
           locale,
         }),
@@ -69,7 +64,7 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
       const res = await fetch("/api/stripe/portal", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, locale }),
+        body: JSON.stringify({ email: portalEmail, locale }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -107,9 +102,6 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
 
   const ctaLabel =
     plan === "newsletter" ? t.ctaNewsletter : plan === "monthly" ? t.ctaMonth : t.ctaYear;
-
-  const canCheckout =
-    Boolean(firstName && email) && (!isPhysical || Boolean(place.trim().length >= 2));
 
   return (
     <div className="space-y-8">
@@ -149,48 +141,6 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
         })}
       </div>
 
-      <div className="space-y-4">
-        <label className="block">
-          <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-            {t.firstName}
-          </span>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-            className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-          />
-        </label>
-        <label className="block">
-          <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-            {t.email}
-          </span>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-          />
-        </label>
-        {isPhysical ? (
-          <label className="block">
-            <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-              {t.place}
-            </span>
-            <input
-              type="text"
-              value={place}
-              onChange={(e) => setPlace(e.target.value)}
-              placeholder={t.placePlaceholder}
-              required
-              className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-            />
-          </label>
-        ) : null}
-      </div>
-
       {isPhysical ? (
         <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
           <input
@@ -206,20 +156,40 @@ export function SubscriptionCheckout({ locale, postcard }: SubscriptionCheckoutP
       <div className="flex flex-wrap items-center gap-4">
         <button
           type="button"
-          disabled={loading !== null || !canCheckout}
+          disabled={loading !== null}
           onClick={startCheckout}
           className="rounded-full bg-stamp px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40"
         >
           {loading === "checkout" ? t.loading : ctaLabel}
         </button>
-        <button
-          type="button"
-          disabled={loading !== null || !email}
-          onClick={openPortal}
-          className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline disabled:opacity-40"
-        >
-          {loading === "portal" ? t.loading : t.manageCta}
-        </button>
+      </div>
+
+      <div className="border-t border-rule pt-6">
+        <p className="mb-3 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+          {t.manageCta}
+        </p>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <label className="block min-w-0 flex-1">
+            <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+              {t.portalEmail}
+            </span>
+            <input
+              type="email"
+              value={portalEmail}
+              onChange={(e) => setPortalEmail(e.target.value)}
+              placeholder={t.portalEmailPlaceholder}
+              className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
+            />
+          </label>
+          <button
+            type="button"
+            disabled={loading !== null || !portalEmail}
+            onClick={openPortal}
+            className="shrink-0 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted underline-offset-4 hover:text-stamp hover:underline disabled:opacity-40"
+          >
+            {loading === "portal" ? t.loading : t.manageSubmit}
+          </button>
+        </div>
       </div>
 
       {error ? <p className="text-sm text-stamp">{error}</p> : null}

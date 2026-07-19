@@ -11,9 +11,6 @@ import {
 
 const schema = z.object({
   plan: z.enum(["newsletter", "monthly", "yearly"]),
-  firstName: z.string().min(1).max(80),
-  email: z.string().email().max(200),
-  place: z.string().max(200).optional().default(""),
   mapConsent: z.boolean().default(false),
   locale: z.enum(["en", "de"]).default("en"),
 });
@@ -58,8 +55,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const { plan, firstName, email, locale } = parsed.data;
-  let { place, mapConsent } = parsed.data;
+  const { plan, locale } = parsed.data;
+  const physical = isPhysicalPostcardPlan(plan as Plan);
+  const mapConsent = physical && parsed.data.mapConsent;
 
   if (plan === "newsletter" && !isNewsletterPriceConfigured()) {
     return NextResponse.json(
@@ -68,33 +66,18 @@ export async function POST(request: Request) {
     );
   }
 
-  const physical = isPhysicalPostcardPlan(plan as Plan);
-  if (physical && place.trim().length < 2) {
-    return NextResponse.json(
-      { error: "Place is required for postcard plans." },
-      { status: 400 },
-    );
-  }
-  if (!physical) {
-    place = "";
-    mapConsent = false;
-  }
-
   const appUrl = (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000").replace(
     /\/$/,
     "",
   );
   const stripe = getStripe();
   const metadata = {
-    firstName,
-    place,
     mapConsent: mapConsent ? "true" : "false",
     plan,
     source: "boxoho-postcard",
   };
 
   const common = {
-    customer_email: email,
     line_items: [{ price: priceIdForPlan(plan as Plan), quantity: 1 }],
     success_url: `${appUrl}/${locale}?subscribed=1#postcard`,
     cancel_url: `${appUrl}/${locale}?cancelled=1#postcard`,
@@ -104,6 +87,7 @@ export async function POST(request: Request) {
   };
 
   // Newsletter + monthly = subscription; yearly = one-time payment for 12 cards
+  // Name, email, and shipping address are collected in Stripe Checkout.
   const session =
     plan === "yearly"
       ? await stripe.checkout.sessions.create({
