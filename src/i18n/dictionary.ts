@@ -252,6 +252,7 @@ const en = {
     title: "Already have a piece?",
     intro:
       "Enter the number from your booklet. You’ll see the matching image — then you can say where it lives at home, and who you are.",
+    imageAlt: "Comic: pinning your Tiny Art Surprise on the world map",
     step1: "Step 1",
     numberLabel: "Registration number",
     numberPlaceholder: "e.g. BX-2026-014",
@@ -622,6 +623,7 @@ const de = {
     title: "Schon ein Stück?",
     intro:
       "Nummer aus dem Heftchen eingeben. Du siehst das zugehörige Bild — und kannst angeben, wo es zu Hause ist und wer du bist.",
+    imageAlt: "Comic: Tiny Art Surprise auf der Weltkarte anpinnen",
     step1: "Schritt 1",
     numberLabel: "Registrierungsnummer",
     numberPlaceholder: "z. B. BX-2026-014",

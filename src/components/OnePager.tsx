@@ -160,14 +160,26 @@ export function OnePager({ locale, dict }: OnePagerProps) {
 
       {/* 5 · Art registration */}
       <section id="register" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-xl">
-          <p className="eyebrow mb-3 sm:mb-4">{register.eyebrow}</p>
-          <h2 className="text-3xl text-ink sm:text-4xl md:text-5xl">{register.title}</h2>
-          <p className="mt-3 text-base leading-relaxed text-ink-soft sm:mt-4 sm:text-lg">
-            {register.intro}
-          </p>
-          <div className="mt-6 sm:mt-8">
-            <RegisterForm register={register} ctaLabel={map.ctaRegister} />
+        <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-14 lg:gap-20">
+          <figure className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
+            <Image
+              src="/register.jpg"
+              alt={register.imageAlt}
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </figure>
+
+          <div className="min-w-0">
+            <p className="eyebrow mb-3 sm:mb-4">{register.eyebrow}</p>
+            <h2 className="text-3xl text-ink sm:text-4xl md:text-5xl">{register.title}</h2>
+            <p className="mt-3 text-base leading-relaxed text-ink-soft sm:mt-4 sm:text-lg">
+              {register.intro}
+            </p>
+            <div className="mt-6 sm:mt-8">
+              <RegisterForm register={register} ctaLabel={map.ctaRegister} />
+            </div>
           </div>
         </div>
       </section>
