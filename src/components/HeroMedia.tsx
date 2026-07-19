@@ -3,16 +3,17 @@
 import { useEffect, useState } from "react";
 
 type HeroMediaProps = {
-  gifSrc: string;
+  gifSrc?: string;
   fallbackSrc: string;
   alt: string;
-  label: string;
+  label?: string;
 };
 
 export function HeroMedia({ gifSrc, fallbackSrc, alt, label }: HeroMediaProps) {
   const [src, setSrc] = useState(fallbackSrc);
 
   useEffect(() => {
+    if (!gifSrc) return;
     let cancelled = false;
     void fetch(gifSrc, { method: "HEAD" }).then((res) => {
       if (!cancelled && res.ok) setSrc(gifSrc);
@@ -33,9 +34,11 @@ export function HeroMedia({ gifSrc, fallbackSrc, alt, label }: HeroMediaProps) {
           if (src !== fallbackSrc) setSrc(fallbackSrc);
         }}
       />
-      <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/35 to-transparent px-4 pb-4 pt-12 text-left font-serif text-base leading-snug text-paper sm:px-5 sm:pb-5 sm:pt-16 sm:text-lg md:text-xl">
-        {label}
-      </figcaption>
+      {label ? (
+        <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/75 via-ink/35 to-transparent px-4 pb-4 pt-12 text-left font-serif text-base leading-snug text-paper sm:px-5 sm:pb-5 sm:pt-16 sm:text-lg md:text-xl">
+          {label}
+        </figcaption>
+      ) : null}
     </figure>
   );
 }

@@ -49,10 +49,8 @@ export function OnePager({ locale, dict }: OnePagerProps) {
 
           <div className="flex flex-col gap-3">
             <HeroMedia
-              gifSrc="/hero/automat.gif"
-              fallbackSrc="/hero/automat.png"
+              fallbackSrc="/hero/tiny-art-surprise.jpg"
               alt={home.mediaAutomatAlt}
-              label={home.mediaAutomatLabel}
             />
             <a
               href="#register"

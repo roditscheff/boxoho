@@ -116,24 +116,40 @@ export function formatAddressLines(row: {
     .join(", ");
 }
 
+/** Split Stripe shipping name into first / last for admin tables. */
+export function splitCustomerName(
+  shippingName: string | null | undefined,
+  firstName: string,
+): { firstName: string; lastName: string } {
+  const first = (firstName || "").trim();
+  const full = (shippingName || first).trim();
+  if (!full) return { firstName: first, lastName: "" };
+  if (first && full.toLowerCase().startsWith(first.toLowerCase())) {
+    return { firstName: first, lastName: full.slice(first.length).trim() };
+  }
+  const parts = full.split(/\s+/);
+  if (parts.length === 1) return { firstName: parts[0], lastName: "" };
+  return { firstName: parts[0], lastName: parts.slice(1).join(" ") };
+}
+
+export function formatStreet(row: {
+  shipping_line1: string | null;
+  shipping_line2: string | null;
+}): string {
+  return [row.shipping_line1, row.shipping_line2].filter(Boolean).join(", ");
+}
+
 export function toCsv(rows: PostcardCustomerRow[]): string {
   const headers = [
-    "first_name",
-    "email",
-    "plan",
-    "status",
-    "shipping_name",
-    "shipping_line1",
-    "shipping_line2",
-    "shipping_city",
-    "shipping_postal_code",
-    "shipping_state",
-    "shipping_country",
-    "period_start",
-    "period_end",
-    "place_text",
-    "stripe_customer_id",
-    "created_at",
+    "produkt",
+    "Vorname",
+    "Name",
+    "Strasse und Nr.",
+    "PLZ",
+    "Land",
+    "emailadresse",
+    "until",
+    "ended/expired",
   ];
 
   const escape = (value: string | null | undefined) => {
@@ -145,24 +161,22 @@ export function toCsv(rows: PostcardCustomerRow[]): string {
   const lines = [headers.join(",")];
   for (const row of rows) {
     const status = deriveStatus(row);
+    const { firstName, lastName } = splitCustomerName(row.shipping_name, row.first_name);
+    const ended =
+      status === "cancelled" || status === "expired"
+        ? row.cancelled_at || row.period_end || status
+        : "";
     lines.push(
       [
-        row.first_name,
-        row.email,
         row.plan,
-        status,
-        row.shipping_name,
-        row.shipping_line1,
-        row.shipping_line2,
-        row.shipping_city,
+        firstName,
+        lastName,
+        formatStreet(row),
         row.shipping_postal_code,
-        row.shipping_state,
         row.shipping_country,
-        row.period_start,
+        row.email,
         row.period_end,
-        row.place_text,
-        row.stripe_customer_id,
-        row.created_at,
+        ended,
       ]
         .map(escape)
         .join(","),

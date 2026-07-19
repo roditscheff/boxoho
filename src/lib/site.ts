@@ -4,7 +4,7 @@ export const site = {
   address: "Muttenzerstrasse 48, 4127 Birsfelden, Schweiz",
   uid: "CHE-417.167.604",
   company: "Sundrbi GmbH",
-  instagram: "https://instagram.com/boxoho",
+  instagram: "https://instagram.com/boxohoooo",
   /** Canonical public site URL (Stripe success/cancel redirects). */
   appUrl: "https://www.boxoho.com",
   /** Set when the shop is live, e.g. "https://shop.boxoho.ch" */

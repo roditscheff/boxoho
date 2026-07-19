@@ -33,9 +33,9 @@ const en = {
     lead: "A piece of Mürren for your home - wherever you live.",
     ctaPrimary: "Subscribe to the postcard",
     ctaSecondary: "Register artwork",
-    mediaAutomatLabel: "Open a little box at the machine",
+    mediaAutomatLabel: "Open your Tiny Art Surprise",
     mediaPostcardLabel: "A postcard arrives in your mailbox",
-    mediaAutomatAlt: "How the Tiny Art Surprise box opens at the machine",
+    mediaAutomatAlt: "Comic: opening a Box Ohooo! Tiny Art Surprise",
     mediaPostcardAlt: "How a Mürren postcard arrives by mail",
   },
   about: {
@@ -55,6 +55,13 @@ const en = {
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
     contact: "{company} · {address} · {uid} · {email}",
+  },
+  thanks: {
+    title: "Box Ohooo!",
+    lead: "Your little piece of Mürren is on its way.",
+    body: "It’s sent once per month, so give it a little time to find you. Follow {handle} to keep the memories of Mürren going.",
+    instagramHandle: "@boxohoooo",
+    homeCta: "Back to the start →",
   },
   offers: {
     eyebrow: "A keepsake from Mürren",
@@ -394,9 +401,9 @@ const de = {
     lead: "Ein Stück Mürren für zu Hause - egal wo du wohnst.",
     ctaPrimary: "Postkarte abonnieren",
     ctaSecondary: "Kunstwerk registrieren",
-    mediaAutomatLabel: "Schachteli öffnen am Automaten",
+    mediaAutomatLabel: "Dein Tiny Art Surprise öffnen",
     mediaPostcardLabel: "Postkarte kommt im Briefkasten an",
-    mediaAutomatAlt: "So öffnet sich das Tiny-Art-Surprise-Schachteli am Automaten",
+    mediaAutomatAlt: "Comic: Box Ohooo! Tiny Art Surprise öffnen",
     mediaPostcardAlt: "So kommt die Mürren-Postkarte per Post an",
   },
   about: {
@@ -416,6 +423,13 @@ const de = {
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
     contact: "{company} · {address} · {uid} · {email}",
+  },
+  thanks: {
+    title: "Box Ohooo!",
+    lead: "Dein kleines Stück Mürren ist unterwegs.",
+    body: "Es kommt einmal im Monat — gib ihm etwas Zeit, bis es dich findet. Folge {handle}, damit die Erinnerungen an Mürren weiterleben.",
+    instagramHandle: "@boxohoooo",
+    homeCta: "Zurück zum Start →",
   },
   offers: {
     eyebrow: "Andenken aus Mürren",

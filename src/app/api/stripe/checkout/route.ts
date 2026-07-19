@@ -79,7 +79,7 @@ export async function POST(request: Request) {
 
   const common = {
     line_items: [{ price: priceIdForPlan(plan as Plan), quantity: 1 }],
-    success_url: `${appUrl}/${locale}?subscribed=1#postcard`,
+    success_url: `${appUrl}/${locale}/thanks?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${appUrl}/${locale}?cancelled=1#postcard`,
     phone_number_collection: { enabled: false },
     metadata,

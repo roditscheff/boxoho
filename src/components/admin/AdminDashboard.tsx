@@ -34,12 +34,36 @@ type CustomerRow = {
   plan: string | null;
   status: string;
   address: string;
+  shippingName: string | null;
+  shippingLine1: string | null;
+  shippingLine2: string | null;
+  shippingCity: string | null;
+  shippingPostalCode: string | null;
+  shippingCountry: string | null;
   periodStart: string | null;
   periodEnd: string | null;
+  cancelledAt: string | null;
   shipThisMonth: boolean;
   mapConsent: boolean;
   createdAt: string;
 };
+
+function splitName(shippingName: string | null, firstName: string) {
+  const first = (firstName || "").trim();
+  const full = (shippingName || first).trim();
+  if (!full) return { firstName: first, lastName: "" };
+  if (first && full.toLowerCase().startsWith(first.toLowerCase())) {
+    return { firstName: first, lastName: full.slice(first.length).trim() };
+  }
+  const parts = full.split(/\s+/);
+  if (parts.length === 1) return { firstName: parts[0], lastName: "" };
+  return { firstName: parts[0], lastName: parts.slice(1).join(" ") };
+}
+
+function formatDate(value: string | null) {
+  if (!value) return "";
+  return new Date(value).toLocaleDateString("de-CH");
+}
 
 type Tab = "artworks" | "collectors" | "customers";
 type CustomerFilter =
@@ -196,34 +220,58 @@ export function AdminDashboard() {
             ))}
           </div>
 
-          <ul className="divide-y divide-rule border-t border-rule">
-            {customers.length === 0 ? (
-              <li className="py-6 text-sm text-muted">No customers for this filter yet.</li>
-            ) : (
-              customers.map((c) => (
-                <li key={c.id} className="grid gap-2 py-4 md:grid-cols-[8rem_1fr]">
-                  <div className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-stamp">
-                    <p>{c.plan || "—"}</p>
-                    <p className="mt-1 text-muted">{c.status}</p>
-                    {c.shipThisMonth ? (
-                      <p className="mt-1 text-ink">Ship</p>
-                    ) : null}
-                  </div>
-                  <div className="text-sm leading-relaxed text-ink-soft">
-                    <p className="text-ink">
-                      {c.firstName} · {c.email}
-                    </p>
-                    <p className="mt-1">{c.address || c.place}</p>
-                    {c.periodEnd ? (
-                      <p className="mt-1 font-mono text-[0.65rem] uppercase tracking-[0.1em] text-muted">
-                        Until {new Date(c.periodEnd).toLocaleDateString()}
-                      </p>
-                    ) : null}
-                  </div>
-                </li>
-              ))
-            )}
-          </ul>
+          <div className="overflow-x-auto border-t border-rule">
+            <table className="w-full min-w-[56rem] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-rule font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                  <th className="px-2 py-3 font-normal">produkt</th>
+                  <th className="px-2 py-3 font-normal">Vorname</th>
+                  <th className="px-2 py-3 font-normal">Name</th>
+                  <th className="px-2 py-3 font-normal">Strasse und Nr.</th>
+                  <th className="px-2 py-3 font-normal">PLZ</th>
+                  <th className="px-2 py-3 font-normal">Land</th>
+                  <th className="px-2 py-3 font-normal">emailadresse</th>
+                  <th className="px-2 py-3 font-normal">until</th>
+                  <th className="px-2 py-3 font-normal">ended/expired</th>
+                </tr>
+              </thead>
+              <tbody>
+                {customers.length === 0 ? (
+                  <tr>
+                    <td colSpan={9} className="px-2 py-6 text-muted">
+                      No customers for this filter yet.
+                    </td>
+                  </tr>
+                ) : (
+                  customers.map((c) => {
+                    const { firstName, lastName } = splitName(c.shippingName, c.firstName);
+                    const street = [c.shippingLine1, c.shippingLine2]
+                      .filter(Boolean)
+                      .join(", ");
+                    const ended =
+                      c.status === "cancelled" || c.status === "expired"
+                        ? formatDate(c.cancelledAt) || formatDate(c.periodEnd) || c.status
+                        : "";
+                    return (
+                      <tr key={c.id} className="border-b border-rule/70 text-ink-soft">
+                        <td className="px-2 py-3 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-stamp">
+                          {c.plan || "—"}
+                        </td>
+                        <td className="px-2 py-3 text-ink">{firstName}</td>
+                        <td className="px-2 py-3 text-ink">{lastName || "—"}</td>
+                        <td className="px-2 py-3">{street || "—"}</td>
+                        <td className="px-2 py-3">{c.shippingPostalCode || "—"}</td>
+                        <td className="px-2 py-3">{c.shippingCountry || "—"}</td>
+                        <td className="px-2 py-3">{c.email}</td>
+                        <td className="px-2 py-3">{formatDate(c.periodEnd) || "—"}</td>
+                        <td className="px-2 py-3">{ended || "—"}</td>
+                      </tr>
+                    );
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
         </section>
       ) : null}
 
