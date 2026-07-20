@@ -12,6 +12,7 @@ const schema = z.object({
   email: z.string().email().max(200),
   place: z.string().min(2).max(200),
   mapConsent: z.boolean().default(false),
+  isAnonymous: z.boolean().default(false),
 });
 
 export async function POST(request: Request) {
@@ -29,6 +30,8 @@ export async function POST(request: Request) {
     email: String(form.get("email") ?? "").trim(),
     place: String(form.get("place") ?? "").trim(),
     mapConsent: form.get("mapConsent") === "true" || form.get("mapConsent") === "on",
+    isAnonymous:
+      form.get("isAnonymous") === "true" || form.get("isAnonymous") === "on",
   });
 
   if (!parsed.success) {
@@ -38,7 +41,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { number, firstName, email, place, mapConsent } = parsed.data;
+  const { number, firstName, email, place, mapConsent, isAnonymous } = parsed.data;
   const supabase = createAdminClient();
 
   const { data: artwork, error: artError } = await supabase
@@ -117,6 +120,7 @@ export async function POST(request: Request) {
     public_lat: publicLat,
     public_lng: publicLng,
     map_consent: mapConsent,
+    is_anonymous: isAnonymous,
     home_photo_path: homePhotoPath,
   });
 

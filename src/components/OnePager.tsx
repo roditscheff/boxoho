@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
+import { localePath } from "@/i18n/paths";
 import { site } from "@/lib/site";
 import { CollectorsMap } from "./CollectorsMap";
 import { HeroMedia } from "./HeroMedia";
@@ -13,7 +15,7 @@ type OnePagerProps = {
 };
 
 export function OnePager({ locale, dict }: OnePagerProps) {
-  const { home, about, impressions, postcard, map, register } = dict;
+  const { home, about, impressions, postcard, map, register, collection } = dict;
   const [heroShot, ...gallery] = impressions.images;
 
   return (
@@ -155,6 +157,22 @@ export function OnePager({ locale, dict }: OnePagerProps) {
             <p className="mt-3 text-base leading-relaxed text-ink-soft sm:mt-4 sm:text-lg">
               {register.intro}
             </p>
+            <div className="mt-6 border-l-2 border-dashed border-stamp/40 pl-4 sm:mt-8">
+              <p className="mb-4 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+                {register.benefitsLabel}
+              </p>
+              <ul className="space-y-4 text-[0.95rem] leading-relaxed text-ink-soft">
+                {register.benefits.map((benefit) => (
+                  <li key={benefit.title} className="flex gap-2">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-stamp/70" aria-hidden />
+                    <span>
+                      <span className="font-medium text-ink">{benefit.title}: </span>
+                      {benefit.body}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <div className="mt-6 sm:mt-8">
               <RegisterForm register={register} ctaLabel={map.ctaRegister} />
             </div>
@@ -162,7 +180,24 @@ export function OnePager({ locale, dict }: OnePagerProps) {
         </div>
       </section>
 
-      {/* 6 · Impressions + Instagram */}
+      {/* 6 · Collection teaser */}
+      <section id="collection" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
+        <div className="mx-auto max-w-5xl">
+          <p className="eyebrow mb-3 sm:mb-4">{collection.eyebrow}</p>
+          <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{collection.teaserTitle}</h2>
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
+            {collection.teaserBody}
+          </p>
+          <Link
+            href={localePath(locale, "/collection")}
+            className="mt-6 inline-block rounded-full bg-stamp px-6 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:mt-8 sm:px-8 sm:text-[0.78rem]"
+          >
+            {collection.teaserCta}
+          </Link>
+        </div>
+      </section>
+
+      {/* 7 · Impressions + Instagram */}
       <section id="impressions" className="scroll-mt-24 border-t border-rule px-4 py-14 sm:px-6 sm:py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-5xl">
           <p className="eyebrow mb-3 sm:mb-4">{impressions.eyebrow}</p>

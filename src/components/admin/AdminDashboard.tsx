@@ -12,6 +12,21 @@ type ArtworkRow = {
   notes: string | null;
   registered: boolean;
   createdAt: string;
+  releaseYear: number | null;
+  releaseMonth: number | null;
+  releaseDay: number | null;
+  collectionName: string | null;
+};
+
+type BulkSummary = {
+  mode: string;
+  total: number;
+  created: number;
+  updated: number;
+  deleted: number;
+  skipped: number;
+  missingImages: string[];
+  errors: string[];
 };
 
 type RegistrationRow = {
@@ -93,6 +108,8 @@ export function AdminDashboard() {
     useState<CustomerFilter>("ship_this_month");
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [bulkSummary, setBulkSummary] = useState<BulkSummary | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const loadArtworks = useCallback(async () => {
     const [aRes, rRes] = await Promise.all([
@@ -138,6 +155,7 @@ export function AdminDashboard() {
     event.preventDefault();
     setSaving(true);
     setError(null);
+    setBulkSummary(null);
     const form = new FormData(event.currentTarget);
     const res = await fetch("/api/admin/artworks", { method: "POST", body: form });
     setSaving(false);
@@ -148,6 +166,65 @@ export function AdminDashboard() {
     }
     event.currentTarget.reset();
     await loadArtworks();
+  }
+
+  async function bulkUpload(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSaving(true);
+    setError(null);
+    setBulkSummary(null);
+    const form = new FormData(event.currentTarget);
+    const res = await fetch("/api/admin/artworks/bulk", { method: "POST", body: form });
+    const data = await res.json();
+    setSaving(false);
+    if (!res.ok) {
+      setError(data.error || "Bulk upload failed");
+      return;
+    }
+    setBulkSummary(data.summary as BulkSummary);
+    event.currentTarget.reset();
+    await loadArtworks();
+  }
+
+  async function deleteArtwork(id: string) {
+    if (!confirm("Dieses Artwork wirklich löschen?")) return;
+    setSaving(true);
+    setError(null);
+    const res = await fetch(`/api/admin/artworks/${id}`, { method: "DELETE" });
+    setSaving(false);
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      setError(data.error || "Delete failed");
+      return;
+    }
+    setSelectedIds((ids) => ids.filter((x) => x !== id));
+    await loadArtworks();
+  }
+
+  async function deleteSelected() {
+    if (!selectedIds.length) return;
+    if (!confirm(`${selectedIds.length} Artworks löschen?`)) return;
+    setSaving(true);
+    setError(null);
+    for (const id of selectedIds) {
+      const res = await fetch(`/api/admin/artworks/${id}`, { method: "DELETE" });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "Delete failed");
+        setSaving(false);
+        await loadArtworks();
+        return;
+      }
+    }
+    setSelectedIds([]);
+    setSaving(false);
+    await loadArtworks();
+  }
+
+  function toggleSelected(id: string) {
+    setSelectedIds((ids) =>
+      ids.includes(id) ? ids.filter((x) => x !== id) : [...ids, id],
+    );
   }
 
   return (
@@ -278,7 +355,95 @@ export function AdminDashboard() {
       {tab === "artworks" ? (
         <>
           <section>
-            <h2 className="text-2xl text-ink">Add artwork</h2>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl text-ink">Bulk upload (Excel + images)</h2>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                  Excel-Spalten: <code>jahr</code>, <code>monat</code>, <code>tag</code>,{" "}
+                  <code>kollektion</code>, optional <code>bild</code> (
+                  <code>2026-08-01-August</code>), <code>nummer</code>, <code>titel</code>,{" "}
+                  <code>notizen</code>. Bilddateien gleich benennen:{" "}
+                  <code>jahr-monat-tag-Kollektion.jpg</code>
+                </p>
+              </div>
+              <a
+                href="/api/admin/artworks/template"
+                className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-stamp underline-offset-4 hover:underline"
+              >
+                Excel-Vorlage laden
+              </a>
+            </div>
+
+            <form onSubmit={bulkUpload} className="mt-6 grid max-w-2xl gap-4">
+              <label className="block">
+                <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                  Mode
+                </span>
+                <select
+                  name="mode"
+                  defaultValue="append"
+                  className="w-full border border-rule bg-transparent px-4 py-3 outline-none focus:border-stamp"
+                >
+                  <option value="append">Ergänzen (nur neue)</option>
+                  <option value="replace">Ersetzen / aktualisieren</option>
+                  <option value="delete">Löschen (laut Excel-Zeilen)</option>
+                </select>
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                  Excel (.xlsx)
+                </span>
+                <input
+                  name="excel"
+                  type="file"
+                  accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                  required
+                  className="w-full border border-rule bg-transparent px-4 py-3 font-mono text-sm"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                  Bilder (mehrere — Name = jahr-monat-tag-Kollektion)
+                </span>
+                <input
+                  name="images"
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="w-full border border-rule bg-transparent px-4 py-3 font-mono text-sm"
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={saving}
+                className="w-fit border border-ink px-5 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] hover:bg-ink hover:text-paper disabled:opacity-50"
+              >
+                {saving ? "Working…" : "Bulk starten"}
+              </button>
+            </form>
+
+            {bulkSummary ? (
+              <div className="mt-6 max-w-2xl border border-rule bg-paper-deep/40 px-4 py-3 text-sm text-ink-soft">
+                <p>
+                  Mode {bulkSummary.mode}: {bulkSummary.created} neu, {bulkSummary.updated}{" "}
+                  updated, {bulkSummary.deleted} gelöscht, {bulkSummary.skipped} übersprungen
+                  (von {bulkSummary.total}).
+                </p>
+                {bulkSummary.missingImages.length ? (
+                  <p className="mt-2 text-stamp">
+                    Fehlende Bilder: {bulkSummary.missingImages.slice(0, 12).join(", ")}
+                    {bulkSummary.missingImages.length > 12 ? "…" : ""}
+                  </p>
+                ) : null}
+                {bulkSummary.errors.length ? (
+                  <p className="mt-2 text-stamp">{bulkSummary.errors.slice(0, 5).join(" · ")}</p>
+                ) : null}
+              </div>
+            ) : null}
+          </section>
+
+          <section>
+            <h2 className="text-2xl text-ink">Einzelnes Artwork</h2>
             <form onSubmit={createArtwork} className="mt-6 grid max-w-xl gap-4">
               <label className="block">
                 <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
@@ -287,7 +452,7 @@ export function AdminDashboard() {
                 <input
                   name="number"
                   required
-                  placeholder="BX-2026-014"
+                  placeholder="2026-08-01-AUGUST"
                   className="w-full border border-rule bg-transparent px-4 py-3 outline-none focus:border-stamp"
                 />
               </label>
@@ -300,6 +465,55 @@ export function AdminDashboard() {
                   className="w-full border border-rule bg-transparent px-4 py-3 outline-none focus:border-stamp"
                 />
               </label>
+              <label className="block">
+                <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+                  Collection name
+                </span>
+                <input
+                  name="collectionName"
+                  placeholder="August"
+                  className="w-full border border-rule bg-transparent px-4 py-3 outline-none focus:border-stamp"
+                />
+              </label>
+              <div className="grid grid-cols-3 gap-3">
+                <label className="block">
+                  <span className="mb-2 block font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                    Year
+                  </span>
+                  <input
+                    name="releaseYear"
+                    type="number"
+                    placeholder="2026"
+                    className="w-full border border-rule bg-transparent px-3 py-3 outline-none focus:border-stamp"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                    Month
+                  </span>
+                  <input
+                    name="releaseMonth"
+                    type="number"
+                    min={1}
+                    max={12}
+                    placeholder="8"
+                    className="w-full border border-rule bg-transparent px-3 py-3 outline-none focus:border-stamp"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
+                    Day
+                  </span>
+                  <input
+                    name="releaseDay"
+                    type="number"
+                    min={1}
+                    max={31}
+                    placeholder="1"
+                    className="w-full border border-rule bg-transparent px-3 py-3 outline-none focus:border-stamp"
+                  />
+                </label>
+              </div>
               <label className="block">
                 <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
                   Image
@@ -333,10 +547,27 @@ export function AdminDashboard() {
           </section>
 
           <section>
-            <h2 className="text-2xl text-ink">Artworks ({artworks.length})</h2>
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-2xl text-ink">Artworks ({artworks.length})</h2>
+              <button
+                type="button"
+                disabled={!selectedIds.length || saving}
+                onClick={deleteSelected}
+                className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-stamp disabled:opacity-40"
+              >
+                Auswahl löschen ({selectedIds.length})
+              </button>
+            </div>
             <ul className="mt-6 divide-y divide-rule border-t border-rule">
               {artworks.map((a) => (
                 <li key={a.id} className="flex items-center gap-4 py-4">
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.includes(a.id)}
+                    onChange={() => toggleSelected(a.id)}
+                    className="accent-[var(--stamp)]"
+                    aria-label={`Select ${a.number}`}
+                  />
                   <div className="relative h-16 w-16 shrink-0 overflow-hidden bg-paper-deep">
                     <Image
                       src={a.imageUrl}
@@ -350,11 +581,24 @@ export function AdminDashboard() {
                     <p className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-stamp">
                       {a.number}
                     </p>
-                    <p className="truncate text-ink">{a.title || "—"}</p>
+                    <p className="truncate text-ink">{a.title || a.collectionName || "—"}</p>
+                    <p className="mt-1 text-xs text-muted">
+                      {[a.collectionName, a.releaseYear, a.releaseMonth, a.releaseDay]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
                   </div>
                   <p className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-muted">
                     {a.registered ? "Registered" : "Open"}
                   </p>
+                  <button
+                    type="button"
+                    disabled={saving}
+                    onClick={() => deleteArtwork(a.id)}
+                    className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-stamp disabled:opacity-40"
+                  >
+                    Delete
+                  </button>
                 </li>
               ))}
             </ul>

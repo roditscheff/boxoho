@@ -4,6 +4,7 @@ import {
   isSupabaseConfigured,
   publicStorageUrl,
 } from "@/lib/supabase/admin";
+import { publicMapName } from "@/lib/collection";
 import type { PublicMapPoint } from "@/lib/types";
 
 function supabaseHost(): string | null {
@@ -37,7 +38,7 @@ export async function GET(request: Request) {
       const { data, error } = await supabase
         .from("artwork_registrations")
         .select(
-          "id, first_name, public_lat, public_lng, home_photo_path, artworks(image_path)",
+          "id, first_name, is_anonymous, public_lat, public_lng, home_photo_path, artworks(image_path)",
         )
         .eq("map_consent", true)
         .not("public_lat", "is", null)
@@ -61,7 +62,10 @@ export async function GET(request: Request) {
         points.push({
           id: `artwork-${row.id}`,
           type: "artwork",
-          firstName: row.first_name,
+          firstName: publicMapName(
+            Boolean((row as { is_anonymous?: boolean }).is_anonymous),
+            row.first_name,
+          ),
           lat: row.public_lat as number,
           lng: row.public_lng as number,
           imageUrl: imagePath ? publicStorageUrl(bucket, imagePath) : null,

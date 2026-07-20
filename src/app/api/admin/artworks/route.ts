@@ -17,8 +17,12 @@ export async function GET() {
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("artworks")
-    .select("id, number, title, image_path, notes, created_at, artwork_registrations(id)")
-    .order("created_at", { ascending: false });
+    .select(
+      "id, number, title, image_path, notes, created_at, release_year, release_month, release_day, collection_name, artwork_registrations(id)",
+    )
+    .order("release_year", { ascending: false })
+    .order("release_month", { ascending: false })
+    .order("release_day", { ascending: true });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -38,6 +42,10 @@ export async function GET() {
         imageUrl: publicStorageUrl("artworks", a.image_path),
         notes: a.notes,
         createdAt: a.created_at,
+        releaseYear: a.release_year,
+        releaseMonth: a.release_month,
+        releaseDay: a.release_day,
+        collectionName: a.collection_name,
         registered: regList.length > 0,
       };
     }),
@@ -56,6 +64,10 @@ export async function POST(request: Request) {
   const number = String(form.get("number") ?? "").trim().toUpperCase();
   const title = String(form.get("title") ?? "").trim() || null;
   const notes = String(form.get("notes") ?? "").trim() || null;
+  const releaseYear = Number(form.get("releaseYear") || 0) || null;
+  const releaseMonth = Number(form.get("releaseMonth") || 0) || null;
+  const releaseDay = Number(form.get("releaseDay") || 0) || null;
+  const collectionName = String(form.get("collectionName") ?? "").trim() || null;
   const image = form.get("image");
 
   if (!number) {
@@ -80,7 +92,16 @@ export async function POST(request: Request) {
 
   const { data, error } = await supabase
     .from("artworks")
-    .insert({ number, title, notes, image_path: path })
+    .insert({
+      number,
+      title,
+      notes,
+      image_path: path,
+      release_year: releaseYear,
+      release_month: releaseMonth,
+      release_day: releaseDay,
+      collection_name: collectionName,
+    })
     .select("id, number")
     .single();
 

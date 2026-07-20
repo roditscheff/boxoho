@@ -18,6 +18,13 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
   const [lookupError, setLookupError] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [firstName, setFirstName] = useState("");
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  const [mapConsent, setMapConsent] = useState(false);
+
+  const previewCollector = isAnonymous
+    ? register.anonymousCollector
+    : firstName.trim() || register.previewNamePlaceholder;
 
   async function lookupArtwork(event: React.FormEvent) {
     event.preventDefault();
@@ -46,6 +53,8 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
     setMessage(null);
     const form = new FormData(event.currentTarget);
     form.set("number", artwork.number);
+    form.set("isAnonymous", isAnonymous ? "true" : "false");
+    form.set("mapConsent", mapConsent ? "true" : "false");
 
     const res = await fetch("/api/registrations", {
       method: "POST",
@@ -131,10 +140,24 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
                   <input
                     type="text"
                     name="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                     className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
                   />
+                  <p className="mt-2 text-sm text-muted">{register.firstNameHint}</p>
                 </label>
+
+                <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                  <input
+                    type="checkbox"
+                    checked={isAnonymous}
+                    onChange={(e) => setIsAnonymous(e.target.checked)}
+                    className="mt-1 accent-[var(--stamp)]"
+                  />
+                  <span>{register.anonymousConsent}</span>
+                </label>
+
                 <label className="block">
                   <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
                     {register.email}
@@ -174,12 +197,41 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
               <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
                 <input
                   type="checkbox"
-                  name="mapConsent"
-                  value="true"
+                  checked={mapConsent}
+                  onChange={(e) => setMapConsent(e.target.checked)}
                   className="mt-1 accent-[var(--stamp)]"
                 />
                 <span>{register.mapConsent}</span>
               </label>
+
+              <div className="rounded-2xl border border-stamp/30 bg-paper-deep/40 p-4 sm:p-5">
+                <p className="mb-3 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-muted">
+                  {register.previewLabel}
+                </p>
+                <div className="flex gap-4">
+                  <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-paper-deep sm:h-28 sm:w-28">
+                    <Image
+                      src={artwork.imageUrl}
+                      alt={artwork.title || artwork.number}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                      unoptimized
+                    />
+                  </div>
+                  <div className="min-w-0 self-end pb-1">
+                    <p className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-stamp">
+                      {artwork.number}
+                    </p>
+                    <p className="mt-2 text-sm text-ink sm:text-base">
+                      {register.collectorPrefix} {previewCollector}
+                    </p>
+                    {mapConsent ? (
+                      <p className="mt-1 text-xs text-muted">{register.previewMapNote}</p>
+                    ) : null}
+                  </div>
+                </div>
+              </div>
 
               <button
                 type="submit"
