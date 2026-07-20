@@ -3,6 +3,7 @@ import {
   buildMonthPlaceholders,
   daysInMonth,
   DEFAULT_COLLECTION_BLOCKS,
+  selectFeaturedArtworks,
   type CollectionBlock,
   type CollectionPiece,
 } from "@/lib/collection";
@@ -36,11 +37,19 @@ function emptyDefaultMonths(): CollectionBlock[] {
   }));
 }
 
+function flattenPieces(months: CollectionBlock[]): CollectionPiece[] {
+  return months.flatMap((block) => block.pieces);
+}
+
 export async function GET() {
   const fallback = emptyDefaultMonths();
 
   if (!isSupabaseConfigured()) {
-    return NextResponse.json({ configured: false, months: fallback });
+    return NextResponse.json({
+      configured: false,
+      months: fallback,
+      featured: selectFeaturedArtworks(flattenPieces(fallback)),
+    });
   }
 
   try {
@@ -58,6 +67,7 @@ export async function GET() {
       return NextResponse.json({
         configured: true,
         months: fallback,
+        featured: selectFeaturedArtworks(flattenPieces(fallback)),
         warning: error.message,
       });
     }
@@ -68,7 +78,11 @@ export async function GET() {
     );
 
     if (!withSlot.length) {
-      return NextResponse.json({ configured: true, months: fallback });
+      return NextResponse.json({
+        configured: true,
+        months: fallback,
+        featured: selectFeaturedArtworks(flattenPieces(fallback)),
+      });
     }
 
     const groupKeys = new Map<
@@ -132,9 +146,18 @@ export async function GET() {
         };
       });
 
-    return NextResponse.json({ configured: true, months });
+    return NextResponse.json({
+      configured: true,
+      months,
+      featured: selectFeaturedArtworks(flattenPieces(months)),
+    });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
-    return NextResponse.json({ configured: false, months: fallback, error: message });
+    return NextResponse.json({
+      configured: false,
+      months: fallback,
+      featured: selectFeaturedArtworks(flattenPieces(fallback)),
+      error: message,
+    });
   }
 }

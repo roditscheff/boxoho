@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 import { CollectorsMap } from "./CollectorsMap";
 import { HeroMedia } from "./HeroMedia";
 import { RegisterForm } from "./RegisterForm";
+import { CollectionFeatured } from "./CollectionFeatured";
 import { PostcardShop } from "./PostcardShop";
 
 type OnePagerProps = {
@@ -188,6 +189,7 @@ export function OnePager({ locale, dict }: OnePagerProps) {
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
             {collection.teaserBody}
           </p>
+          <CollectionFeatured collection={collection} />
           <Link
             href={localePath(locale, "/collection")}
             className="mt-6 inline-block rounded-full bg-stamp px-6 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft sm:mt-8 sm:px-8 sm:text-[0.78rem]"

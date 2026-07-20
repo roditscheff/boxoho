@@ -67,3 +67,52 @@ export function buildMonthPlaceholders(
     collectorName: null,
   }));
 }
+
+function pieceSortKey(piece: CollectionPiece): number {
+  return piece.year * 10_000 + piece.month * 100 + piece.day;
+}
+
+function todayInZurich(now = new Date()): { year: number; month: number; day: number } {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/Zurich",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(now);
+  const year = Number(parts.find((p) => p.type === "year")?.value);
+  const month = Number(parts.find((p) => p.type === "month")?.value);
+  const day = Number(parts.find((p) => p.type === "day")?.value);
+  return { year, month, day };
+}
+
+/**
+ * Featured homepage arts: today's piece + the next 4 with images.
+ * If today (or enough following days) are missing, take the next 5 available.
+ */
+export function selectFeaturedArtworks(
+  pieces: CollectionPiece[],
+  count = 5,
+  now = new Date(),
+): CollectionPiece[] {
+  const withImages = pieces
+    .filter((piece) => Boolean(piece.imageUrl))
+    .sort((a, b) => pieceSortKey(a) - pieceSortKey(b));
+
+  if (!withImages.length) return [];
+
+  const today = todayInZurich(now);
+  const todayKey = today.year * 10_000 + today.month * 100 + today.day;
+
+  const fromToday = withImages.filter((piece) => pieceSortKey(piece) >= todayKey);
+  if (fromToday.length >= count) return fromToday.slice(0, count);
+
+  // Not enough upcoming — fill from the start of the catalog
+  const picked = [...fromToday];
+  for (const piece of withImages) {
+    if (picked.length >= count) break;
+    if (!picked.some((p) => p.number === piece.number && pieceSortKey(p) === pieceSortKey(piece))) {
+      picked.push(piece);
+    }
+  }
+  return picked.slice(0, count);
+}

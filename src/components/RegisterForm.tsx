@@ -190,17 +190,32 @@ export function RegisterForm({ locale, register }: RegisterFormProps) {
                     />
                   </label>
                 </div>
-                <p className="text-sm text-muted">{register.firstNameHint}</p>
 
-                <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
-                  <input
-                    type="checkbox"
-                    checked={isAnonymous}
-                    onChange={(e) => setIsAnonymous(e.target.checked)}
-                    className="mt-1 accent-[var(--stamp)]"
-                  />
-                  <span>{register.anonymousConsent}</span>
-                </label>
+                <fieldset className="space-y-3">
+                  <legend className="text-sm leading-relaxed text-ink-soft">
+                    {register.displayChoiceLabel}
+                  </legend>
+                  <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                    <input
+                      type="radio"
+                      name="displayChoice"
+                      checked={!isAnonymous}
+                      onChange={() => setIsAnonymous(false)}
+                      className="mt-1 accent-[var(--stamp)]"
+                    />
+                    <span>{register.displayChoiceName}</span>
+                  </label>
+                  <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                    <input
+                      type="radio"
+                      name="displayChoice"
+                      checked={isAnonymous}
+                      onChange={() => setIsAnonymous(true)}
+                      className="mt-1 accent-[var(--stamp)]"
+                    />
+                    <span>{register.displayChoiceAnonymous}</span>
+                  </label>
+                </fieldset>
 
                 <label className="block">
                   <span className={labelClass}>{register.street}</span>
