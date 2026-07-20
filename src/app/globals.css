@@ -149,6 +149,44 @@ body {
   }
 }
 
+/* Collectors map popup */
+.boxoho-map-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 160px;
+}
+
+.boxoho-map-popup__image {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+}
+
+.boxoho-map-popup__label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.maplibregl-popup-content {
+  background: var(--paper) !important;
+  border: 1px solid var(--rule) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.18) !important;
+  padding: 10px !important;
+}
+
+.maplibregl-popup-tip {
+  border-top-color: var(--paper) !important;
+  border-bottom-color: var(--paper) !important;
+}
+
 /* Cookie consent — Swim Elements pattern, Boxoho look */
 .boxoho-consent {
   position: fixed;

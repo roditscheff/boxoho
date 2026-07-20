@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { fill } from "@/i18n/dictionary";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { PublicMapPoint } from "@/lib/types";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -14,6 +15,8 @@ type CollectorsMapProps = {
 export function CollectorsMap({ map }: CollectorsMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<import("maplibre-gl").Map | null>(null);
+  const popupCtorRef = useRef<typeof import("maplibre-gl").Popup | null>(null);
+  const popupRef = useRef<import("maplibre-gl").Popup | null>(null);
   const [filter, setFilter] = useState<Filter>("all");
   const [points, setPoints] = useState<PublicMapPoint[]>([]);
   const [configured, setConfigured] = useState<boolean | null>(null);
@@ -42,6 +45,7 @@ export function CollectorsMap({ map }: CollectorsMapProps) {
 
     (async () => {
       const maplibregl = (await import("maplibre-gl")).default;
+      popupCtorRef.current = maplibregl.Popup;
       if (destroyed || !containerRef.current) return;
 
       const instance = new maplibregl.Map({
@@ -69,6 +73,8 @@ export function CollectorsMap({ map }: CollectorsMapProps) {
 
     return () => {
       destroyed = true;
+      popupRef.current?.remove();
+      popupRef.current = null;
       mapRef.current?.remove();
       mapRef.current = null;
       setReady(false);
@@ -130,6 +136,49 @@ export function CollectorsMap({ map }: CollectorsMapProps) {
           "circle-stroke-color": "rgba(28, 25, 23, 0.12)",
         },
       });
+
+      const clickableLayers = [artworkLayer, postcardLayer];
+      for (const layerId of clickableLayers) {
+        instance.on("mouseenter", layerId, () => {
+          instance.getCanvas().style.cursor = "pointer";
+        });
+        instance.on("mouseleave", layerId, () => {
+          instance.getCanvas().style.cursor = "";
+        });
+        instance.on("click", layerId, (e) => {
+          const feature = e.features?.[0];
+          if (!feature || feature.geometry.type !== "Point") return;
+          const props = feature.properties as {
+            firstName?: string;
+            imageUrl?: string | null;
+          } | null;
+          const [lng, lat] = feature.geometry.coordinates as [number, number];
+          const name = props?.firstName ?? "";
+          const imageUrl = props?.imageUrl ?? null;
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "boxoho-map-popup";
+          if (imageUrl) {
+            const img = document.createElement("img");
+            img.src = imageUrl;
+            img.alt = map.popupImageAlt;
+            img.className = "boxoho-map-popup__image";
+            wrapper.appendChild(img);
+          }
+          const label = document.createElement("p");
+          label.className = "boxoho-map-popup__label";
+          label.textContent = name ? fill(map.popupCollector, { name }) : "";
+          wrapper.appendChild(label);
+
+          const PopupCtor = popupCtorRef.current;
+          if (!PopupCtor) return;
+          popupRef.current?.remove();
+          popupRef.current = new PopupCtor({ closeButton: true, offset: 14 })
+            .setLngLat([lng, lat])
+            .setDOMContent(wrapper)
+            .addTo(instance);
+        });
+      }
     }
 
     if (points.length > 0) {
@@ -143,7 +192,7 @@ export function CollectorsMap({ map }: CollectorsMapProps) {
         { padding: 48, maxZoom: 5, duration: 800 },
       );
     }
-  }, [points, ready]);
+  }, [points, ready, map.popupCollector, map.popupImageAlt]);
 
   const filters: { id: Filter; label: string }[] = [
     { id: "all", label: map.filterAll },

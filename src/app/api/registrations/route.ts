@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { blurLocation, geocodePlace } from "@/lib/geo";
+import { blurLocationWithinCountry, geocodePlace } from "@/lib/geo";
 import {
   createAdminClient,
   isSupabaseConfigured,
@@ -109,7 +109,7 @@ export async function POST(request: Request) {
   let publicLat: number | null = null;
   let publicLng: number | null = null;
   if (mapConsent) {
-    const blurred = blurLocation(geo.lat, geo.lng);
+    const blurred = blurLocationWithinCountry(geo.lat, geo.lng, geo.countryCode);
     publicLat = blurred.publicLat;
     publicLng = blurred.publicLng;
   }

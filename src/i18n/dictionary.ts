@@ -281,6 +281,8 @@ const en = {
       "Soon: an interactive map of registered Tiny Art Surprises, postcard homes, and newsletter connections — always softly blurred.",
     ctaRegister: "Register artwork",
     ctaPostcard: "Subscribe to the postcard",
+    popupCollector: "Collector: {name}",
+    popupImageAlt: "Registered Tiny Art Surprise",
   },
   register: {
     eyebrow: "Authenticity · Number",
@@ -804,6 +806,8 @@ const de = {
       "Bald: eine interaktive Karte mit registrierten Tiny Art Surprises, Postkarten-Zuhause und Newsletter-Verbindungen — immer unscharf dargestellt.",
     ctaRegister: "Kunstwerk registrieren",
     ctaPostcard: "Postkarte abonnieren",
+    popupCollector: "Collector: {name}",
+    popupImageAlt: "Registriertes Tiny Art Surprise",
   },
   register: {
     eyebrow: "Echtheit · Nummer",

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { blurLocation, geocodePlace } from "@/lib/geo";
+import { blurLocationWithinCountry, geocodePlace } from "@/lib/geo";
 import { addMonths } from "@/lib/postcard-customers";
 import { getStripe } from "@/lib/stripe";
 import {
@@ -57,7 +57,7 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
       lat = geo.lat;
       lng = geo.lng;
       if (mapConsent) {
-        const blurred = blurLocation(geo.lat, geo.lng);
+        const blurred = blurLocationWithinCountry(geo.lat, geo.lng, geo.countryCode);
         publicLat = blurred.publicLat;
         publicLng = blurred.publicLng;
       }
