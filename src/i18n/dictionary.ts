@@ -41,7 +41,11 @@ const en = {
   about: {
     eyebrow: "About BOXOHO",
     title: "Mürren, in a box — and by mail.",
-    body: "BOXOHO is made in Mürren: Tiny Art Surprises from the retro machine, and postcards that keep you connected to the most beautiful place in the world. Sandrine creates both — with love for this place, and for the people who carry a piece of it home.",
+    paragraphs: [
+      "BOXOHO is made in Mürren: Tiny Art Surprises from the retro machine, and postcards that keep you connected to the most beautiful place in the world. Sandrine creates both — with love for this place, and for the people who carry a piece of it home.",
+      "Sandrine’s family are the owners of Chalet Erika, nestled right in the heart of Mürren. If they had a nickel for every photo taken of Mürrmeli, their famous shop window featuring the beloved marmot, they’d be millionaires! Just across the street, the family also owns two-thirds of the historic barn — a unique but traditional ownership structure quite common here in the Berner Oberland.",
+      "Together with their friends, Sandrine and her family have woven these two spaces into a seamless, street-spanning experience. Their shared mission? To bring pure joy to Mürren’s visitors, creating unforgettable memories and making every stay truly exceptional.",
+    ],
     creatorEyebrow: "Creator",
     creatorName: "Sandrine",
     creatorBody:
@@ -54,7 +58,7 @@ const en = {
       "A piece of Mürren for your home. Tiny Art Surprises from the vintage vending machine — and postcards that keep the connection alive.",
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
-    contact: "{company} · {address} · {uid} · {email}",
+    contact: "Boxoho by {company} · {address} · {uid} · {email}",
   },
   thanks: {
     title: "Box Ohooo!",
@@ -97,7 +101,11 @@ const en = {
   impressions: {
     eyebrow: "Mürren",
     title: "Impressions.",
-    intro: "A few moments from the place this is all about — car-free, high above the valley.",
+    placeLabel: "Mürren, 1’650 m, Switzerland",
+    paragraphs: [
+      "Sitting on the sun terrace, facing the mountain panorama of Eiger, Mönch and Jungfrau, Mürren invites you to take a deep breath and enjoy the gorgeous alpine view. From the beginning, this little village in the Swiss Alps has been known for its pure air, marvelous nature and calm pace.",
+      "Actors, artists, writers, hikers, skiers, queens, kings, you and I have visited this magical place below the peaks and above the valley. All of us left with a heart full of unique memories — and a spirit of freedom and joy.",
+    ],
     instagramCta: "Follow on Instagram →",
     images: [
       { src: "/muerren/01-peaks.jpg", alt: "Snow-capped alpine peaks above green meadows near Mürren" },
@@ -236,7 +244,7 @@ const en = {
     eyebrow: "Collectors",
     title: "Where Mürren lives with you.",
     intro:
-      "On the world map you never see an exact address — only a ~100 km radius. Filter by artworks, postcards & newsletter, or both.",
+      "Here you see where Mürren friends keep their Tiny Art Surprises — and where the postcard and newsletter land each month. Joining the map is optional, and the pinpoints are only accurate to about 100 km — but it’s fun to see who’s in.",
     filterLabel: "Show on map",
     filterAll: "All",
     filterPostcards: "Postcards & newsletter",
@@ -412,7 +420,11 @@ const de = {
   about: {
     eyebrow: "Über BOXOHO",
     title: "Mürren, im Schachteli — und per Post.",
-    body: "BOXOHO entsteht in Mürren: Tiny Art Surprises aus dem retro Automaten und Postkarten, die dich mit dem schönsten Ort der Welt verbunden halten. Sandrine macht beides — aus Liebe zu diesem Ort und zu den Menschen, die ein Stück davon mitnehmen.",
+    paragraphs: [
+      "BOXOHO entsteht in Mürren: Tiny Art Surprises aus dem Retro-Automaten und Postkarten, die dich mit dem schönsten Ort der Welt verbunden halten. Sandrine macht beides — aus Liebe zu diesem Ort und zu den Menschen, die ein Stück davon mitnehmen.",
+      "Sandrines Familie besitzt das Chalet Erika, mitten im Herzen von Mürren. Hätten sie für jedes Foto von Mürrmeli — dem berühmten Schaufenster mit dem geliebten Murmeltier — einen Franken, wären sie Millionäre. Gegenüber gehört der Familie ausserdem zwei Drittel der historischen Scheune — eine besondere, aber im Berner Oberland ganz traditionelle Besitzstruktur.",
+      "Zusammen mit ihren Freunden haben Sandrine und ihre Familie diese beiden Orte zu einem durchgängigen Erlebnis über die Strasse hinweg verwoben. Ihre gemeinsame Mission: Mürren-Gästen pure Freude schenken, unvergessliche Erinnerungen schaffen und jeden Aufenthalt wirklich besonders machen.",
+    ],
     creatorEyebrow: "Creatorin",
     creatorName: "Sandrine",
     creatorBody:
@@ -425,7 +437,7 @@ const de = {
       "Ein Stück Mürren für dich zu Hause. Tiny Art Surprises aus dem Automaten — und Postkarten, die die Verbindung lebendig halten.",
     instagram: "Instagram",
     rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
-    contact: "{company} · {address} · {uid} · {email}",
+    contact: "Boxoho by {company} · {address} · {uid} · {email}",
   },
   thanks: {
     title: "Box Ohooo!",
@@ -468,7 +480,11 @@ const de = {
   impressions: {
     eyebrow: "Mürren",
     title: "Impressionen.",
-    intro: "Ein paar Momente von dem Ort, um den es geht — autofrei, hoch über dem Tal.",
+    placeLabel: "Mürren, 1’650 m, Schweiz",
+    paragraphs: [
+      "Auf der Sonnenterrasse, dem Bergpanorama von Eiger, Mönch und Jungfrau gegenüber, lädt Mürren dich ein, tief durchzuatmen und die herrliche Alpensicht zu geniessen. Von Anfang an ist das kleine Dorf in den Schweizer Alpen bekannt für reine Luft, wunderbare Natur und ein ruhiges Tempo.",
+      "Schauspieler, Künstler, Schriftsteller, Wanderer, Skifahrer, Königinnen, Könige, du und ich — wir alle haben diesen magischen Ort unter den Gipfeln und über dem Tal besucht. Und sind mit einem Herzen voll einzigartiger Erinnerungen gegangen — und mit einem Geist von Freiheit und Freude.",
+    ],
     instagramCta: "Auf Instagram folgen →",
     images: [
       { src: "/muerren/01-peaks.jpg", alt: "Schneebedeckte Gipfel über grünen Wiesen bei Mürren" },
@@ -609,7 +625,7 @@ const de = {
     eyebrow: "Collectors",
     title: "Wo Mürren bei dir lebt.",
     intro:
-      "Auf der Weltkarte siehst du nie die genaue Adresse — nur einen Umkreis von ca. 100 km. Filtere nach Kunstwerken, Postkarten & Newsletter oder beidem.",
+      "Hier siehst du, wo Mürren-Friends ihre Tiny Art Surprises haben — und wo Postkarte und Newsletter jeden Monat landen. Die Eintragung auf der Karte ist optional und die Pins sind auf ca. 100 km genau — aber es macht Spass zu sehen, wer dabei ist.",
     filterLabel: "Auf der Karte zeigen",
     filterAll: "Alle",
     filterPostcards: "Postkarten & Newsletter",

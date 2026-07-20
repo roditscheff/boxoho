@@ -96,26 +96,29 @@ export function OnePager({ locale, dict }: OnePagerProps) {
           <p className="eyebrow mb-3 sm:mb-4">{about.eyebrow}</p>
           <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{about.title}</h2>
 
-          <div className="mt-8 grid grid-cols-1 items-start gap-8 sm:mt-10 md:mt-12 md:grid-cols-2 md:gap-14">
-            <p className="text-base leading-relaxed text-ink-soft sm:text-lg">{about.body}</p>
-
-            <div className="flex gap-4 sm:gap-5">
-              <figure className="relative h-24 w-24 shrink-0 overflow-hidden bg-paper-deep sm:h-32 sm:w-32">
+          <div className="mt-8 grid grid-cols-1 items-start gap-10 sm:mt-10 md:mt-12 md:grid-cols-2 md:gap-14">
+            <div>
+              <figure className="relative aspect-[3/4] w-full overflow-hidden bg-paper-deep">
                 <Image
                   src="/sandrine.jpg"
                   alt={about.portraitAlt}
                   fill
-                  className="object-cover"
-                  sizes="128px"
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority={false}
                 />
               </figure>
-              <div>
-                <p className="eyebrow mb-2">{about.creatorEyebrow}</p>
-                <h3 className="text-xl text-ink sm:text-2xl">{about.creatorName}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:mt-3 sm:text-base">
-                  {about.creatorBody}
-                </p>
-              </div>
+              <p className="eyebrow mt-5 mb-2">{about.creatorEyebrow}</p>
+              <h3 className="text-xl text-ink sm:text-2xl">{about.creatorName}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft sm:mt-3 sm:text-base">
+                {about.creatorBody}
+              </p>
+            </div>
+
+            <div className="space-y-5 text-base leading-relaxed text-ink-soft sm:text-lg md:pt-1">
+              {about.paragraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+              ))}
             </div>
           </div>
         </div>
@@ -164,9 +167,14 @@ export function OnePager({ locale, dict }: OnePagerProps) {
         <div className="mx-auto max-w-5xl">
           <p className="eyebrow mb-3 sm:mb-4">{impressions.eyebrow}</p>
           <h2 className="max-w-2xl text-3xl text-ink sm:text-4xl md:text-5xl">{impressions.title}</h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
-            {impressions.intro}
+          <p className="mt-6 max-w-2xl font-mono text-[0.78rem] uppercase tracking-[0.14em] text-muted">
+            {impressions.placeLabel}
           </p>
+          <div className="mt-4 max-w-2xl space-y-4 text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
+            {impressions.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+            ))}
+          </div>
           <a
             href={site.instagram}
             target="_blank"
