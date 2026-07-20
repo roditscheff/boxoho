@@ -174,7 +174,7 @@ export function OnePager({ locale, dict }: OnePagerProps) {
               </ul>
             </div>
             <div className="mt-6 sm:mt-8">
-              <RegisterForm register={register} ctaLabel={map.ctaRegister} />
+              <RegisterForm locale={locale} register={register} />
             </div>
           </div>
         </div>

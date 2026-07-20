@@ -311,6 +311,11 @@ const en = {
     chooseFile: "Choose file",
     mapConsent:
       "Show me on the world map with an approximate pin. The exact address stays private. If I stay anonymous, only “Anonymous” is shown — never my real name. (Optional)",
+    legalConsentBefore: "I accept the",
+    legalConsentTerms: "Terms",
+    legalConsentAnd: "and the",
+    legalConsentPrivacy: "Privacy Policy",
+    legalConsentRequired: "Please accept the Terms and Privacy Policy to continue.",
     submitting: "Saving…",
     success: "Thank you — your artwork is registered.",
     alreadyRegistered: "This artwork is already registered.",
@@ -319,7 +324,7 @@ const en = {
       generic: "Something went wrong. Please try again.",
       placeNotFound: "Could not find that address. Please check city and country.",
     },
-    button: "Register",
+    button: "Register now",
   },
   collection: {
     eyebrow: "Tiny Art Surprises",
@@ -750,6 +755,11 @@ const de = {
     chooseFile: "Choose file",
     mapConsent:
       "Zeig mich auf der Weltkarte mit einem ungenauen Pin. Die genaue Adresse bleibt privat. Wenn ich anonym bleibe, erscheint nur «Anonymous» — nie mein echter Name. (Optional)",
+    legalConsentBefore: "Ich akzeptiere die",
+    legalConsentTerms: "AGB",
+    legalConsentAnd: "und die",
+    legalConsentPrivacy: "Datenschutzerklärung",
+    legalConsentRequired: "Bitte akzeptiere die AGB und die Datenschutzerklärung, um fortzufahren.",
     submitting: "Speichern…",
     success: "Danke — dein Kunstwerk ist registriert.",
     alreadyRegistered: "Dieses Kunstwerk ist bereits registriert.",
@@ -758,7 +768,7 @@ const de = {
       generic: "Etwas ist schiefgelaufen. Bitte nochmals versuchen.",
       placeNotFound: "Adresse nicht gefunden. Bitte Ort und Land prüfen.",
     },
-    button: "Registrieren",
+    button: "Jetzt registrieren",
   },
   collection: {
     eyebrow: "Tiny Art Surprises",

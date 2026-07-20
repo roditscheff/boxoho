@@ -1,13 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useId, useState } from "react";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
+import { localePath } from "@/i18n/paths";
 import type { ArtworkLookup } from "@/lib/types";
 
 type RegisterFormProps = {
+  locale: Locale;
   register: Dictionary["register"];
-  ctaLabel: string;
 };
 
 type Status = "idle" | "loading" | "success" | "error";
@@ -31,7 +34,7 @@ function UploadIcon({ className }: { className?: string }) {
   );
 }
 
-export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
+export function RegisterForm({ locale, register }: RegisterFormProps) {
   const photoInputId = useId();
   const [number, setNumber] = useState("");
   const [artwork, setArtwork] = useState<ArtworkLookup | null>(null);
@@ -41,6 +44,7 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
   const [firstName, setFirstName] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [mapConsent, setMapConsent] = useState(false);
+  const [legalConsent, setLegalConsent] = useState(false);
   const [photoName, setPhotoName] = useState<string | null>(null);
 
   const previewCollector = isAnonymous
@@ -69,6 +73,11 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
   async function submitRegistration(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!artwork || artwork.alreadyRegistered) return;
+    if (!legalConsent) {
+      setStatus("error");
+      setMessage(register.legalConsentRequired);
+      return;
+    }
 
     setStatus("loading");
     setMessage(null);
@@ -76,6 +85,7 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
     form.set("number", artwork.number);
     form.set("isAnonymous", isAnonymous ? "true" : "false");
     form.set("mapConsent", mapConsent ? "true" : "false");
+    form.set("legalConsent", "true");
 
     const res = await fetch("/api/registrations", {
       method: "POST",
@@ -281,12 +291,45 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
                 </div>
               </div>
 
+              <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                <input
+                  type="checkbox"
+                  checked={legalConsent}
+                  onChange={(e) => {
+                    setLegalConsent(e.target.checked);
+                    if (e.target.checked && status === "error") {
+                      setMessage(null);
+                      setStatus("idle");
+                    }
+                  }}
+                  required
+                  className="mt-1 accent-[var(--stamp)]"
+                />
+                <span>
+                  {register.legalConsentBefore}{" "}
+                  <Link
+                    href={localePath(locale, "/terms")}
+                    className="text-stamp underline underline-offset-2 hover:text-stamp-soft"
+                  >
+                    {register.legalConsentTerms}
+                  </Link>{" "}
+                  {register.legalConsentAnd}{" "}
+                  <Link
+                    href={localePath(locale, "/privacy")}
+                    className="text-stamp underline underline-offset-2 hover:text-stamp-soft"
+                  >
+                    {register.legalConsentPrivacy}
+                  </Link>
+                  .
+                </span>
+              </label>
+
               <button
                 type="submit"
-                disabled={status === "loading"}
-                className="border border-ink px-6 py-3 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper disabled:opacity-50"
+                disabled={status === "loading" || !legalConsent}
+                className="w-full rounded-full bg-stamp px-5 py-3.5 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-paper transition-colors hover:bg-stamp-soft disabled:opacity-40 sm:px-6 sm:py-4 sm:text-[0.78rem] md:w-auto"
               >
-                {status === "loading" ? register.submitting : ctaLabel}
+                {status === "loading" ? register.submitting : register.button}
               </button>
             </form>
           ) : null}

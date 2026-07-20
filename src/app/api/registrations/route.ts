@@ -17,6 +17,7 @@ const schema = z.object({
   email: z.string().email().max(200),
   mapConsent: z.boolean().default(false),
   isAnonymous: z.boolean().default(false),
+  legalConsent: z.literal(true),
 });
 
 export async function POST(request: Request) {
@@ -40,6 +41,10 @@ export async function POST(request: Request) {
     mapConsent: form.get("mapConsent") === "true" || form.get("mapConsent") === "on",
     isAnonymous:
       form.get("isAnonymous") === "true" || form.get("isAnonymous") === "on",
+    legalConsent:
+      form.get("legalConsent") === "true" || form.get("legalConsent") === "on"
+        ? true
+        : false,
   });
 
   if (!parsed.success) {
