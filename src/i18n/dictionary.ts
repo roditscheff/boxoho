@@ -171,9 +171,11 @@ const en = {
     title: "Get Mürren home to you.",
     intro:
       "A Mürren motif, a short story — delivered wherever you are. If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
-    body: "Three ways to stay with Mürren: a digital newsletter, a monthly postcard with story and QR to the newsletter, or a full year paid once.",
+    body: "Three ways to stay with Mürren: a digital newsletter, a monthly postcard with story, or a full year paid once.",
     firstShipNote:
       "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
+    shippingNote:
+      "Your postcard sets off at the start of every month. Depending on the destination country and postal service, it can then take up to 14 days to reach you. The newsletter goes out at the start of the month too.",
     productImageAlt:
       "Comic: hand holding a Mürren postcard with alpine greeting from Sandrine",
     yearImageAlt:
@@ -436,6 +438,7 @@ const en = {
         title: "7. Registration & collectors’ map (optional)",
         paragraphs: [
           "Via the website, the registration number of an artwork or postcard may be recorded. Optionally, with express consent, first name and a blurred location (~100 km) may appear on the public collectors’ world map — together with a product image (optionally a personal photo). This applies to all products, including the newsletter subscription. This display is voluntary and may be declined; in that case there is no display on the map. The exact address and other contact details remain private in every case and are processed in accordance with the privacy policy.",
+          "The ~100 km figure is a target value, not an exact guarantee. Near a national border, the displayed location is additionally constrained to remain within the same country as the actual address; in these cases the blur radius may be noticeably smaller than 100 km.",
         ],
       },
       {
@@ -695,9 +698,11 @@ const de = {
     title: "Mürren zu dir nach Hause.",
     intro:
       "Ein Sujet aus Mürren, eine kleine Story — zugestellt, wo immer du bist. Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
-    body: "Drei Wege: digitaler Newsletter, monatliche Postkarte mit Motiv, Geschichte und QR zum Newsletter — oder ein ganzes Jahr einmal bezahlt.",
+    body: "Drei Wege: digitaler Newsletter, monatliche Postkarte mit Motiv und Geschichte — oder ein ganzes Jahr einmal bezahlt.",
     firstShipNote:
       "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
+    shippingNote:
+      "Deine Postkarte macht sich jeweils zu Beginn des Monats auf den Weg. Je nach Zielland und Postdienst kann es danach bis zu 14 Tage dauern, bis sie bei dir ankommt. Auch der Newsletter wird jeweils zu Monatsbeginn versendet.",
     productImageAlt:
       "Comic: Hand hält eine Mürren-Postkarte mit Alpengruss von Sandrine",
     yearImageAlt:
@@ -961,6 +966,7 @@ const de = {
         title: "7. Registrierung & Collectors-Karte (optional)",
         paragraphs: [
           "Über die Website kann die Registrierungsnummer eines Kunstwerks oder einer Postkarte erfasst werden. Optional, mit ausdrücklicher Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Collectors-Weltkarte erscheinen — zusammen mit einem Produktbild (optional ein eigenes Foto). Dies gilt für alle Produkte, einschliesslich des Newsletter-Abonnements. Diese Anzeige ist freiwillig und kann abgelehnt werden; in diesem Fall erfolgt keine Anzeige auf der Karte. Die exakte Adresse und weitere Kontaktdaten bleiben in jedem Fall privat und werden gemäss Datenschutzerklärung verarbeitet.",
+          "Die Angabe von ca. 100 km ist ein Zielwert, keine exakte Garantie. In der Nähe einer Landesgrenze wird der angezeigte Standort zusätzlich so eingeschränkt, dass er im selben Land wie die tatsächliche Adresse bleibt; in diesen Fällen kann der Unschärferadius merklich kleiner als 100 km ausfallen.",
         ],
       },
       {

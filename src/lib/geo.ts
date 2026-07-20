@@ -48,8 +48,11 @@ export function blurLocation(
 /**
  * Blur exact coords like `blurLocation`, but keep the public point inside the
  * same country as the original address (checked locally, no extra network
- * calls). Falls back to progressively smaller radii for small countries, and
- * finally to the original point if no in-country candidate can be found.
+ * calls). Falls back to progressively smaller radii for small countries.
+ * The exact point is never returned unblurred: if no in-country candidate can
+ * be found at all (e.g. an unrecognized country code, or a micro-state where
+ * even a ~100 m radius crosses the border every time), it falls back to a
+ * plain, un-constrained blur rather than exposing the real location.
  */
 export function blurLocationWithinCountry(
   lat: number,
@@ -68,6 +71,7 @@ export function blurLocationWithinCountry(
     [minKm / 4, maxKm / 4],
     [1, minKm / 4],
     [0.1, 1],
+    [0.01, 0.1],
   ];
 
   for (const [bandMin, bandMax] of bands) {
@@ -85,7 +89,9 @@ export function blurLocationWithinCountry(
     }
   }
 
-  return { publicLat: lat, publicLng: lng };
+  // No in-country candidate at any radius (e.g. a micro-state): still blur,
+  // just without the country constraint, so we never publish the exact spot.
+  return blurLocation(lat, lng, minKm, maxKm);
 }
 
 function destinationPoint(

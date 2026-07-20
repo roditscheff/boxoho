@@ -42,6 +42,9 @@ export function PostcardShop({ locale, postcard }: PostcardShopProps) {
         <p className="mt-4 max-w-xl text-base leading-relaxed text-ink-soft sm:mt-5 sm:text-lg">
           {postcard.intro}
         </p>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:mt-4">
+          {postcard.shippingNote}
+        </p>
 
         <div className="mt-8 sm:mt-10">
           <SubscriptionCheckout
