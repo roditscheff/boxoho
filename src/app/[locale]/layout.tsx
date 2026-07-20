@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
+import { CookieConsent } from "@/components/CookieConsent";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { SetHtmlLang } from "@/components/SetHtmlLang";
@@ -47,6 +48,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <Header locale={locale} dict={dict} />
       <main className="flex-1">{children}</main>
       <Footer locale={locale} dict={dict} />
+      <CookieConsent locale={locale} consent={dict.consent} />
     </>
   );
 }

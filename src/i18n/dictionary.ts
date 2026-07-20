@@ -58,8 +58,29 @@ const en = {
     blurb:
       "A piece of Mürren for your home. Tiny Art Surprises from the vintage vending machine — and postcards that keep the connection alive.",
     instagram: "Instagram",
+    cookieSettings: "Cookie settings",
     rights: "© {year} Sundrbi GmbH · Brand BOXOHO",
     contact: "Boxoho by {company} · {address} · {uid} · {email}",
+  },
+  consent: {
+    title: "Cookies & privacy",
+    intro:
+      "We use necessary cookies for language preference, checkout, and site security. With your consent we may also use optional statistics and marketing technologies.",
+    necessaryTitle: "Necessary",
+    necessaryDesc:
+      "Language preference, cookie settings, payment checkout (Stripe), and basic site functions. Always active.",
+    analyticsTitle: "Statistics",
+    analyticsDesc:
+      "Optional usage measurement to improve the website. No advertising cookies.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Optional marketing technologies, e.g. embedded social media. Loaded only with your consent.",
+    acceptAll: "Accept all",
+    necessaryOnly: "Necessary only",
+    settings: "Settings",
+    save: "Save selection",
+    privacyLink: "Privacy policy",
+    close: "Close",
   },
   thanks: {
     title: "Box Ohooo!",
@@ -349,72 +370,124 @@ const en = {
   terms: {
     eyebrow: "Legal",
     title: "Terms and conditions.",
-    // Shared legal content kept factual; EN version
+    stand: "As of 20 July 2026",
     provider:
-      "Provider of both offers: Sundrbi GmbH, under the brand BOXOHO, {address}, UID {uid}.",
+      "Provider: Sundrbi GmbH, under the brand BOXOHO, {address}, UID {uid}",
     sections: [
       {
         title: "1. Scope",
-        body: "These terms apply to purchases from the Boxoho artwork vending machine in Mürren and to BOXOHO products under the brand BOXOHO — physical postcards and digital offers (including a paid digital newsletter), on site in Mürren and/or via the website (including QR code), as stated for each product at the time of purchase. Prices and product details are those shown in the offer (e.g. Stripe product page or on-site information) when you buy.",
+        paragraphs: [
+          "These Terms and Conditions apply to all purchases and subscriptions under the brand BOXOHO — both on site in Mürren (e.g. at the artwork vending machine or directly on site) and online via the website or by QR code. They apply to physical products (e.g. artworks, postcards) as well as digital offers (e.g. a newsletter subscription).",
+          "Prices, payment method and further product details arise exclusively from the respective offer at the time of purchase (e.g. Stripe product page, machine or on-site information). These Terms themselves contain no price information. All stated prices include statutory Swiss VAT, unless otherwise noted for the respective offer.",
+          "All on-site offers are designed as self-service (e.g. machine or Stripe QR code, without staff on site).",
+          "Rights and obligations are governed by the product categories and service descriptions in these Terms — not by the concrete product name on Stripe, the website or on site, which may differ by channel (e.g. English designations on Stripe).",
+          "The provider may amend these Terms at any time. For a purchase, the version published on the website at the time the contract is formed is decisive. For ongoing subscriptions, an amended version applies from the next billing period, provided the change was communicated beforehand in a suitable form (e.g. by email or on the website).",
+        ],
       },
       {
         title: "2. Contract formation",
-        body: "At the machine or on site, the contract is formed upon payment and handover of the goods (and, where applicable, acceptance of the follow-up mailing). Online, upon completing checkout or successful payment via the payment provider. The contract covers the specific product chosen (physical and/or digital).",
+        paragraphs: [
+          "All payments — whether at the machine, via a Stripe QR code scanned on site, or directly online — are processed technically through the same online checkout of the payment provider. The contract is formed upon successful payment.",
+          "The difference between offer types lies not in the payment process, but in how goods are handed over:",
+        ],
+        list: [
+          "For on-site offers (machine, Single Delivery, prepaid pack on site), the first performance is taken immediately on site by the customer (self-service); any further performances are delivered by post.",
+          "For purely online offers (without on-site collection), the entire delivery is by post or email only, without self-collection on site.",
+        ],
+        after: [
+          "The subject matter is always the specifically chosen product (physical and/or digital) according to the offer description at the time of purchase.",
+        ],
       },
       {
-        title: "Artwork machine — 3. Purchase & handover",
-        body: "Purchase is made on site by cash or card. The mini artwork (“Tiny Art Surprise”) is handed over immediately and in full. There is no shipping obligation.",
+        title: "3. Offer & future products",
+        paragraphs: [
+          "The provider may expand, adapt or discontinue the range of products, formats and distribution channels at any time — for example additional physical items, further postcard formats, new subscription periods or further digital offers. For new products these Terms apply mutatis mutandis, supplemented by the conditions stated specifically at the respective purchase (in particular price, scope of performance and form of delivery).",
+          "Production and stock of individual products (e.g. the monthly limited artworks) are limited. If the provider cannot fulfil an order despite careful planning (e.g. due to production or capacity constraints), it will inform the buyer without delay and refund payments already made for the unfulfilled performance in full.",
+        ],
       },
       {
-        title: "4. Nature of goods & returns",
-        body: "Each piece is unique and a surprise purchase without prior selection. There is no right of withdrawal or exchange to the extent permitted by law. For obvious defects, the buyer should contact {email} within 7 days.",
+        title: "4. Artwork machine",
+        paragraphs: [
+          "Purchase is made on site using the payment methods accepted at the machine or Stripe QR code, as self-service. The mini artwork (“Tiny Art Surprise”) is taken from the machine immediately and in full; there is no shipping obligation.",
+          "Each piece is unique and a surprise purchase without prior selection. There is no right of withdrawal or exchange to the extent permitted by law. For obvious defects, the buyer should contact {email} within 7 days.",
+          "Each artwork carries a sequential number and a certificate of authenticity. Monthly production is limited.",
+          "At the machine there is also a Stripe QR code through which a freely chosen amount may be paid voluntarily. This payment is voluntary and creates no additional entitlement to performance.",
+        ],
       },
       {
-        title: "5. Authenticity & edition",
-        body: "Each artwork carries a sequential number and a certificate of authenticity. Monthly production is limited to at most as many pieces as the month has days.",
+        title: "5. Postcard products",
+        paragraphs: [
+          "Depending on availability and sales channel, the following formats are offered:",
+          "a) One-time purchase with follow-up shipping on site (self-service) — e.g. labelled “Single Delivery” or “Yearly Card Set”. Available only on site in Mürren, not online, as self-service without staff on site. A first postcard is taken immediately on site by the customer; one or more further postcards, each with a new photo and new story, are then mailed to the address provided according to the quantity and rhythm stated at purchase (e.g. monthly). Not a subscription; does not renew automatically. For multi-part packs, the provider may contact you before the end of the period (e.g. by email) to offer continuation — as a further prepaid pack or as a subscription if then available.",
+          "b) Prepaid postcard pack online — e.g. labelled “Yearly Card Set”. One-time payment; the number of postcards stated at purchase, each with a new photo and new story, is mailed to the address provided from the start of service in the agreed rhythm (e.g. monthly); immediate on-site collection does not apply, as there is no on-site collection. Not a subscription; does not renew automatically. The provider may contact you before the end of the period (e.g. by email) to offer continuation — as a further prepaid pack or as a subscription if then available.",
+          "c) Postcard subscription (online, recurring). Recurring payment for one new postcard per billing period. Further subscription periods (e.g. an annual subscription) may be introduced later; they are governed by section 8 and by the description stated at purchase. Motifs correspond to the then-current issue period.",
+        ],
       },
       {
-        title: "6. Registration (optional)",
-        body: "Via the website, the registration number may be recorded and an approximate location shared. Optionally, with consent, first name and a blurred location (~100 km) may appear on the public collectors’ map, along with the artwork image (and optionally a personal photo). Exact address and other contact details remain private. Full contact details are processed as described in the privacy policy.",
+        title: "6. Newsletter subscription (online, recurring)",
+        paragraphs: [
+          "Paid digital subscription with Mürren-related content (stories and image impressions from Mürren), delivered exclusively by email — without physical postal shipping. Billing period and scope of performance arise from the offer at purchase. This product is governed by section 8.",
+          "Anyone who obtains a postcard product under section 5 (a, b or c) additionally receives free access to the newsletter for the duration of that product, without separate payment. This free access ends automatically when the respective postcard product expires or is cancelled, unless a paid newsletter subscription is taken out independently.",
+        ],
       },
       {
-        title: "Postcard & digital products — 7. Offers",
-        body: "Depending on availability and channel, the following products may be offered: (a) Single Delivery — on site in Mürren only (not sold online): one-time payment. One postcard is received immediately on site; a second postcard with a new photo and new story is mailed to the address provided about one month later. (b) Yearly Card Set — 12 months of Mürren: one-time payment for twelve postcards — one new postcard with story each month for twelve months from the start of service. This pack does not renew automatically. Before the period ends, Sundrbi GmbH may contact you (e.g. by email) to offer continuation, whether as another prepaid pack or as a subscription if then available. (c) Monthly postcard subscription — online: recurring monthly payment for one new postcard per month. Further postcard subscription periods (in particular a yearly subscription) may be introduced later; they are governed by section 10 and by the price and description stated at purchase. Motifs match the current issue period. Optionally, with consent at checkout or on site, a blurred shipping location (~100 km) and first name may appear on the public collectors’ map; the exact address remains private. (d) Digital newsletter subscription — online: a paid digital subscription delivering Mürren-related content (e.g. photos, stories, or updates) by email only, with no physical postcard shipping. The fee and billing period (e.g. a monthly fee such as CHF 5.00) are those stated at purchase. This product is governed by section 10.",
+        title: "7. Registration & collectors’ map (optional)",
+        paragraphs: [
+          "Via the website, the registration number of an artwork or postcard may be recorded. Optionally, with express consent, first name and a blurred location (~100 km) may appear on the public collectors’ world map — together with a product image (optionally a personal photo). This applies to all products, including the newsletter subscription. This display is voluntary and may be declined; in that case there is no display on the map. The exact address and other contact details remain private in every case and are processed in accordance with the privacy policy.",
+        ],
       },
       {
-        title: "8. Delivery",
-        body: "Physical postcards are sent by standard mail to the address provided and are not tracked. Delivery times vary by destination and postal service. In case of proven postal loss within 60 days of the shipping date (or, if unknown, the purchase date), a free replacement card will be sent if reported to {email}. Digital newsletter content is delivered electronically to the email address provided; there is no postal shipping for that product.",
+        title: "8. Subscriptions — term & cancellation",
+        paragraphs: [
+          "Where a product is sold as a subscription (including postcard subscription, any future annual postcard subscription, newsletter subscription), it renews for the agreed billing period until cancelled. Cancellation is possible at any time and takes effect at the end of the current billing period — not retroactively or immediately — via the payment provider’s customer portal.",
+          "Prepaid packs under sections 5(a) and 5(b) are not subscriptions and do not renew automatically unless a subscription is later expressly concluded or a new order is placed.",
+        ],
       },
       {
-        title: "9. Withdrawal & refunds",
-        body: "After the first card of an order or pack has been handed over or shipped, or after a subscription service (physical or digital) has begun, refunds are excluded to the extent permitted by law. Statutory warranty rights remain unaffected.",
+        title: "9. Delivery",
+        paragraphs: [
+          "Physical postcards are sent by standard mail without tracking to the address provided. Delivery times vary by destination country and postal service. The risk of accidental loss or accidental damage passes to the buyer upon handover to the postal service, to the extent permitted by law.",
+          "Digital content (e.g. newsletter) is delivered electronically to the email address provided; there is no postal shipping for this.",
+        ],
       },
       {
-        title: "10. Subscriptions",
-        body: "Where a product is sold as a subscription — including the monthly postcard subscription, any later yearly postcard subscription, and a digital newsletter subscription — it renews for the agreed billing period until cancelled. Cancellation is possible at any time and takes effect at the end of the current billing period — not immediately — via the payment provider’s customer portal or by email to {email}. Prepaid packs under section 7(b) are not subscriptions and do not auto-renew unless you later agree to a subscription or place a new order.",
+        title: "10. Withdrawal & refunds",
+        paragraphs: [
+          "After handover or shipping of the first performance of an order or pack, or after a subscription service (physical or digital) has begun, a refund is excluded to the extent permitted by law. Statutory warranty rights remain unaffected.",
+        ],
       },
       {
-        title: "11. Payments",
-        body: "Online payments are processed by the integrated payment provider (e.g. Stripe). Their terms apply in addition. On-site payments follow the payment methods accepted there.",
+        title: "11. Liability",
+        paragraphs: [
+          "The provider is liable without limitation for intent and gross negligence and for injury to life, body or health. Otherwise the provider is liable only for breach of essential contractual duties and limited to the foreseeable damage typical of the contract. Any further liability, in particular for indirect damage or consequential damage, is excluded to the extent permitted by law.",
+        ],
       },
       {
-        title: "12. Governing law",
-        body: "Swiss law applies. Place of jurisdiction is the registered office of Sundrbi GmbH, to the extent permitted by law.",
+        title: "12. Payments",
+        paragraphs: [
+          "Online payments are processed by the integrated payment provider (e.g. Stripe); their terms apply in addition. On site, the payment methods accepted there apply.",
+        ],
+      },
+      {
+        title: "13. Governing law",
+        paragraphs: [
+          "Swiss law applies. Place of jurisdiction is the registered office of Sundrbi GmbH, to the extent permitted by law.",
+        ],
       },
     ],
   },
   privacy: {
     eyebrow: "Legal",
     title: "Privacy policy.",
-    controller: "Controller: Sundrbi GmbH, {address}. Contact: {email}.",
+    controller: "Controller: Sundrbi GmbH, under the brand BOXOHO, {address}. Contact: {email}.",
     sections: [
       {
         title: "1. Artwork machine",
-        body: "No personal data are collected by us at the machine. Purchase is anonymous by cash or card. Card data may be processed by the on-site payment provider.",
+        body: "No personal data are collected by us at the machine. Purchase is anonymous by cash or card. Card data may be processed by the on-site payment provider. A voluntary donation via the Stripe QR code at the machine is likewise processed by the payment provider and does not require any personal data from us.",
       },
       {
         title: "2. Postcards, subscriptions & newsletter",
-        body: "For shipping and contract fulfilment we collect name, postal address (where needed for physical products), email address, and payment status via our payment provider (Stripe). This covers the digital newsletter subscription, the monthly postcard subscription, and the one-year postcard pack. Postcard purchases may include the digital newsletter as part of the product; the email address is then also used to deliver that newsletter. Data are used for shipping, digital delivery, customer support, renewal reminders where applicable, and billing. They are not shared with third parties except as technically necessary with the payment provider, the postal service, and email delivery tools. Optionally, with your consent at checkout, a blurred location (~100 km radius) and your first name may appear on the public collectors’ map. The exact address is never shown publicly.",
+        body: "For shipping and contract fulfilment we collect name, postal address (where needed for physical products), email address, and payment status via our payment provider (Stripe). This covers all postcard products (on-site Single Delivery, prepaid Yearly Card Set, and the postcard subscription) and the paid digital newsletter subscription. If you obtain a postcard product, you automatically receive free, time-limited access to the newsletter for the duration of that product; this access ends automatically when the postcard product expires or is cancelled, unless you separately hold a paid newsletter subscription — your email address is used to deliver the newsletter during that time. Data are used for shipping, digital delivery, customer support, renewal reminders where applicable, and billing. To deliver the newsletter, the email addresses of eligible subscribers are transferred to and processed by Brevo (Sendinblue SAS / Brevo SAS, France), our email marketing provider, under a data processing agreement; Brevo may store the email address, first name, and newsletter status for this purpose. Data are not otherwise shared with third parties except as technically necessary with the payment provider and the postal service. Optionally, with your consent at checkout, a blurred location (~100 km radius) and your first name may appear on the public collectors’ map. The exact address is never shown publicly.",
       },
       {
         title: "3. Artwork registration",
@@ -426,18 +499,22 @@ const en = {
       },
       {
         title: "5. Website & hosting",
-        body: "Visiting the website may generate technically necessary data (e.g. server logs) and cookies or similar technologies from hosting and embedded services (e.g. maps, payments, media). Checkout success pages and account/customer-portal links may process session or email identifiers needed to complete payment flows.",
+        body: "Visiting the website may generate technically necessary data (e.g. server logs, IP address, browser type, time of access) from hosting and delivery infrastructure. Checkout success pages and customer-portal links may process session or email identifiers needed to complete payment flows. Embedded services (e.g. payment checkout via Stripe, interactive maps) may process data as described by those providers, to the extent required for the function you use.",
       },
       {
-        title: "6. Retention",
-        body: "Personal data are stored only as long as needed for contract, shipping, digital delivery, support, collectors’ registry administration, and legal retention duties, then deleted or anonymised.",
+        title: "6. Cookies & similar technologies",
+        body: "We use cookies and similar technologies in the following categories. (a) Necessary — always active: language preference, storage of your cookie choice (cookie name boxoho_consent), payment checkout (Stripe), and basic site security/function. Without these, core features may not work. (b) Statistics — only with your consent: optional usage measurement to improve the website. We do not use advertising cookies for this category. (c) Marketing — only with your consent: optional marketing technologies, for example embedded social media content, loaded only after you opt in. You can accept all cookies, allow necessary cookies only, or choose categories under “Settings” in the cookie banner. You can change or withdraw your choice at any time via “Cookie settings” in the website footer. You can also manage or delete cookies in your browser settings.",
       },
       {
-        title: "7. Your rights",
-        body: "Under applicable Swiss data protection law you may in particular request access, rectification, erasure, restriction of processing, and object to processing — including withdrawal of map consent or a change of your public anonymity preference where technically possible. Contact {email}.",
+        title: "7. Retention",
+        body: "Personal data are stored only as long as needed for contract, shipping, digital delivery, support, collectors’ registry administration, and legal retention duties, then deleted or anonymised. The cookie-consent cookie is typically stored for up to 12 months and is renewed when you update your choice.",
       },
       {
-        title: "8. Contact",
+        title: "8. Your rights",
+        body: "Under applicable Swiss data protection law you may in particular request access, rectification, erasure, restriction of processing, and object to processing — including withdrawal of map consent, a change of your public anonymity preference, or withdrawal of optional cookie consent (statistics/marketing) where technically possible. Optional cookie consent can also be changed via “Cookie settings” in the footer. Contact {email}.",
+      },
+      {
+        title: "9. Contact",
         body: "For privacy questions: {email}, Sundrbi GmbH, {address}.",
       },
     ],
@@ -502,8 +579,29 @@ const de = {
     blurb:
       "Ein Stück Mürren für dich zu Hause. Tiny Art Surprises aus dem Automaten — und Postkarten, die die Verbindung lebendig halten.",
     instagram: "Instagram",
+    cookieSettings: "Cookie-Einstellungen",
     rights: "© {year} Sundrbi GmbH · Marke BOXOHO",
     contact: "Boxoho by {company} · {address} · {uid} · {email}",
+  },
+  consent: {
+    title: "Cookies & Datenschutz",
+    intro:
+      "Wir verwenden notwendige Cookies für Spracheinstellung, Checkout und Sicherheit. Mit deiner Einwilligung können wir zusätzlich optionale Statistik- und Marketing-Technologien nutzen.",
+    necessaryTitle: "Notwendig",
+    necessaryDesc:
+      "Spracheinstellung, Cookie-Einstellungen, Zahlungs-Checkout (Stripe) und grundlegende Website-Funktionen. Immer aktiv.",
+    analyticsTitle: "Statistik",
+    analyticsDesc:
+      "Optionale Nutzungsmessung zur Verbesserung der Website. Keine Werbe-Cookies.",
+    marketingTitle: "Marketing",
+    marketingDesc:
+      "Optionale Marketing-Technologien, z. B. eingebundene Social-Media-Inhalte. Laden nur mit deiner Einwilligung.",
+    acceptAll: "Alle akzeptieren",
+    necessaryOnly: "Nur notwendige",
+    settings: "Einstellungen",
+    save: "Auswahl speichern",
+    privacyLink: "Datenschutzerklärung",
+    close: "Schliessen",
   },
   thanks: {
     title: "Box Ohooo!",
@@ -795,71 +893,124 @@ const de = {
   terms: {
     eyebrow: "Rechtliches",
     title: "Allgemeine Geschäftsbedingungen.",
+    stand: "Stand: 20. Juli 2026",
     provider:
-      "Anbieterin beider Angebote: Sundrbi GmbH, unter der Marke BOXOHO, {address}, UID {uid}.",
+      "Anbieterin: Sundrbi GmbH, unter der Marke BOXOHO, {address}, UID {uid}",
     sections: [
       {
         title: "1. Geltungsbereich",
-        body: "Diese AGB gelten für Käufe am Boxoho-Kunstwerk-Automaten in Mürren sowie für BOXOHO-Produkte der Marke BOXOHO — physische Postkarten und digitale Angebote (inkl. eines bezahlten Digital-Newsletters), vor Ort in Mürren und/oder über die Website (inkl. QR-Code), soweit für das jeweilige Produkt zum Kaufzeitpunkt angegeben. Preise und Produktdetails ergeben sich aus dem Angebot (z. B. Stripe-Produktseite oder Information vor Ort) im Moment des Kaufs.",
+        paragraphs: [
+          "Diese AGB gelten für alle Käufe und Abonnements der Marke BOXOHO — sowohl vor Ort in Mürren (z. B. am Kunstwerk-Automaten oder direkt vor Ort) als auch online über die Website oder per QR-Code. Sie gelten für physische Produkte (z. B. Kunstwerke, Postkarten) ebenso wie für digitale Angebote (z. B. ein Newsletter-Abonnement).",
+          "Preise, Zahlungsart und weitere Produktdetails ergeben sich ausschliesslich aus dem jeweiligen Angebot im Moment des Kaufs (z. B. Stripe-Produktseite, Automat oder Information vor Ort). Diese AGB enthalten selbst keine Preisangaben. Sämtliche ausgewiesenen Preise verstehen sich inklusive der gesetzlichen Schweizer Mehrwertsteuer, sofern beim jeweiligen Angebot nichts anderes vermerkt ist.",
+          "Sämtliche Vor-Ort-Angebote sind als Selfservice ausgestaltet (z. B. Automat oder Stripe-QR-Code, ohne Personal vor Ort).",
+          "Massgebend für Rechte und Pflichten sind die in diesen AGB beschriebenen Produktkategorien und Leistungsbeschreibungen — nicht die konkrete Produktbezeichnung auf Stripe, der Website oder vor Ort, welche je nach Kanal abweichen kann (z. B. englische Bezeichnungen bei Stripe).",
+          "Die Anbieterin kann diese AGB jederzeit ändern. Für einen Kauf massgebend ist jeweils die Version, die zum Zeitpunkt des Vertragsschlusses auf der Website veröffentlicht ist. Für laufende Abonnements gilt eine geänderte Fassung ab der jeweils nächsten Abrechnungsperiode, sofern die Änderung vorgängig in geeigneter Form (z. B. per E-Mail oder auf der Website) mitgeteilt wurde.",
+        ],
       },
       {
         title: "2. Vertragsschluss",
-        body: "Am Automaten bzw. vor Ort kommt der Vertrag mit Zahlung und Warenübergabe zustande (sowie, soweit vorgesehen, mit Annahme des Folgevorsands). Online mit Abschluss des Checkouts bzw. erfolgreicher Zahlung über den Zahlungsdienstleister. Gegenstand ist das jeweils gewählte Produkt (physisch und/oder digital).",
+        paragraphs: [
+          "Sämtliche Zahlungen — ob am Automaten, über einen vor Ort gescannten Stripe-QR-Code oder direkt online — werden technisch über denselben Online-Checkout des Zahlungsdienstleisters abgewickelt. Der Vertrag kommt jeweils mit erfolgreicher Zahlung zustande.",
+          "Der Unterschied zwischen den Angebotsformen liegt nicht im Zahlungsvorgang, sondern in der Warenübergabe:",
+        ],
+        list: [
+          "Bei Vor-Ort-Angeboten (Automat, Single Delivery, Prepaid-Paket vor Ort) wird die erste Leistung unmittelbar vor Ort selbst entnommen (Selfservice); allfällige weitere Leistungen werden per Post zugestellt.",
+          "Bei reinen Online-Angeboten (ohne Vor-Ort-Bezug) erfolgt die gesamte Zustellung ausschliesslich per Post oder E-Mail, ohne Selbstentnahme vor Ort.",
+        ],
+        after: [
+          "Gegenstand ist jeweils das konkret gewählte Produkt (physisch und/oder digital) gemäss Angebotsbeschreibung zum Kaufzeitpunkt.",
+        ],
       },
       {
-        title: "Kunstwerk-Automat — 3. Kauf & Übergabe",
-        body: "Der Kauf erfolgt vor Ort gegen Bar- oder Kartenzahlung. Das Mini-Kunstwerk («Tiny Art Surprise») wird sofort und vollständig übergeben. Es besteht keine Versandpflicht.",
+        title: "3. Angebot & künftige Produkte",
+        paragraphs: [
+          "Die Anbieterin kann das Sortiment an Produkten, Formaten und Vertriebswegen jederzeit erweitern, anpassen oder einstellen — etwa zusätzliche physische Artikel, weitere Postkartenformate, neue Abo-Perioden oder weitere digitale Angebote. Für neue Produkte gelten diese AGB sinngemäss, ergänzt um die beim jeweiligen Kauf spezifisch angegebenen Bedingungen (insbesondere Preis, Leistungsumfang und Lieferform).",
+          "Produktion und Bestand einzelner Produkte (z. B. der monatlich limitierten Kunstwerke) sind begrenzt. Kann die Anbieterin eine Bestellung trotz sorgfältiger Planung nicht erfüllen (z. B. wegen Produktions- oder Kapazitätsengpass), informiert sie die Käuferschaft unverzüglich und erstattet bereits geleistete Zahlungen für die nicht erfüllte Leistung vollständig zurück.",
+        ],
       },
       {
-        title: "4. Beschaffenheit & Rückgabe",
-        body: "Jedes Stück ist einzigartig und ein Überraschungskauf ohne Vorauswahl. Ein Widerrufs- oder Umtauschrecht besteht nicht, soweit gesetzlich zulässig. Bei offensichtlichen Mängeln meldet sich die Käuferschaft innert 7 Tagen unter {email}.",
+        title: "4. Kunstwerk-Automat",
+        paragraphs: [
+          "Der Kauf erfolgt vor Ort gegen die am Automaten bzw. Stripe-QR-Code akzeptierten Zahlungsmittel, im Selfservice. Das Mini-Kunstwerk («Tiny Art Surprise») wird sofort und vollständig aus dem Automaten entnommen; es besteht keine Versandpflicht.",
+          "Jedes Stück ist einzigartig und ein Überraschungskauf ohne Vorauswahl. Ein Widerrufs- oder Umtauschrecht besteht nicht, soweit gesetzlich zulässig. Bei offensichtlichen Mängeln meldet sich die Käuferschaft innert 7 Tagen unter {email}.",
+          "Jedes Kunstwerk trägt eine fortlaufende Nummer und ein Echtheitszertifikat. Die monatliche Produktion ist limitiert.",
+          "Am Automaten steht zusätzlich ein Stripe-QR-Code zur Verfügung, über den freiwillig ein selbst gewählter Betrag entrichtet werden kann. Diese Zahlung ist freiwillig und begründet keinen zusätzlichen Leistungsanspruch.",
+        ],
       },
       {
-        title: "5. Echtheit & Auflage",
-        body: "Jedes Kunstwerk trägt eine fortlaufende Nummer und ein Echtheitszertifikat. Die monatliche Produktion ist auf höchstens so viele Stücke begrenzt, wie der betreffende Monat Tage hat.",
+        title: "5. Postkarten-Produkte",
+        paragraphs: [
+          "Je nach Verfügbarkeit und Verkaufskanal werden folgende Formate angeboten:",
+          "a) Einmalkauf mit Nachversand vor Ort (Selfservice) — z. B. als «Single Delivery» oder «Yearly Card Set» bezeichnet. Nur vor Ort in Mürren erhältlich, nicht online, im Selfservice ohne Personal vor Ort. Eine erste Postkarte wird sofort vor Ort selbst entnommen; eine oder mehrere weitere Postkarten mit jeweils neuem Foto und neuer Story werden anschliessend gemäss der beim Kauf angegebenen Anzahl und Rhythmus (z. B. monatlich) an die angegebene Adresse versendet. Kein Abonnement; verlängert sich nicht automatisch. Bei mehrteiligen Paketen darf die Anbieterin vor Ablauf Kontakt aufnehmen (z. B. per E-Mail), um eine Fortsetzung anzubieten — als weiteres Prepaid-Paket oder als Abonnement, falls dann verfügbar.",
+          "b) Prepaid-Postkartenpaket online — z. B. als «Yearly Card Set» bezeichnet. Einmalzahlung; die beim Kauf angegebene Anzahl Postkarten mit jeweils neuem Foto und neuer Story wird ab Leistungsbeginn im vereinbarten Rhythmus (z. B. monatlich) an die angegebene Adresse versendet; eine sofortige Entnahme vor Ort entfällt, da kein Vor-Ort-Bezug stattfindet. Kein Abonnement; verlängert sich nicht automatisch. Die Anbieterin darf vor Ablauf Kontakt aufnehmen (z. B. per E-Mail), um eine Fortsetzung anzubieten — als weiteres Prepaid-Paket oder als Abonnement, falls dann verfügbar.",
+          "c) Postkarten-Abonnement (online, wiederkehrend). Wiederkehrende Zahlung für eine neue Postkarte pro Abrechnungsperiode. Weitere Abo-Perioden (z. B. ein Jahresabonnement) können künftig eingeführt werden; sie unterliegen Ziff. 8 sowie der beim Kauf ausgewiesenen Beschreibung. Motive entsprechen dem jeweils aktuellen Ausgabezeitraum.",
+        ],
       },
       {
-        title: "6. Registrierung (optional)",
-        body: "Über die Website kann die Registrierungsnummer erfasst und der ungefähre Standort geteilt werden. Optional, mit Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Collectors-Karte erscheinen — zusammen mit dem Kunstwerkbild (optional ein eigenes Foto). Exakte Adresse und weitere Kontaktdaten bleiben privat. Vollständige Kontaktdaten verarbeitet die Anbieterin gemäss Datenschutzerklärung.",
+        title: "6. Newsletter-Abonnement (online, wiederkehrend)",
+        paragraphs: [
+          "Bezahltes digitales Abonnement mit Mürren-bezogenem Inhalt (Geschichten und Bild-Impressionen aus Mürren), das ausschliesslich per E-Mail zugestellt wird — ohne physischen Postversand. Abrechnungsperiode und Leistungsumfang ergeben sich aus dem Angebot beim Kauf. Dieses Produkt unterliegt Ziff. 8.",
+          "Wer ein Postkarten-Produkt gemäss Ziff. 5 (a, b oder c) bezieht, erhält für die Dauer des jeweiligen Bezugs zusätzlich kostenlosen Zugang zum Newsletter, ohne gesonderte Zahlung. Dieser kostenlose Zugang endet automatisch mit Ablauf bzw. Kündigung des jeweiligen Postkarten-Produkts, sofern nicht eigenständig ein bezahltes Newsletter-Abonnement abgeschlossen wird.",
+        ],
       },
       {
-        title: "Postkarten- & Digitalprodukte — 7. Angebote",
-        body: "Je nach Verfügbarkeit und Verkaufskanal können folgende Produkte angeboten werden: (a) Single Delivery — nur vor Ort in Mürren (nicht online): Einmalzahlung. Eine Postkarte wird sofort vor Ort übergeben; eine zweite Postkarte mit neuem Foto und neuer Story wird etwa einen Monat später an die angegebene Adresse versendet. (b) Yearly Card Set — 12 Monate Mürren: Einmalzahlung für zwölf Postkarten — jeden Monat eine neue Postkarte mit Story über zwölf Monate ab Leistungsbeginn. Dieses Paket verlängert sich nicht automatisch. Vor Ablauf darf die Sundrbi GmbH dich kontaktieren (z. B. per E-Mail), um eine Fortsetzung anzubieten — als weiteres Prepaid-Paket oder als Abonnement, falls dann angeboten. (c) Monatliches Postkarten-Abonnement — online: wiederkehrende monatliche Zahlung für eine neue Postkarte pro Monat. Weitere Postkarten-Abo-Perioden (insbesondere ein Jahresabonnement) können später eingeführt werden; sie unterliegen Ziff. 10 sowie dem beim Kauf ausgewiesenen Preis und der Produktbeschreibung. Motive entsprechen dem aktuellen Ausgabezeitraum. Optional, mit Einwilligung beim Checkout oder vor Ort, dürfen ein unscharfer Versandort (ca. 100 km) sowie der Vorname auf der öffentlichen Collectors-Karte erscheinen; die genaue Adresse bleibt privat. (d) Digital-Newsletter-Abonnement — online: bezahltes digitales Abo mit Mürren-bezogenem Inhalt (z. B. Fotos, Stories oder Updates) ausschliesslich per E-Mail, ohne physischen Postkartenversand. Gebühr und Abrechnungsperiode (z. B. eine monatliche Gebühr wie CHF 5.00) ergeben sich aus dem Angebot beim Kauf. Dieses Produkt unterliegt Ziff. 10.",
+        title: "7. Registrierung & Collectors-Karte (optional)",
+        paragraphs: [
+          "Über die Website kann die Registrierungsnummer eines Kunstwerks oder einer Postkarte erfasst werden. Optional, mit ausdrücklicher Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Collectors-Weltkarte erscheinen — zusammen mit einem Produktbild (optional ein eigenes Foto). Dies gilt für alle Produkte, einschliesslich des Newsletter-Abonnements. Diese Anzeige ist freiwillig und kann abgelehnt werden; in diesem Fall erfolgt keine Anzeige auf der Karte. Die exakte Adresse und weitere Kontaktdaten bleiben in jedem Fall privat und werden gemäss Datenschutzerklärung verarbeitet.",
+        ],
       },
       {
-        title: "8. Lieferung",
-        body: "Physische Postkarten gehen als normale Post (ohne Tracking) an die angegebene Adresse. Lieferzeiten variieren je nach Zielland und Post. Bei nachweislichem Postverlust innert 60 Tagen ab Versanddatum (oder, falls unbekannt, ab Kaufdatum) wird kostenlos eine Ersatzkarte versendet, sofern dies unter {email} gemeldet wird. Digitale Newsletter-Inhalte werden elektronisch an die angegebene E-Mail-Adresse zugestellt; für dieses Produkt erfolgt kein Postversand.",
+        title: "8. Abonnements — Laufzeit & Kündigung",
+        paragraphs: [
+          "Wird ein Produkt als Abonnement verkauft (u. a. Postkarten-Abo, künftiges Jahres-Postkarten-Abo, Newsletter-Abo), verlängert es sich jeweils um die vereinbarte Abrechnungsperiode, bis es gekündigt wird. Die Kündigung ist jederzeit möglich und wirkt auf das Ende der laufenden Abrechnungsperiode — nicht rückwirkend oder sofort — über das Kundenportal des Zahlungsdienstleisters.",
+          "Prepaid-Pakete gemäss Ziff. 5(a) und 5(b) sind keine Abonnements und verlängern sich nicht automatisch, es sei denn, es wird später ausdrücklich ein Abonnement abgeschlossen oder erneut bestellt.",
+        ],
       },
       {
-        title: "9. Widerruf & Rückerstattung",
-        body: "Nach Übergabe oder Versand der ersten Karte einer Bestellung bzw. eines Pakets oder nach Beginn einer Abo-Leistung (physisch oder digital) ist eine Rückerstattung ausgeschlossen, soweit gesetzlich zulässig. Gesetzliche Gewährleistungsrechte bleiben unberührt.",
+        title: "9. Lieferung",
+        paragraphs: [
+          "Physische Postkarten werden als normale Post ohne Tracking an die angegebene Adresse versendet. Lieferzeiten variieren je nach Zielland und Postdienst. Die Gefahr des zufälligen Untergangs oder der zufälligen Beschädigung geht mit Übergabe an die Post auf die Käuferschaft über, soweit gesetzlich zulässig.",
+          "Digitale Inhalte (z. B. Newsletter) werden elektronisch an die angegebene E-Mail-Adresse zugestellt; hierfür erfolgt kein Postversand.",
+        ],
       },
       {
-        title: "10. Abonnements",
-        body: "Wird ein Produkt als Abonnement verkauft — einschliesslich des monatlichen Postkarten-Abos, eines späteren jährlichen Postkarten-Abos und eines Digital-Newsletter-Abos — verlängert es sich um die vereinbarte Abrechnungsperiode, bis es gekündigt wird. Die Kündigung ist jederzeit möglich und wirkt auf das Ende der laufenden Abrechnungsperiode — nicht sofort — über das Kundenportal des Zahlungsdienstleisters oder per E-Mail an {email}. Prepaid-Pakete nach Ziff. 7(b) sind keine Abonnements und verlängern sich nicht automatisch, es sei denn, du schließt später ein Abonnement ab oder bestellst erneut.",
+        title: "10. Widerruf & Rückerstattung",
+        paragraphs: [
+          "Nach Übergabe bzw. Versand der ersten Leistung einer Bestellung oder eines Pakets, oder nach Beginn einer Abo-Leistung (physisch oder digital), ist eine Rückerstattung ausgeschlossen, soweit gesetzlich zulässig. Gesetzliche Gewährleistungsrechte bleiben unberührt.",
+        ],
       },
       {
-        title: "11. Zahlungsabwicklung",
-        body: "Online-Zahlungen werden über den eingebundenen Zahlungsdienstleister (z. B. Stripe) abgewickelt. Es gelten ergänzend dessen Bedingungen. Vor Ort gelten die dort akzeptierten Zahlungsmittel.",
+        title: "11. Haftung",
+        paragraphs: [
+          "Die Anbieterin haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit sowie für die Verletzung von Leben, Körper oder Gesundheit. Im Übrigen haftet die Anbieterin nur für die Verletzung wesentlicher Vertragspflichten und beschränkt auf den vertragstypisch vorhersehbaren Schaden. Eine weitergehende Haftung, insbesondere für indirekte Schäden oder Folgeschäden, ist ausgeschlossen, soweit gesetzlich zulässig.",
+        ],
       },
       {
-        title: "12. Anwendbares Recht",
-        body: "Es gilt Schweizer Recht. Gerichtsstand ist der Sitz der Sundrbi GmbH, soweit gesetzlich zulässig.",
+        title: "12. Zahlungsabwicklung",
+        paragraphs: [
+          "Online-Zahlungen werden über den eingebundenen Zahlungsdienstleister (z. B. Stripe) abgewickelt; dessen Bedingungen gelten ergänzend. Vor Ort gelten die dort akzeptierten Zahlungsmittel.",
+        ],
+      },
+      {
+        title: "13. Anwendbares Recht",
+        paragraphs: [
+          "Es gilt Schweizer Recht. Gerichtsstand ist der Sitz der Sundrbi GmbH, soweit gesetzlich zulässig.",
+        ],
       },
     ],
   },
   privacy: {
     eyebrow: "Rechtliches",
     title: "Datenschutzerklärung.",
-    controller: "Verantwortliche Stelle: Sundrbi GmbH, {address}. Kontakt: {email}.",
+    controller: "Verantwortliche Stelle: Sundrbi GmbH, unter der Marke BOXOHO, {address}. Kontakt: {email}.",
     sections: [
       {
         title: "1. Kunstwerk-Automat",
-        body: "Beim Kauf am Automaten werden durch uns keine Personendaten erhoben. Der Kauf erfolgt anonym gegen Bar- oder Kartenzahlung. Kartendaten werden gegebenenfalls durch den Zahlungsanbieter vor Ort verarbeitet.",
+        body: "Beim Kauf am Automaten werden durch uns keine Personendaten erhoben. Der Kauf erfolgt anonym gegen Bar- oder Kartenzahlung. Kartendaten werden gegebenenfalls durch den Zahlungsanbieter vor Ort verarbeitet. Eine freiwillige Spende über den Stripe-QR-Code am Automaten wird ebenfalls durch den Zahlungsdienstleister verarbeitet und erfordert von uns keine Personendaten.",
       },
       {
         title: "2. Postkarten, Abonnements & Newsletter",
-        body: "Für Versand und Vertragsabwicklung erheben wir Name, Postadresse (soweit für physische Produkte nötig), E-Mail-Adresse und Zahlungsstatus über unseren Zahlungsdienstleister (Stripe). Das betrifft das digitale Newsletter-Abo, das monatliche Postkarten-Abo und das Einjahres-Postkartenpaket. Bei Postkartenkäufen kann der digitale Newsletter im Produkt enthalten sein; die E-Mail-Adresse wird dann auch für die Newsletter-Zustellung verwendet. Die Daten dienen Versand, digitaler Zustellung, Support, ggf. Verlängerungshinweisen und Abrechnung. Eine Weitergabe an Dritte erfolgt nur, soweit technisch nötig, an Zahlungsdienstleister, Post und E-Mail-Versandtools. Optional, mit Einwilligung im Checkout, dürfen ein unscharfer Standort (Umkreis ca. 100 km) sowie der Vorname auf der öffentlichen Collectors-Karte erscheinen. Die genaue Adresse wird öffentlich nie gezeigt.",
+        body: "Für Versand und Vertragsabwicklung erheben wir Name, Postadresse (soweit für physische Produkte nötig), E-Mail-Adresse und Zahlungsstatus über unseren Zahlungsdienstleister (Stripe). Das betrifft sämtliche Postkarten-Produkte (Single Delivery vor Ort, Prepaid-Yearly-Card-Set und das Postkarten-Abonnement) sowie das bezahlte Digital-Newsletter-Abo. Wer ein Postkarten-Produkt bezieht, erhält automatisch für die Dauer dieses Produkts kostenlosen, zeitlich befristeten Zugang zum Newsletter; dieser Zugang endet automatisch mit Ablauf bzw. Kündigung des Postkarten-Produkts, sofern nicht eigenständig ein bezahltes Newsletter-Abo besteht — die E-Mail-Adresse wird währenddessen für die Newsletter-Zustellung verwendet. Die Daten dienen Versand, digitaler Zustellung, Support, ggf. Verlängerungshinweisen und Abrechnung. Für den Versand des Newsletters werden die E-Mail-Adressen berechtigter Abonnentinnen und Abonnenten an Brevo (Sendinblue SAS / Brevo SAS, Frankreich), unseren E-Mail-Marketing-Dienstleister, übermittelt und dort im Rahmen eines Auftragsverarbeitungsvertrags verarbeitet; Brevo kann dazu E-Mail-Adresse, Vorname und Newsletter-Status speichern. Eine darüber hinausgehende Weitergabe an Dritte erfolgt nur, soweit technisch nötig, an Zahlungsdienstleister und Post. Optional, mit Einwilligung im Checkout, dürfen ein unscharfer Standort (Umkreis ca. 100 km) sowie der Vorname auf der öffentlichen Collectors-Karte erscheinen. Die genaue Adresse wird öffentlich nie gezeigt.",
       },
       {
         title: "3. Kunstwerk-Registrierung",
@@ -871,18 +1022,22 @@ const de = {
       },
       {
         title: "5. Website & Hosting",
-        body: "Beim Besuch der Website können technisch notwendige Daten (z. B. Server-Logs) sowie Cookies oder ähnliche Technologien von Hosting- und eingebundenen Diensten anfallen (z. B. Karte, Zahlungen, Medien). Dankesseiten nach dem Checkout sowie Links zum Kundenportal können Session- oder E-Mail-Kennungen verarbeiten, soweit für den Zahlungsablauf nötig.",
+        body: "Beim Besuch der Website können technisch notwendige Daten anfallen (z. B. Server-Logs, IP-Adresse, Browsertyp, Zugriffszeit) über Hosting- und Auslieferungsinfrastruktur. Dankesseiten nach dem Checkout sowie Links zum Kundenportal können Session- oder E-Mail-Kennungen verarbeiten, soweit für den Zahlungsablauf nötig. Eingebundene Dienste (z. B. Zahlungs-Checkout über Stripe, interaktive Karten) können Daten verarbeiten, soweit für die von dir genutzte Funktion erforderlich — nach den Angaben der jeweiligen Anbieter.",
       },
       {
-        title: "6. Aufbewahrung",
-        body: "Personendaten werden nur so lange gespeichert, wie es für Vertrag, Versand, digitale Zustellung, Support, Verwaltung der Collectors-Registry und gesetzliche Aufbewahrungspflichten erforderlich ist. Danach werden sie gelöscht oder anonymisiert.",
+        title: "6. Cookies & ähnliche Technologien",
+        body: "Wir verwenden Cookies und ähnliche Technologien in folgenden Kategorien. (a) Notwendig — immer aktiv: Spracheinstellung, Speicherung deiner Cookie-Auswahl (Cookie-Name boxoho_consent), Zahlungs-Checkout (Stripe) sowie grundlegende Sicherheit und Funktionen der Website. Ohne diese können Kernfunktionen nicht zuverlässig laufen. (b) Statistik — nur mit deiner Einwilligung: optionale Nutzungsmessung zur Verbesserung der Website. Für diese Kategorie setzen wir keine Werbe-Cookies ein. (c) Marketing — nur mit deiner Einwilligung: optionale Marketing-Technologien, z. B. eingebundene Social-Media-Inhalte, die erst nach Opt-in geladen werden. Du kannst alle Cookies akzeptieren, nur notwendige zulassen oder Kategorien unter «Einstellungen» im Cookie-Banner wählen. Deine Wahl kannst du jederzeit über «Cookie-Einstellungen» im Footer der Website ändern oder widerrufen. Cookies kannst du zudem in den Einstellungen deines Browsers verwalten oder löschen.",
       },
       {
-        title: "7. Rechte",
-        body: "Du hast nach anwendbarem Schweizer Datenschutzrecht insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung und Widerspruch — einschliesslich Widerruf der Karteneinwilligung oder Anpassung der öffentlichen Anonymität, soweit technisch möglich. Anfragen an {email}.",
+        title: "7. Aufbewahrung",
+        body: "Personendaten werden nur so lange gespeichert, wie es für Vertrag, Versand, digitale Zustellung, Support, Verwaltung der Collectors-Registry und gesetzliche Aufbewahrungspflichten erforderlich ist. Danach werden sie gelöscht oder anonymisiert. Das Cookie zur Speicherung der Einwilligung wird in der Regel bis zu 12 Monate gespeichert und bei einer neuen Auswahl erneuert.",
       },
       {
-        title: "8. Kontakt",
+        title: "8. Rechte",
+        body: "Du hast nach anwendbarem Schweizer Datenschutzrecht insbesondere das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung und Widerspruch — einschliesslich Widerruf der Karteneinwilligung, Anpassung der öffentlichen Anonymität oder Widerruf optionaler Cookie-Einwilligungen (Statistik/Marketing), soweit technisch möglich. Optionale Cookie-Einwilligungen kannst du auch über «Cookie-Einstellungen» im Footer ändern. Anfragen an {email}.",
+      },
+      {
+        title: "9. Kontakt",
         body: "Für Fragen zum Datenschutz: {email}, Sundrbi GmbH, {address}.",
       },
     ],

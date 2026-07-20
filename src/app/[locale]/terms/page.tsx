@@ -22,11 +22,28 @@ export default async function TermsPage({ params }: Props) {
   return (
     <PageShell eyebrow={t.eyebrow} title={t.title}>
       <div className="max-w-2xl space-y-10 text-[1.05rem] leading-relaxed text-ink-soft">
+        <p className="font-mono text-[0.72rem] uppercase tracking-[0.12em] text-muted">
+          {t.stand}
+        </p>
         <p>{fill(t.provider, values)}</p>
         {t.sections.map((section) => (
-          <section key={section.title}>
-            <h2 className="mb-3 text-2xl text-ink">{section.title}</h2>
-            <p>{fill(section.body, values)}</p>
+          <section key={section.title} className="space-y-4">
+            <h2 className="text-2xl text-ink">{section.title}</h2>
+            {section.paragraphs.map((paragraph, i) => (
+              <p key={`${section.title}-p-${i}`}>{fill(paragraph, values)}</p>
+            ))}
+            {"list" in section && section.list ? (
+              <ul className="list-disc space-y-2 pl-5">
+                {section.list.map((item, i) => (
+                  <li key={`${section.title}-li-${i}`}>{fill(item, values)}</li>
+                ))}
+              </ul>
+            ) : null}
+            {"after" in section && section.after
+              ? section.after.map((paragraph, i) => (
+                  <p key={`${section.title}-a-${i}`}>{fill(paragraph, values)}</p>
+                ))
+              : null}
           </section>
         ))}
       </div>

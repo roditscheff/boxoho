@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { fill } from "@/i18n/dictionary";
@@ -40,6 +41,10 @@ export function Footer({ locale, dict }: FooterProps) {
                 {item.label}
               </Link>
             ))}
+            <CookieSettingsButton
+              label={dict.footer.cookieSettings}
+              className="cursor-pointer text-left hover:text-stamp md:text-right"
+            />
             <a
               href={site.instagram}
               target="_blank"

@@ -22,8 +22,8 @@ export function Header({ locale, dict }: HeaderProps) {
           <Image
             src="/logo.png"
             alt={`${site.name} logo`}
-            width={120}
-            height={56}
+            width={720}
+            height={359}
             className="h-11 w-auto md:h-12"
             priority
           />
