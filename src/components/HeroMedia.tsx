@@ -24,7 +24,7 @@ export function HeroMedia({ gifSrc, fallbackSrc, alt, label }: HeroMediaProps) {
   }, [gifSrc]);
 
   return (
-    <figure className="fade-up-delay relative aspect-[3/4] overflow-hidden rounded-2xl bg-paper-deep shadow-[0_1px_0_0_var(--stamp)] sm:rounded-3xl">
+    <figure className="fade-up-delay relative aspect-[3/4] overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep">
       {/* eslint-disable-next-line @next/next/no-img-element -- GIF + runtime fallback */}
       <img
         src={src}

@@ -14,15 +14,21 @@ type PostcardShopProps = {
 
 export function PostcardShop({ locale, postcard }: PostcardShopProps) {
   const [plan, setPlan] = useState<Plan>("monthly");
-  const newsletter = plan === "newsletter";
+
+  const productMedia =
+    plan === "newsletter"
+      ? { src: "/newsletter-product.jpg", alt: postcard.newsletterImageAlt, key: "newsletter" }
+      : plan === "yearly"
+        ? { src: "/postcard-product-year.jpg", alt: postcard.yearImageAlt, key: "yearly" }
+        : { src: "/postcard-product.jpg", alt: postcard.productImageAlt, key: "monthly" };
 
   return (
     <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-14 lg:gap-20">
       <figure className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-2xl border border-stamp/30 bg-paper-deep sm:max-w-md md:mx-0 md:sticky md:top-24 md:max-w-none">
         <Image
-          key={newsletter ? "newsletter" : "postcard"}
-          src={newsletter ? "/newsletter-product.jpg" : "/postcard-product.jpg"}
-          alt={newsletter ? postcard.newsletterImageAlt : postcard.productImageAlt}
+          key={productMedia.key}
+          src={productMedia.src}
+          alt={productMedia.alt}
           fill
           className="object-cover object-center"
           sizes="(max-width: 768px) 100vw, 50vw"

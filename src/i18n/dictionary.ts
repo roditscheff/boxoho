@@ -154,6 +154,8 @@ const en = {
       "If you join by 26 July 2026, you’ll receive your first postcard in mid-August.",
     productImageAlt:
       "Comic: hand holding a Mürren postcard with alpine greeting from Sandrine",
+    yearImageAlt:
+      "Comic: a full year of Mürren postcards stacked together",
     newsletterImageAlt:
       "Comic: Mürren newsletter email with alpine greeting from Sandrine",
     subscription: {
@@ -181,20 +183,21 @@ const en = {
       priceYear: "CHF 90.00 · paid once",
       factsNewsletter: [
         "Digital only — email every month",
-        "Impressions & what’s up in Mürren",
+        "A longer Mürren story, photo impressions & what’s up in the village",
+        "Sometimes something special — a second story, a download, or a little extra",
         "No postal shipping",
         "Cancel anytime at the end of the billing period",
       ],
       factsMonth: [
         "Worldwide standard shipping (no tracking)",
         "A postcard in your mailbox, with a current image and story from Mürren",
-        "QR code to the newsletter: with more Mürren updates and photo impressions of the month",
+        "Newsletter subscription included free — longer stories, photo impressions, and occasional extras (second story, download, etc.)",
         "Cancel anytime at the end of the billing period",
       ],
       factsYear: [
         "Worldwide standard shipping (no tracking)",
         "A postcard in your mailbox each month, with a current image and story from Mürren",
-        "QR code to the newsletter: with more Mürren updates and photo impressions of the month",
+        "Newsletter subscription included free — longer stories, photo impressions, and occasional extras (second story, download, etc.)",
         "12 months paid once — does not auto-renew",
       ],
       mapConsent:
@@ -244,7 +247,7 @@ const en = {
     eyebrow: "Collectors",
     title: "Where Mürren lives with you.",
     intro:
-      "Here you see where Mürren friends keep their Tiny Art Surprises — and where the postcard and newsletter land each month. Joining the map is optional, and the pinpoints are only accurate to about 100 km — but it’s fun to see who’s in.",
+      "On this world map you see where Mürren friends keep their Tiny Art Surprises — and where the postcard and newsletter land each month. Joining the map is optional, and the pinpoints are only accurate to about 100 km — but it’s fun to see who’s in.",
     filterLabel: "Show on map",
     filterAll: "All",
     filterPostcards: "Postcards & newsletter",
@@ -534,6 +537,8 @@ const de = {
       "Wenn du bis zum 26.07.2026 mitmachst, erhältst du deine erste Postkarte Mitte August.",
     productImageAlt:
       "Comic: Hand hält eine Mürren-Postkarte mit Alpengruss von Sandrine",
+    yearImageAlt:
+      "Comic: ein ganzes Jahr Mürren-Postkarten gestapelt",
     newsletterImageAlt:
       "Comic: Mürren-Newsletter-E-Mail mit Alpengruss von Sandrine",
     subscription: {
@@ -561,20 +566,21 @@ const de = {
       priceYear: "CHF 90.00 · einmalig",
       factsNewsletter: [
         "Nur digital — jeden Monat per E-Mail",
-        "Impressionen & what’s up in Mürren",
+        "Eine längere Mürren-Geschichte, Foto-Impressionen & what’s up im Dorf",
+        "Manchmal etwas Spezielles — eine zweite Geschichte, ein Download oder ein Extra",
         "Kein Postversand",
         "Jederzeit kündbar zum Ende der Abrechnungsperiode",
       ],
       factsMonth: [
         "Standardversand weltweit (ohne Tracking)",
         "Postkarte in deinem Briefkasten, mit aktuellem Bild und Geschichte aus Mürren",
-        "QR-Code zum Newsletter: mit weiteren Mürren-Aktualitäten und Foto-Impressionen dieses Monats",
+        "Newsletter-Abo gratis inklusive — längere Geschichten, Foto-Impressionen und gelegentliche Extras (zweite Geschichte, Download usw.)",
         "Jederzeit kündbar zum Ende der Abrechnungsperiode",
       ],
       factsYear: [
         "Standardversand weltweit (ohne Tracking)",
         "Postkarte in deinem Briefkasten, mit aktuellem Bild und Geschichte aus Mürren",
-        "QR-Code zum Newsletter: mit weiteren Mürren-Aktualitäten und Foto-Impressionen dieses Monats",
+        "Newsletter-Abo gratis inklusive — längere Geschichten, Foto-Impressionen und gelegentliche Extras (zweite Geschichte, Download usw.)",
         "12 Monate einmal bezahlt — keine automatische Verlängerung",
       ],
       mapConsent:
@@ -625,7 +631,7 @@ const de = {
     eyebrow: "Collectors",
     title: "Wo Mürren bei dir lebt.",
     intro:
-      "Hier siehst du, wo Mürren-Friends ihre Tiny Art Surprises haben — und wo Postkarte und Newsletter jeden Monat landen. Die Eintragung auf der Karte ist optional und die Pins sind auf ca. 100 km genau — aber es macht Spass zu sehen, wer dabei ist.",
+      "Auf dieser Weltkarte siehst du, wo Mürren-Friends ihre Tiny Art Surprises haben — und wo Postkarte und Newsletter jeden Monat landen. Die Eintragung auf der Karte ist optional und die Pins sind auf ca. 100 km genau — aber es macht Spass zu sehen, wer dabei ist.",
     filterLabel: "Auf der Karte zeigen",
     filterAll: "Alle",
     filterPostcards: "Postkarten & Newsletter",
