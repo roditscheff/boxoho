@@ -1,6 +1,37 @@
 import { iso1A2Code } from "@rapideditor/country-coder";
+import * as isoCountries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
+import de from "i18n-iso-countries/langs/de.json";
+import fr from "i18n-iso-countries/langs/fr.json";
+import it from "i18n-iso-countries/langs/it.json";
+
+isoCountries.registerLocale(en);
+isoCountries.registerLocale(de);
+isoCountries.registerLocale(fr);
+isoCountries.registerLocale(it);
 
 const EARTH_RADIUS_KM = 6371;
+
+/**
+ * Resolve a free-text country field (e.g. "Schweiz", "Switzerland", "CH")
+ * typed by a user into an ISO 3166-1 alpha-2 code, so geocoding can be
+ * restricted to that exact country. Returns null if it can't be resolved.
+ */
+export function resolveCountryCode(input: string): string | null {
+  const trimmed = input.trim();
+  if (!trimmed) return null;
+
+  if (/^[a-zA-Z]{2}$/.test(trimmed) && isoCountries.isValid(trimmed.toUpperCase())) {
+    return trimmed.toUpperCase();
+  }
+
+  for (const lang of ["en", "de", "fr", "it"]) {
+    const code = isoCountries.getAlpha2Code(trimmed, lang);
+    if (code) return code;
+  }
+
+  return null;
+}
 
 /** Blur exact coords into a public point ~40–100 km away. */
 export function blurLocation(
@@ -83,17 +114,20 @@ function destinationPoint(
   };
 }
 
-export async function geocodePlace(
-  place: string,
-): Promise<
-  { lat: number; lng: number; displayName: string; countryCode: string | null }
-  | null
-> {
-  const query = place.trim();
-  if (!query) return null;
+type GeocodeResult = {
+  lat: number;
+  lng: number;
+  displayName: string;
+  countryCode: string | null;
+};
 
+async function queryNominatim(
+  params: Record<string, string>,
+): Promise<GeocodeResult | null> {
   const url = new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("q", query);
+  for (const [key, value] of Object.entries(params)) {
+    url.searchParams.set(key, value);
+  }
   url.searchParams.set("format", "json");
   url.searchParams.set("addressdetails", "1");
   url.searchParams.set("limit", "1");
@@ -127,4 +161,48 @@ export async function geocodePlace(
     displayName: data[0].display_name,
     countryCode,
   };
+}
+
+export async function geocodePlace(
+  place: string,
+  opts?: { countryCode?: string | null },
+): Promise<GeocodeResult | null> {
+  const query = place.trim();
+  if (!query) return null;
+
+  const params: Record<string, string> = { q: query };
+  if (opts?.countryCode) params.countrycodes = opts.countryCode.toLowerCase();
+  return queryNominatim(params);
+}
+
+/**
+ * Geocode a structured postal address. Resolves the free-text country field
+ * to an ISO code and restricts the search to that country, which avoids
+ * cross-border mismatches (e.g. a Swiss postal code resolving to a
+ * similarly-named place just across the German border).
+ */
+export async function geocodeAddress(address: {
+  street?: string;
+  postalCode: string;
+  city: string;
+  country: string;
+}): Promise<GeocodeResult | null> {
+  const countryCode = resolveCountryCode(address.country);
+
+  const structuredParams: Record<string, string> = {
+    postalcode: address.postalCode,
+    city: address.city,
+    country: address.country,
+  };
+  if (address.street) structuredParams.street = address.street;
+  if (countryCode) structuredParams.countrycodes = countryCode.toLowerCase();
+
+  const structured = await queryNominatim(structuredParams);
+  if (structured) return structured;
+
+  // Fall back to a free-text query, still restricted to the resolved country.
+  const fallbackQuery = [address.street, address.postalCode, address.city, address.country]
+    .filter(Boolean)
+    .join(", ");
+  return geocodePlace(fallbackQuery, { countryCode });
 }

@@ -137,7 +137,9 @@ export function CollectorsMap({ map }: CollectorsMapProps) {
         },
       });
 
-      const clickableLayers = [artworkLayer, postcardLayer];
+      // Only artwork pins are clickable — postcard/newsletter pins stay
+      // anonymous dots with no name or popup.
+      const clickableLayers = [artworkLayer];
       for (const layerId of clickableLayers) {
         instance.on("mouseenter", layerId, () => {
           instance.getCanvas().style.cursor = "pointer";

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { blurLocationWithinCountry, geocodePlace } from "@/lib/geo";
+import { blurLocationWithinCountry, geocodeAddress } from "@/lib/geo";
 import {
   createAdminClient,
   isSupabaseConfigured,
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const geo = await geocodePlace(`${postalCode} ${city}, ${country}`);
+  const geo = await geocodeAddress({ street, postalCode, city, country });
   if (!geo) {
     return NextResponse.json(
       { error: "Could not find that address. Please check city and country." },

@@ -50,9 +50,11 @@ async function upsertPostcardFromCheckout(session: Stripe.Checkout.Session) {
   let lat: number | null = null;
   let lng: number | null = null;
 
-  // Geocode from Stripe address; blur ~40–100 km server-side when map consent is on
+  // Geocode from Stripe address; blur ~40–100 km server-side when map consent is on.
+  // Stripe's `address.country` is already an ISO 3166-1 alpha-2 code, so we can
+  // restrict the geocoder to that country and avoid cross-border mismatches.
   if (place) {
-    const geo = await geocodePlace(place);
+    const geo = await geocodePlace(place, { countryCode: address?.country ?? null });
     if (geo) {
       lat = geo.lat;
       lng = geo.lng;

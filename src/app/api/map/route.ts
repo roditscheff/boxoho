@@ -92,7 +92,7 @@ export async function GET(request: Request) {
         points.push({
           id: `postcard-${row.id}`,
           type: "postcard",
-          firstName: row.first_name,
+          firstName: "",
           lat: row.public_lat as number,
           lng: row.public_lng as number,
           imageUrl: null,
