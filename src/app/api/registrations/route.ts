@@ -9,8 +9,12 @@ import {
 const schema = z.object({
   number: z.string().min(1).max(64),
   firstName: z.string().min(1).max(80),
+  lastName: z.string().min(1).max(80),
+  street: z.string().min(1).max(200),
+  postalCode: z.string().min(1).max(32),
+  city: z.string().min(1).max(120),
+  country: z.string().min(1).max(120),
   email: z.string().email().max(200),
-  place: z.string().min(2).max(200),
   mapConsent: z.boolean().default(false),
   isAnonymous: z.boolean().default(false),
 });
@@ -27,8 +31,12 @@ export async function POST(request: Request) {
   const parsed = schema.safeParse({
     number: String(form.get("number") ?? "").trim().toUpperCase(),
     firstName: String(form.get("firstName") ?? "").trim(),
+    lastName: String(form.get("lastName") ?? "").trim(),
+    street: String(form.get("street") ?? "").trim(),
+    postalCode: String(form.get("postalCode") ?? "").trim(),
+    city: String(form.get("city") ?? "").trim(),
+    country: String(form.get("country") ?? "").trim(),
     email: String(form.get("email") ?? "").trim(),
-    place: String(form.get("place") ?? "").trim(),
     mapConsent: form.get("mapConsent") === "true" || form.get("mapConsent") === "on",
     isAnonymous:
       form.get("isAnonymous") === "true" || form.get("isAnonymous") === "on",
@@ -41,7 +49,19 @@ export async function POST(request: Request) {
     );
   }
 
-  const { number, firstName, email, place, mapConsent, isAnonymous } = parsed.data;
+  const {
+    number,
+    firstName,
+    lastName,
+    street,
+    postalCode,
+    city,
+    country,
+    email,
+    mapConsent,
+    isAnonymous,
+  } = parsed.data;
+  const placeText = `${street}, ${postalCode} ${city}, ${country}`;
   const supabase = createAdminClient();
 
   const { data: artwork, error: artError } = await supabase
@@ -73,10 +93,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const geo = await geocodePlace(place);
+  const geo = await geocodePlace(`${postalCode} ${city}, ${country}`);
   if (!geo) {
     return NextResponse.json(
-      { error: "Could not find that place. Try a city and country." },
+      { error: "Could not find that address. Please check city and country." },
       { status: 422 },
     );
   }
@@ -113,8 +133,13 @@ export async function POST(request: Request) {
   const { error: insertError } = await supabase.from("artwork_registrations").insert({
     artwork_id: artwork.id,
     first_name: firstName,
+    last_name: lastName,
+    street,
+    postal_code: postalCode,
+    city,
+    country,
     email,
-    place_text: place,
+    place_text: placeText,
     lat: geo.lat,
     lng: geo.lng,
     public_lat: publicLat,

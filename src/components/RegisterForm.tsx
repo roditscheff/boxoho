@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useId, useState } from "react";
 import type { Dictionary } from "@/i18n/dictionary";
 import type { ArtworkLookup } from "@/lib/types";
 
@@ -12,7 +12,27 @@ type RegisterFormProps = {
 
 type Status = "idle" | "loading" | "success" | "error";
 
+function UploadIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <path d="M12 16V4" />
+      <path d="m7 9 5-5 5 5" />
+      <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+    </svg>
+  );
+}
+
 export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
+  const photoInputId = useId();
   const [number, setNumber] = useState("");
   const [artwork, setArtwork] = useState<ArtworkLookup | null>(null);
   const [lookupError, setLookupError] = useState<string | null>(null);
@@ -21,6 +41,7 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
   const [firstName, setFirstName] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [mapConsent, setMapConsent] = useState(false);
+  const [photoName, setPhotoName] = useState<string | null>(null);
 
   const previewCollector = isAnonymous
     ? register.anonymousCollector
@@ -72,22 +93,25 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
     setArtwork({ ...artwork, alreadyRegistered: true });
   }
 
+  const fieldClass =
+    "w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp";
+  const labelClass =
+    "mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted";
+
   return (
     <div className="space-y-8">
       <form onSubmit={lookupArtwork} className="space-y-4">
         <fieldset className="space-y-4">
           <legend className="eyebrow mb-2">{register.step1}</legend>
           <label className="block">
-            <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-              {register.numberLabel}
-            </span>
+            <span className={labelClass}>{register.numberLabel}</span>
             <input
               type="text"
               name="number"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
               placeholder={register.numberPlaceholder}
-              className="w-full border border-rule bg-transparent px-4 py-3 text-lg text-ink outline-none transition-colors placeholder:text-muted/50 focus:border-stamp"
+              className={`${fieldClass} text-ink transition-colors placeholder:text-muted/50`}
               required
             />
           </label>
@@ -133,20 +157,30 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
             <form onSubmit={submitRegistration} className="space-y-4">
               <fieldset className="space-y-4">
                 <legend className="eyebrow mb-2">{register.step2}</legend>
-                <label className="block">
-                  <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-                    {register.firstName}
-                  </span>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                    className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-                  />
-                  <p className="mt-2 text-sm text-muted">{register.firstNameHint}</p>
-                </label>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <label className="block">
+                    <span className={labelClass}>{register.firstName}</span>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      required
+                      className={fieldClass}
+                    />
+                  </label>
+                  <label className="block">
+                    <span className={labelClass}>{register.lastName}</span>
+                    <input
+                      type="text"
+                      name="lastName"
+                      required
+                      className={fieldClass}
+                    />
+                  </label>
+                </div>
+                <p className="text-sm text-muted">{register.firstNameHint}</p>
 
                 <label className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
                   <input
@@ -159,39 +193,53 @@ export function RegisterForm({ register, ctaLabel }: RegisterFormProps) {
                 </label>
 
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-                    {register.email}
-                  </span>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-                  />
+                  <span className={labelClass}>{register.street}</span>
+                  <input type="text" name="street" required className={fieldClass} />
                 </label>
+
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <label className="block">
+                    <span className={labelClass}>{register.postalCode}</span>
+                    <input type="text" name="postalCode" required className={fieldClass} />
+                  </label>
+                  <label className="block sm:col-span-2">
+                    <span className={labelClass}>{register.city}</span>
+                    <input type="text" name="city" required className={fieldClass} />
+                  </label>
+                </div>
+
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-                    {register.place}
-                  </span>
-                  <input
-                    type="text"
-                    name="place"
-                    placeholder={register.placePlaceholder}
-                    required
-                    className="w-full border border-rule bg-transparent px-4 py-3 text-lg outline-none focus:border-stamp"
-                  />
+                  <span className={labelClass}>{register.country}</span>
+                  <input type="text" name="country" required className={fieldClass} />
                 </label>
+
                 <label className="block">
-                  <span className="mb-2 block font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
-                    {register.photo}
-                  </span>
+                  <span className={labelClass}>{register.email}</span>
+                  <input type="email" name="email" required className={fieldClass} />
+                </label>
+
+                <div>
+                  <span className={labelClass}>{register.photo}</span>
+                  <p className="mb-3 text-sm text-muted">{register.photoHint}</p>
                   <input
+                    id={photoInputId}
                     type="file"
                     name="photo"
                     accept="image/*"
-                    className="w-full border border-rule bg-transparent px-4 py-3 font-mono text-sm outline-none"
+                    className="sr-only"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      setPhotoName(file?.name ?? null);
+                    }}
                   />
-                </label>
+                  <label
+                    htmlFor={photoInputId}
+                    className="inline-flex cursor-pointer items-center gap-3 border border-rule px-4 py-3 font-mono text-[0.78rem] text-ink transition-colors hover:border-stamp hover:text-stamp"
+                  >
+                    <span>{photoName || register.chooseFile}</span>
+                    <UploadIcon className="h-5 w-5 shrink-0" />
+                  </label>
+                </div>
               </fieldset>
 
               <label className="flex items-start gap-3 text-sm leading-relaxed text-muted">
