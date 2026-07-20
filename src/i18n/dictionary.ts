@@ -10,6 +10,8 @@ const en = {
   nav: {
     main: "Main navigation",
     mobile: "Mobile navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
     items: [
       { href: "#postcard", label: "Postcard" },
       { href: "#register", label: "Register" },
@@ -536,6 +538,8 @@ const de = {
   nav: {
     main: "Hauptnavigation",
     mobile: "Mobile Navigation",
+    openMenu: "Menü öffnen",
+    closeMenu: "Menü schliessen",
     items: [
       { href: "#postcard", label: "Postkarte" },
       { href: "#register", label: "Registrieren" },
@@ -689,7 +693,7 @@ const de = {
       "Nur vor Ort in Mürren am Automaten",
       "So viele Stücke pro Monat wie der Monat Tage hat",
       "Aufhängen — oder den Magneten nutzen",
-      "Nummer registrieren und auf der Collectors-Karte erscheinen",
+      "Nummer registrieren und auf der Weltkarte erscheinen",
     ],
     cta: "Auf der Karte registrieren →",
   },
@@ -752,7 +756,7 @@ const de = {
         "12 Monate einmal bezahlt — keine automatische Verlängerung",
       ],
       mapConsent:
-        "Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) sowie mein Vorname auf der öffentlichen Collectors-Karte erscheinen dürfen. Die genaue Adresse bleibt privat — die Unschärfe berechnen wir automatisch. (optional)",
+        "Ich bin einverstanden, dass ein unscharfer Standort (Umkreis ca. 100 km) sowie mein Vorname auf der öffentlichen Weltkarte erscheinen dürfen. Die genaue Adresse bleibt privat — die Unschärfe berechnen wir automatisch. (optional)",
       legalConsentBefore: "Ich akzeptiere die",
       legalConsentTerms: "AGB",
       legalConsentAnd: "und die",
@@ -963,9 +967,9 @@ const de = {
         ],
       },
       {
-        title: "7. Registrierung & Collectors-Karte (optional)",
+        title: "7. Registrierung & Weltkarte (optional)",
         paragraphs: [
-          "Über die Website kann die Registrierungsnummer eines Kunstwerks oder einer Postkarte erfasst werden. Optional, mit ausdrücklicher Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Collectors-Weltkarte erscheinen — zusammen mit einem Produktbild (optional ein eigenes Foto). Dies gilt für alle Produkte, einschliesslich des Newsletter-Abonnements. Diese Anzeige ist freiwillig und kann abgelehnt werden; in diesem Fall erfolgt keine Anzeige auf der Karte. Die exakte Adresse und weitere Kontaktdaten bleiben in jedem Fall privat und werden gemäss Datenschutzerklärung verarbeitet.",
+          "Über die Website kann die Registrierungsnummer eines Kunstwerks oder einer Postkarte erfasst werden. Optional, mit ausdrücklicher Einwilligung, dürfen Vorname und ein unscharfer Standort (ca. 100 km) auf der öffentlichen Weltkarte erscheinen — zusammen mit einem Produktbild (optional ein eigenes Foto). Dies gilt für alle Produkte, einschliesslich des Newsletter-Abonnements. Diese Anzeige ist freiwillig und kann abgelehnt werden; in diesem Fall erfolgt keine Anzeige auf der Karte. Die exakte Adresse und weitere Kontaktdaten bleiben in jedem Fall privat und werden gemäss Datenschutzerklärung verarbeitet.",
           "Die Angabe von ca. 100 km ist ein Zielwert, keine exakte Garantie. In der Nähe einer Landesgrenze wird der angezeigte Standort zusätzlich so eingeschränkt, dass er im selben Land wie die tatsächliche Adresse bleibt; in diesen Fällen kann der Unschärferadius merklich kleiner als 100 km ausfallen.",
         ],
       },
